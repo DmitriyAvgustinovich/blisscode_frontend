@@ -1,0 +1,25 @@
+.solutionFileWrapper {
+  margin-left: 20px;
+}
+
+.solutionFileNameWrapper {
+  display: flex;
+  gap: 5px;
+  overflow-x: scroll;
+  cursor: pointer;
+  font: var(--font-ml);
+  color: var(--gray-text-color);
+  font-weight: 100;
+
+  &:hover {
+    text-decoration: underline;
+  }
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.solutionFileIcon {
+  font: var(--font-m);
+}

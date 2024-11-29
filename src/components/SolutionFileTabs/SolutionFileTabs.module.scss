@@ -1,0 +1,32 @@
+.solutionFileTabsWrapper {
+  display: flex;
+  overflow-x: scroll;
+  width: 75vw;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.solutionFileTab {
+  display: flex;
+  gap: 10px;
+  padding: 10px;
+  max-width: fit-content;
+  border: 1px var(--gray-bg-color) solid;
+  border-top: none;
+  border-left: none;
+  color: var(--white-text-color);
+  font: var(--font-m);
+  font-weight: 100;
+  cursor: pointer;
+}
+
+.solutionFileActiveTab {
+  background-color: var(--code-space-bg-color);
+}
+
+.solutionFileTabIcon {
+  font: var(--font-s);
+  cursor: pointer;
+}
