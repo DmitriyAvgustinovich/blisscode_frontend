@@ -5,6 +5,12 @@ export const rtkApi = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: import.meta.env.VITE_BASE_URL,
   }),
-  tagTypes: ["SolutionFile"],
+  tagTypes: [
+    "SolutionFile",
+    "Direction",
+    "DirectionStack",
+    "DirectionCategory",
+    "User",
+  ],
   endpoints: () => ({}),
 });

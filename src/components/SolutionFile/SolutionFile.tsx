@@ -2,7 +2,7 @@ import React from "react";
 
 import { FileTextOutlined } from "@ant-design/icons";
 
-import { HIDDEN_FOLDERS_OR_FILES } from "constants/hidden-folders-or-files";
+import { HIDDEN_FOLDERS_OR_FILES } from "constants/solution-files-constants";
 
 import styles from "./SolutionFile.module.scss";
 

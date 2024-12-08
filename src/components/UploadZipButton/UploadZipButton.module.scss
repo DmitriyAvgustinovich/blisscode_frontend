@@ -1,0 +1,31 @@
+.uploadZipButtonWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 1px dashed var(--white-bg-color);
+  border-radius: 10px;
+  cursor: pointer;
+  transition: border-color 0.3s;
+  padding: 15px;
+
+  &:hover {
+    border-color: var(--purple-bg-color);
+  }
+}
+
+.uploadZipButtonText {
+  color: var(--white-text-color);
+  font: var(--font-s);
+}
+
+.uploadZipButtonUploadedFileWrapper {
+  background-color: var(--white-bg-color);
+  padding: 16px;
+  border-radius: 5px;
+}
+
+.uploadZipButtonUploadedFileText {
+  color: var(--black-text-color);
+  font: var(--font-s);
+}

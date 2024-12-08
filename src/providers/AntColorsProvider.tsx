@@ -13,15 +13,46 @@ export const AntColorsProvider = (props: IAntColorsProviderProps) => {
         components: {
           Button: {
             algorithm: true,
+            colorPrimary: "#715fde",
           },
           Input: {
             algorithm: true,
-            activeBorderColor: "var(--folders-bg-color)",
-            hoverBorderColor: "var(--folders-bg-color)",
-            activeShadow: "var(--folders-bg-color)",
+            activeBorderColor: "var(--black-bg-color)",
+            hoverBorderColor: "var(--black-bg-color)",
+            activeShadow: "var(--black-bg-color)",
+            colorBgContainerDisabled: "var(--white-bg-color)",
+            colorTextDisabled: "var(--black-text-color)",
+          },
+          Tabs: {
+            algorithm: true,
+            colorPrimary: "#715fde",
+            colorText: "var(--white-text-color)",
           },
           Modal: {
             algorithm: true,
+            headerBg: "#333333",
+            contentBg: "#333333",
+            titleColor: "var(--white-text-color)",
+            colorIcon: "var(--white-text-color)",
+            colorIconHover: "var(--white-text-color)",
+          },
+          Table: {
+            algorithm: true,
+            colorBgContainer: "#333333",
+            colorText: "var(--white-text-color)",
+          },
+          Pagination: {
+            algorithm: true,
+            colorBgContainer: "#333333",
+            colorText: "#ffffff !important",
+          },
+          Form: {
+            algorithm: true,
+            colorText: "var(--white-text-color)",
+          },
+          Upload: {
+            algorithm: true,
+            colorText: "var(--white-text-color)",
           },
         },
       }}

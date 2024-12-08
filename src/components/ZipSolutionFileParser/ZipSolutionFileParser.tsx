@@ -1,5 +1,7 @@
 import React from "react";
 
+import { useGetSearchParams } from "hooks";
+
 import JSZip from "jszip";
 
 import { Light as SyntaxHighlighter } from "react-syntax-highlighter";
@@ -11,7 +13,7 @@ import { SolutionFile } from "components/SolutionFile/SolutionFile";
 import { SolutionFileTabs } from "components/SolutionFileTabs/SolutionFileTabs";
 import { SolutionFolder } from "components/SolutionFolder/SolutionFolder";
 
-import { useGetSolutionFileByIdQuery } from "store/api/solutionFile/solution-file-api";
+import { useGetSolutionFileByUuidQuery } from "store/api/solution_file/solution-file-api";
 
 import { buildFileTree, getSyntaxLanguageName, openSolutionCode } from "utils";
 
@@ -20,11 +22,12 @@ import { IFileOrFolder, TRecordStringObject } from "types";
 import styles from "./ZipSolutionFileParser.module.scss";
 
 export const ZipSolutionFileParser = () => {
-  const solutionFileId = window.location.pathname.split("=")[1];
+  const { solutionFileId: uuid } = useGetSearchParams();
 
-  const { data: solutionFileData } = useGetSolutionFileByIdQuery({
-    id: solutionFileId,
-  });
+  const { data: solutionFileData } = useGetSolutionFileByUuidQuery(
+    { uuid },
+    { skip: !uuid }
+  );
 
   const [solutionsFilesTree, setSolutionsFilesTree] =
     React.useState<IFileOrFolder | null>(null);

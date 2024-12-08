@@ -6,3 +6,14 @@
   padding: 0;
   box-sizing: border-box;
 }
+
+.ant-pagination-item {
+  &:hover {
+    border: 1px solid var(--purple-bg-color) !important;
+    background-color: var(--gray-bg-color) !important;
+  }
+
+  &.ant-pagination-item-active {
+    border: 1px solid var(--purple-bg-color) !important;
+  }
+}

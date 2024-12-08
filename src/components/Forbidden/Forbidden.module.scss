@@ -1,11 +1,10 @@
 .forbiddenWrapper {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 50vh;
-} 
+  padding-top: 40px;
+  height: 100vh;
+  text-align: center;
+  background-color: var(--primary-bg-color);
+}
 
-.backToMainPageButton {
-  margin-top: 20px;
+.forbiddenTitle {
+  color: var(--white-text-color) !important;
 }

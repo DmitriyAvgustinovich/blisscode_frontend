@@ -1,13 +1,25 @@
 import React from "react";
 
-import { Main } from "components/Main/Main";
+import { useGetSearchParams } from "hooks";
 
-import { tg } from "constants/tg-api";
+import { AppRouter } from "components/AppRouter/AppRouter";
+
+import { AppProviders } from "providers/AppProviders";
 
 export const App = () => {
-  React.useEffect(() => {
-    tg.ready();
-  }, []);
+  const { authUserId } = useGetSearchParams();
 
-  return <Main />;
+  React.useEffect(() => {
+    if (authUserId) {
+      localStorage.setItem("botAuthUserHash", authUserId);
+    }
+  }, [authUserId]);
+
+  return (
+    <React.Suspense fallback={""}>
+      <AppProviders>
+        <AppRouter />
+      </AppProviders>
+    </React.Suspense>
+  );
 };

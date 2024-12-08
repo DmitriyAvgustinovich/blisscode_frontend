@@ -4,6 +4,7 @@ import { Routes, Route } from "react-router-dom";
 
 import { TAppRouteProps, routeConfig } from "configs/route-config";
 
+import { RequireAdmin } from "./RequireAdmin";
 import { RequireSubscriber } from "./RequireSubscriber";
 
 export const AppRouter = () => {
@@ -15,6 +16,8 @@ export const AppRouter = () => {
         element={
           route.subscriberOnly ? (
             <RequireSubscriber>{route.element}</RequireSubscriber>
+          ) : route.adminOnly ? (
+            <RequireAdmin>{route.element}</RequireAdmin>
           ) : (
             route.element
           )

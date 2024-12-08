@@ -1,0 +1,33 @@
+.solutionsFilesWrapper {
+  padding: 20px;
+  background-color: var(--primary-bg-color);
+  height: 100vh;
+}
+
+.solutionsFilesTitle {
+  color: var(--white-text-color) !important;
+}
+
+.solutionsFilesGoToAdminPanelButton {
+  margin-bottom: 20px;
+}
+
+.solutionsFilesCardsWrapper {
+  display: flex;
+  gap: 20px;
+}
+
+.solutionsFilesPaginationWrapper {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+}
+
+.solutionsFilesPaginationText {
+  display: block;
+  margin-bottom: 10px;
+  font: var(--font-s);
+  color: var(--white-text-color);
+}

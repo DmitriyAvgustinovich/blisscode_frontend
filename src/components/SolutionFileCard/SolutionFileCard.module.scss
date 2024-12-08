@@ -1,0 +1,18 @@
+.solutionFileCardWrapper {
+  background-color: var(--purple-bg-color);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.solutionFileCardTitle {
+  font: var(--font-l);
+  color: var(--white-text-color);
+}
+
+.solutionFileCardDescription {
+  font: var(--font-ml);
+  color: var(--white-text-color);
+}
