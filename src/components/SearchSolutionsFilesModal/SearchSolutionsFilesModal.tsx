@@ -1,13 +1,15 @@
 import React from "react";
 
-import { Button, Modal, Typography } from "antd";
+import { Button, Modal } from "antd";
 
-import { FileTextOutlined, SearchOutlined } from "@ant-design/icons";
+import { SearchOutlined } from "@ant-design/icons";
 
 import { SearchSolutionsFilesInput } from "components/SearchSolutionsFilesInput/SearchSolutionsFilesInput";
+import { SolutionsFilesSearchResult } from "components/SolutionsFilesSearchResult/SolutionsFilesSearchResult";
 
 import {
   IFileOrFolder,
+  IOpenSolutionFileFromSearch,
   TRecordStringObject,
   TSetStateActionStrings,
 } from "types";
@@ -23,12 +25,6 @@ interface ISearchSolutionsFilesModalProps {
   setActiveSolutionsFilePath: React.Dispatch<
     React.SetStateAction<string | null>
   >;
-}
-
-interface IOpenSolutionFileFromSearchArgs {
-  file: File;
-  path: string;
-  name: string;
 }
 
 export const SearchSolutionsFilesModal = (
@@ -55,7 +51,7 @@ export const SearchSolutionsFilesModal = (
   };
 
   const handleOpenSolutionFileFromSearch = async (
-    args: IOpenSolutionFileFromSearchArgs
+    args: IOpenSolutionFileFromSearch
   ) => {
     const { file, path, name } = args;
 
@@ -93,15 +89,14 @@ export const SearchSolutionsFilesModal = (
 
   return (
     <>
-      <div
+      <Button
         className={styles.searchSolutionsFilesButton}
+        type="primary"
+        icon={<SearchOutlined />}
         onClick={handleOpenSearchSolutionsFilesModal}
       >
-        <SearchOutlined />
-        <Typography.Text className={styles.searchSolutionsFilesButtonText}>
-          Поиск файлов по имени...
-        </Typography.Text>
-      </div>
+        Поиск файлов по имени...
+      </Button>
 
       <Modal
         title="Поиск файла по имени..."
@@ -119,31 +114,12 @@ export const SearchSolutionsFilesModal = (
           setSolutionsFilesSearchResults={setSolutionsFilesSearchResults}
         />
 
-        <div className={styles.searchSolutionsFilesSearchResultWrapper}>
-          {searchSolutionsFilesResults.map((searchSolutionFileResult) => {
-            const handleClickSearchResultFile = () => {
-              //eslint-disable-next-line @typescript-eslint/ban-ts-comment
-              // @ts-ignore
-              handleOpenSolutionFileFromSearch(searchSolutionFileResult);
-            };
-
-            return (
-              <div
-                className={styles.searchSolutionsFilesSearchResult}
-                key={searchSolutionFileResult.path}
-                onClick={handleClickSearchResultFile}
-              >
-                <Button
-                  className={styles.searchSolutionsFilesSearchResultButton}
-                  icon={<FileTextOutlined />}
-                  type="default"
-                >
-                  {searchSolutionFileResult.path}
-                </Button>
-              </div>
-            );
-          })}
-        </div>
+        {searchSolutionsFilesResults.length > 0 && (
+          <SolutionsFilesSearchResult
+            searchSolutionsFilesResults={searchSolutionsFilesResults}
+            handleOpenSolutionFileFromSearch={handleOpenSolutionFileFromSearch}
+          />
+        )}
       </Modal>
     </>
   );

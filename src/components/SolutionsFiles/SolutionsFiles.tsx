@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Button, Pagination, Typography } from "antd";
+import { Button, Input, Pagination, Typography } from "antd";
 import { useGetActiveUser, useGetSearchParams } from "hooks";
 import { Link } from "react-router-dom";
 
@@ -11,6 +11,7 @@ import { SolutionFileCard } from "components/SolutionFileCard/SolutionFileCard";
 import { useGetDirectionByIdQuery } from "store/api/direction/direction-api";
 import { useGetDirectionCategoryByIdQuery } from "store/api/direction_category/direction-category-api";
 import { useGetDirectionStackByIdQuery } from "store/api/direction_stack/direction-stack-api";
+import { useSearchSolutionFilesMutation } from "store/api/elastic_search/elastic-search-api";
 import { useGetSolutionsFilesByParamsQuery } from "store/api/solution_file/solution-file-api";
 
 import { RouterPath } from "configs/route-config";
@@ -21,10 +22,12 @@ import styles from "./SolutionsFiles.module.scss";
 
 export const SolutionsFiles = () => {
   const [currentPage, setCurrentPage] = React.useState(1);
+  const [searchResults, setSearchResults] = React.useState(null);
 
   const { isActiveUserHasAdmin } = useGetActiveUser();
-
   const { directionId, stackId, categoryId } = useGetSearchParams();
+
+  const [searchSolutionFiles] = useSearchSolutionFilesMutation();
 
   const { data: directionData } = useGetDirectionByIdQuery({
     id: +directionId,
@@ -38,16 +41,36 @@ export const SolutionsFiles = () => {
     id: +categoryId,
   });
 
-  const { data: solutionsFilesData } = useGetSolutionsFilesByParamsQuery({
-    directionId: +directionId,
-    stackId: +stackId,
-    categoryId: +categoryId,
-    page: currentPage,
-    pageSize: PAGINATION_PAGE_SIZE,
-  });
+  const { data: solutionsFilesByParamsData } =
+    useGetSolutionsFilesByParamsQuery({
+      directionId: +directionId,
+      stackId: +stackId,
+      categoryId: +categoryId,
+      page: currentPage,
+      pageSize: PAGINATION_PAGE_SIZE,
+    });
+
+  const handleSearchSolutionsFiles = async (searchQuery: string) => {
+    try {
+      if (!searchQuery.trim()) {
+        setSearchResults(null);
+        return;
+      }
+
+      const response = await searchSolutionFiles({ searchQuery }).unwrap();
+      setSearchResults(response);
+    } catch (error) {
+      console.error(error);
+      setSearchResults(null);
+    }
+  };
+
+  const displayedData = searchResults || solutionsFilesByParamsData;
 
   const onPageChange = (currentPage: number) => {
-    setCurrentPage(currentPage);
+    if (!searchResults) {
+      setCurrentPage(currentPage);
+    }
   };
 
   return (
@@ -69,24 +92,32 @@ export const SolutionsFiles = () => {
         </Link>
       )}
 
+      <Input.Search
+        className={styles.solutionsFilesSearchInput}
+        placeholder="Поиск решений..."
+        onSearch={handleSearchSolutionsFiles}
+        allowClear
+      />
+
       <div className={styles.solutionsFilesCardsWrapper}>
-        {solutionsFilesData?.data?.map((solutionFile) => (
+        {displayedData?.data?.map((solutionFile) => (
           <React.Fragment key={solutionFile.id}>
             <SolutionFileCard {...solutionFile} />
           </React.Fragment>
         ))}
       </div>
 
-      {(solutionsFilesData?.totalCount ?? 0) > 0 && (
+      {(displayedData?.totalCount ?? 0) > 0 && !searchResults && (
         <div className={styles.solutionsFilesPaginationWrapper}>
           <Typography.Text className={styles.solutionsFilesPaginationText}>
-            Всего решений: {solutionsFilesData?.totalCount}
+            Всего решений: {displayedData?.totalCount}
           </Typography.Text>
 
           <Pagination
-            pageSize={PAGINATION_PAGE_SIZE}
+            className={styles.solutionsFilesPagination}
             current={currentPage}
-            total={solutionsFilesData?.totalCount}
+            total={displayedData?.totalCount}
+            pageSize={PAGINATION_PAGE_SIZE}
             onChange={onPageChange}
           />
         </div>

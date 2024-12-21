@@ -28,6 +28,7 @@ import { getDirectionsOptions } from "utils";
 export const useGetFormItemsForAdminPanel = () => {
   const { data: allDirectionsData } = useGetAllDirectionsQuery();
   const { data: allStacksData } = useGetAllDirectionsStacksQuery();
+
   const { data: allDirectionCategoriesData } =
     useGetAllDirectionCategoriesQuery();
 

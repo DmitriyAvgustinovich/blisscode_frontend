@@ -42,7 +42,7 @@ const solutionFileApi = rtkApi.injectEndpoints({
       IGetSolutionsFilesByParamsRequest
     >({
       query: (body) => ({
-        url: `solution-files/filtered-solution-files?directionId=${body.directionId}&stackId=${body.stackId}&categoryId=${body.categoryId}&page=${body.page}&pageSize=${body.pageSize}`,
+        url: `solution-files/solutions-files-by-params?directionId=${body.directionId}&stackId=${body.stackId}&categoryId=${body.categoryId}&page=${body.page}&pageSize=${body.pageSize}`,
       }),
       providesTags: ["SolutionFile"],
     }),

@@ -1,0 +1,36 @@
+.solutionsFilesResultsTitle {
+  display: block;
+  margin-top: 10px;
+  color: var(--white-text-color);
+}
+
+.solutionsFilesSearchResultWrapper {
+  margin-top: 10px;
+  padding: 0 15px 10px 15px;
+  background-color: var(--primary-bg-color);
+  max-height: 30vh;
+  overflow-y: scroll;
+  border-radius: 10px;
+
+  &::-webkit-scrollbar {
+    width: 3px;
+    height: 3px;
+
+    &-thumb {
+      background-color: var(--purple-bg-color);
+    }
+  }
+}
+
+.solutionsFilesSearchResult {
+  margin-top: 10px;
+}
+
+.solutionsFilesSearchResultText {
+  color: var(--white-text-color);
+  cursor: pointer;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}

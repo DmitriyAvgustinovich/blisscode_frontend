@@ -107,6 +107,7 @@ export const SearchSolutionsFilesInput = (
       value={searchSolutionFileValue}
       onChange={onChangeSearchSolutionFiles}
       ref={inputRef}
+      allowClear
     />
   );
 };

@@ -75,7 +75,7 @@ export const AdminPanelTable = (props: IAdminPanelTableProps) => {
         await updateEntity({
           ...entity,
           id: editingEntity.id,
-          filename: solutionFileName,
+          filename: solutionFileName || entity.file_path.slice(6),
         });
       } else {
         await addEntity({ ...entity, filename: solutionFileName });

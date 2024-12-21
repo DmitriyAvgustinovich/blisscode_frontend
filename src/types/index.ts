@@ -7,3 +7,4 @@ export * from "./IDirectionStack";
 export * from "./IDirectionCategory";
 export * from "./IUser";
 export * from "./IFormItem";
+export * from "./IOpenSolutionFileFromSearch";

@@ -51,13 +51,17 @@ export const SolutionFileTabs = (props: ISolutionFileTabsProps) => {
           setActiveSolutionsFilePath(solutionFile.solutionFilePath);
         };
 
-        const handleClickSaveFileContent = () => {
+        const handleClickSaveFileContent = (event: React.MouseEvent) => {
+          event.stopPropagation();
           handleSaveFileContentInClipBoard(solutionFile.solutionFileContent);
         };
 
         const handleClickCloseFile = () => {
           handleCloseSolutionFileTab(solutionFile.solutionFilePath);
         };
+
+        const isActiveSolutionFilePath =
+          solutionFile.solutionFilePath === activeSolutionFilePath;
 
         return (
           <div
@@ -66,13 +70,17 @@ export const SolutionFileTabs = (props: ISolutionFileTabsProps) => {
             onClick={handleClickActiveFile}
           >
             <FileTextOutlined className={styles.solutionFileTabIcon} />
+
             {solutionFile.solutionFileName}
-            <Tooltip title="Скопировать содержимое файла">
-              <CopyOutlined
-                className={styles.solutionFileTabIcon}
-                onClick={handleClickSaveFileContent}
-              />
-            </Tooltip>
+
+            {isActiveSolutionFilePath && (
+              <Tooltip title="Скопировать содержимое файла">
+                <CopyOutlined
+                  className={styles.solutionFileTabIcon}
+                  onClick={handleClickSaveFileContent}
+                />
+              </Tooltip>
+            )}
 
             <Tooltip title="Файл доступен только для чтения">
               <LockOutlined className={styles.solutionFileTabIcon} />

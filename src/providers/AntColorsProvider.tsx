@@ -17,6 +17,7 @@ export const AntColorsProvider = (props: IAntColorsProviderProps) => {
           },
           Input: {
             algorithm: true,
+            colorPrimary: "#715fde",
             activeBorderColor: "var(--black-bg-color)",
             hoverBorderColor: "var(--black-bg-color)",
             activeShadow: "var(--black-bg-color)",
