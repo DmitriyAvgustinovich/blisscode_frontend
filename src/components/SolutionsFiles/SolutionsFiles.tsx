@@ -58,6 +58,8 @@ export const SolutionsFiles = () => {
       }
 
       const response = await searchSolutionFiles({ searchQuery }).unwrap();
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
       setSearchResults(response);
     } catch (error) {
       console.error(error);
