@@ -72,13 +72,24 @@ export const AdminPanelTable = (props: IAdminPanelTableProps) => {
   const handleSaveEntity = async (entity: TRecordStringObject) => {
     try {
       if (editingEntity) {
-        await updateEntity({
+        const updateData: TRecordStringObject = {
           ...entity,
           id: editingEntity.id,
-          filename: solutionFileName || entity.file_path.slice(6),
-        });
+        };
+
+        if ("filename" in entity) {
+          updateData.filename = solutionFileName || entity.file_path?.slice(6);
+        }
+
+        await updateEntity(updateData);
       } else {
-        await addEntity({ ...entity, filename: solutionFileName });
+        const createData: TRecordStringObject = { ...entity };
+
+        if (solutionFileName) {
+          createData.filename = solutionFileName;
+        }
+
+        await addEntity(createData);
       }
 
       setIsModalOpen(false);

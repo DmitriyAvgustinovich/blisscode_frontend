@@ -2,6 +2,7 @@ import { RouteProps } from "react-router-dom";
 
 import { AdminPanelPage } from "pages/AdminPanelPage";
 import { ForbiddenPage } from "pages/ForbiddenPage";
+import { MainPage } from "pages/MainPage";
 import { SolutionFileViewerPage } from "pages/SolutionFileViewerPage";
 import { SolutionsFilesPage } from "pages/SolutionsFilesPage";
 
@@ -14,6 +15,7 @@ export type TAppRouteProps = RouteProps & {
 };
 
 export enum AppRoutes {
+  MAIN = "main",
   SOLUTION_FILE_VIEWER = "solution_file_viewer",
   ADMIN_PANEL = "admin_panel",
   SOLUTIONS_FILES = "solution_files",
@@ -21,6 +23,7 @@ export enum AppRoutes {
 }
 
 export const RouterPath: Record<AppRoutes, string> = {
+  [AppRoutes.MAIN]: "/",
   [AppRoutes.SOLUTION_FILE_VIEWER]: "/solution_file_viewer",
   [AppRoutes.ADMIN_PANEL]: "/admin_panel",
   [AppRoutes.SOLUTIONS_FILES]: "/solutions_files",
@@ -28,6 +31,14 @@ export const RouterPath: Record<AppRoutes, string> = {
 };
 
 export const routeConfig: Record<AppRoutes, TAppRouteProps> = {
+  [AppRoutes.MAIN]: {
+    path: RouterPath.main,
+    element: (
+      <LazyLoadChunk>
+        <MainPage />
+      </LazyLoadChunk>
+    ),
+  },
   [AppRoutes.SOLUTION_FILE_VIEWER]: {
     path: RouterPath.solution_file_viewer,
     element: (

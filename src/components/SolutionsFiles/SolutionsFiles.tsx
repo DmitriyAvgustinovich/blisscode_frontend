@@ -13,6 +13,7 @@ import { useGetDirectionCategoryByIdQuery } from "store/api/direction_category/d
 import { useGetDirectionStackByIdQuery } from "store/api/direction_stack/direction-stack-api";
 import { useSearchSolutionFilesMutation } from "store/api/elastic_search/elastic-search-api";
 import { useGetSolutionsFilesByParamsQuery } from "store/api/solution_file/solution-file-api";
+import { IGetSolutionsFilesByParamsResponse } from "store/api/solution_file/types";
 
 import { RouterPath } from "configs/route-config";
 
@@ -22,7 +23,9 @@ import styles from "./SolutionsFiles.module.scss";
 
 export const SolutionsFiles = () => {
   const [currentPage, setCurrentPage] = React.useState(1);
-  const [searchResults, setSearchResults] = React.useState(null);
+
+  const [searchResults, setSearchResults] =
+    React.useState<IGetSolutionsFilesByParamsResponse | null>(null);
 
   const { isActiveUserHasAdmin } = useGetActiveUser();
   const { directionId, stackId, categoryId } = useGetSearchParams();
@@ -57,10 +60,11 @@ export const SolutionsFiles = () => {
         return;
       }
 
-      const response = await searchSolutionFiles({ searchQuery }).unwrap();
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-ignore
-      setSearchResults(response);
+      const { data, totalCount } = await searchSolutionFiles({
+        searchQuery,
+      }).unwrap();
+
+      setSearchResults({ data, totalCount });
     } catch (error) {
       console.error(error);
       setSearchResults(null);
@@ -77,7 +81,7 @@ export const SolutionsFiles = () => {
 
   return (
     <div className={styles.solutionsFilesWrapper}>
-      <Typography.Title className={styles.solutionsFilesTitle}>
+      <Typography.Title className={styles.solutionsFilesTitle} level={3}>
         {directionData?.name} <RightOutlined /> {stackData?.name}{" "}
         <RightOutlined /> {categoryData?.name}
       </Typography.Title>
@@ -88,6 +92,7 @@ export const SolutionsFiles = () => {
             className={styles.solutionsFilesGoToAdminPanelButton}
             type="primary"
             icon={<ControlFilled />}
+            size="small"
           >
             Админ панель
           </Button>
@@ -108,6 +113,12 @@ export const SolutionsFiles = () => {
           </React.Fragment>
         ))}
       </div>
+
+      {searchResults && searchResults?.totalCount < 1 && (
+        <Typography.Text className={styles.solutionsFilesEmptyText}>
+          Решений не найдено. Попробуйте еще раз.
+        </Typography.Text>
+      )}
 
       {(displayedData?.totalCount ?? 0) > 0 && !searchResults && (
         <div className={styles.solutionsFilesPaginationWrapper}>

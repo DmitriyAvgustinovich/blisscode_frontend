@@ -29,7 +29,9 @@ export const SolutionFileCard = (props: ISolutionFile) => {
         to={`${RouterPath.solution_file_viewer}?solutionFileId=${props.uuid}`}
         target="_blank"
       >
-        <Button icon={<CodepenOutlined />}>Смотреть решение</Button>
+        <Button icon={<CodepenOutlined />} block>
+          Смотреть решение
+        </Button>
       </Link>
     </div>
   );

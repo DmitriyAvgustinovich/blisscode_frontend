@@ -5,6 +5,6 @@ export interface ISearchSolutionsFilesRequest {
 }
 
 export interface ISearchSolutionsFilesResponse {
-  hits: ISolutionFile[];
-  total: number;
+  data: ISolutionFile[];
+  totalCount: number;
 }

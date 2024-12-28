@@ -9,18 +9,22 @@
 }
 
 .solutionsFilesGoToAdminPanelButton {
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 
 .solutionsFilesSearchInput {
-  display: block;
-  max-width: 400px;
   margin-bottom: 20px;
 }
 
 .solutionsFilesCardsWrapper {
   display: flex;
+  flex-wrap: wrap;
   gap: 20px;
+}
+
+.solutionsFilesEmptyText {
+  font: var(--font-m);
+  color: var(--white-text-color);
 }
 
 .solutionsFilesPaginationWrapper {

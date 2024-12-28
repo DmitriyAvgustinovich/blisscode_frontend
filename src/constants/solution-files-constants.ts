@@ -1,4 +1,4 @@
-export const PAGINATION_PAGE_SIZE = 1;
+export const PAGINATION_PAGE_SIZE = 3;
 
 export const HIDDEN_FOLDERS_OR_FILES = [
   "__MACOSX",
