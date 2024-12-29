@@ -1,0 +1,24 @@
+.mainWrapper {
+  background-color: var(--primary-bg-color);
+  height: 100vh;
+  padding: 20px;
+}
+
+.mainTitle,
+.mainGreetingText,
+.mainSubTitle,
+.mainDescriptionText {
+  color: var(--white-text-color) !important;
+}
+
+.mainGreetingText,
+.mainDescriptionText,
+.mainDescriptionTextLink {
+  font: var(--font-m);
+}
+
+.mainDescriptionTextLink {
+  color: var(--purple-text-color) !important;
+  text-decoration: underline;
+  cursor: pointer;
+}
