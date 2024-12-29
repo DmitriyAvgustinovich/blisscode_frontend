@@ -60,13 +60,13 @@ export const Main = () => {
       <br />
       <br />
       <Typography.Text className={styles.mainDescriptionText}>
-        🚀 Начни прямо сейчас! Перейди в
+        🚀 Начни прямо сейчас! Перейди в{" "}
         <a
           className={styles.mainDescriptionTextLink}
           // todo: вписать продакшн версию
           href="https://t.me/BlissCodeBaseTest_bot"
         >
-          Бот BlissCodeBase
+          BlissCodeBase
         </a>{" "}
         и выбери интерисующее тебя направление.
       </Typography.Text>
