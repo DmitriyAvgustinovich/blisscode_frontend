@@ -1,6 +1,7 @@
 import { rtkApi } from "../rtk-api";
 import {
   IDeleteDirectionCategoryRequest,
+  IGetDirectionCategoriesByDirectionIdAndStackIdRequest,
   IGetDirectionCategoryByIdRequest,
   IUpdateDirectionCategoryRequest,
   TAddDirectionCategoryRequest,
@@ -8,6 +9,7 @@ import {
   TDeleteDirectionCategoryResponse,
   TGetAllDirectionCategoriesRequest,
   TGetAllDirectionCategoriesResponse,
+  TGetDirectionCategoriesByDirectionIdAndStackIdResponse,
   TGetDirectionCategoryByIdResponse,
   TUpdateDirectionCategoryResponse,
 } from "./types";
@@ -30,6 +32,16 @@ const directionCategoryApi = rtkApi.injectEndpoints({
     >({
       query: (body) => ({
         url: `direction-category/${body.id}`,
+      }),
+      providesTags: ["DirectionCategory"],
+    }),
+
+    getDirectionCategoriesByDirectionIdAndStackId: build.query<
+      TGetDirectionCategoriesByDirectionIdAndStackIdResponse,
+      IGetDirectionCategoriesByDirectionIdAndStackIdRequest
+    >({
+      query: (body) => ({
+        url: `direction-category/direction/${body.direction_id}/stack/${body.stack_id}`,
       }),
       providesTags: ["DirectionCategory"],
     }),
@@ -74,6 +86,7 @@ const directionCategoryApi = rtkApi.injectEndpoints({
 export const {
   useGetAllDirectionCategoriesQuery,
   useGetDirectionCategoryByIdQuery,
+  useGetDirectionCategoriesByDirectionIdAndStackIdQuery,
   useAddDirectionCategoryMutation,
   useUpdateDirectionCategoryMutation,
   useDeleteDirectionCategoryMutation,

@@ -1,3 +1,4 @@
+import { useGetActiveUser } from "hooks";
 import { Navigate } from "react-router-dom";
 
 import { RouterPath } from "configs/route-config";
@@ -9,12 +10,10 @@ interface IRequireSubscriberProps {
 export function RequireSubscriber(props: IRequireSubscriberProps) {
   const { children } = props;
 
-  // const { authUserData, isUserDataLoading } = useGetAuthUser();
+  const { activeUserData, isActiveUserDataLoading } = useGetActiveUser();
 
-  const isSubscriberDataLoading = false;
-  const subscriberData = true;
-
-  if (!isSubscriberDataLoading && !subscriberData) {
+  // todo: доделать потом когда появится платежка
+  if (!isActiveUserDataLoading && !activeUserData) {
     return <Navigate to={RouterPath.forbidden} />;
   }
 

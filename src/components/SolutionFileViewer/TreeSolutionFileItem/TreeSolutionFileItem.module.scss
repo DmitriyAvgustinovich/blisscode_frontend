@@ -1,8 +1,8 @@
-.solutionFileWrapper {
+.treeSolutionFileItemWrapper {
   margin-left: 20px;
 }
 
-.solutionFileNameWrapper {
+.treeSolutionFileItemNameWrapper {
   display: flex;
   gap: 5px;
   overflow-x: scroll;
@@ -20,6 +20,6 @@
   }
 }
 
-.solutionFileIcon {
+.treeSolutionFileItemIcon {
   font: var(--font-m);
 }

@@ -4,14 +4,14 @@ import { FileTextOutlined } from "@ant-design/icons";
 
 import { HIDDEN_FOLDERS_OR_FILES } from "constants/solution-files-constants";
 
-import styles from "./SolutionFile.module.scss";
+import styles from "./TreeSolutionFileItem.module.scss";
 
-interface ISolutionFileProps {
+interface ITreeSolutionFileItem {
   fileName: string;
   getSolutionFileContent: () => void;
 }
 
-export const SolutionFile = (props: ISolutionFileProps) => {
+export const TreeSolutionFileItem = (props: ITreeSolutionFileItem) => {
   const { fileName, getSolutionFileContent } = props;
 
   const [solutionFileContent, setSolutionFileContent] = React.useState("");
@@ -30,12 +30,15 @@ export const SolutionFile = (props: ISolutionFileProps) => {
   }
 
   return (
-    <div className={styles.solutionFileWrapper}>
+    <div className={styles.treeSolutionFileItemWrapper}>
       <div
-        className={styles.solutionFileNameWrapper}
+        className={styles.treeSolutionFileItemNameWrapper}
         onClick={handleOpenSolutionCode}
       >
-        {fileName && <FileTextOutlined className={styles.solutionFileIcon} />}
+        {fileName && (
+          <FileTextOutlined className={styles.treeSolutionFileItemIcon} />
+        )}
+
         {fileName}
       </div>
     </div>

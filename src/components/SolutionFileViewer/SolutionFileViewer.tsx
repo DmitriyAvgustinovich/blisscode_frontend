@@ -1,3 +1,3 @@
-import { ZipSolutionFileParser } from "components/ZipSolutionFileParser/ZipSolutionFileParser";
+import { ZipSolutionFileParser } from "components/SolutionFileViewer/ZipSolutionFileParser/ZipSolutionFileParser";
 
 export const SolutionFileViewer = () => <ZipSolutionFileParser />;

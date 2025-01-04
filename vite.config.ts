@@ -16,4 +16,8 @@ export default defineConfig({
       utils: "/src/utils",
     },
   },
+  server: {
+    host: "127.0.0.1",
+    port: 5173,
+  },
 });

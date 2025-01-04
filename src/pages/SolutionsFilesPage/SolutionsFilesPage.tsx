@@ -1,7 +1,7 @@
-import { SolutionsFiles } from "components/SolutionsFiles/SolutionsFiles";
+import { DisplayedSolutionsFilesList } from "components/SolutionFileViewer/DisplayedSolutionsFilesList/DisplayedSolutionsFilesList";
 
 const SolutionsFilesPage = () => {
-  return <SolutionsFiles />;
+  return <DisplayedSolutionsFilesList />;
 };
 
 export default SolutionsFilesPage;

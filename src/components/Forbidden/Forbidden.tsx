@@ -6,7 +6,7 @@ export const Forbidden = () => {
   return (
     <div className={styles.forbiddenWrapper}>
       <Typography.Title className={styles.forbiddenTitle}>
-        Недостаточно прав для просмотра страницы
+        Недостаточно прав для просмотра страницы. Отсутствует подписка.
       </Typography.Title>
 
       <Button

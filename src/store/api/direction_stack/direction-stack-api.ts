@@ -1,6 +1,7 @@
 import { rtkApi } from "../rtk-api";
 import {
   IDeleteDirectionStackRequest,
+  IGetDirectionStackByDirectionIdRequest,
   IGetDirectionStackByIdRequest,
   IUpdateDirectionStackRequest,
   TAddDirectionStackRequest,
@@ -8,6 +9,7 @@ import {
   TDeleteDirectionStackResponse,
   TGetAllDirectionStacksRequest,
   TGetAllDirectionStacksResponse,
+  TGetDirectionStackByDirectionIdResponse,
   TGetDirectionStackByIdResponse,
   TUpdateDirectionStackResponse,
 } from "./types";
@@ -30,6 +32,16 @@ const directionApi = rtkApi.injectEndpoints({
     >({
       query: (body) => ({
         url: `direction-stack/${body.id}`,
+      }),
+      providesTags: ["DirectionStack"],
+    }),
+
+    getDirectionStacksByDirectionId: build.query<
+      TGetDirectionStackByDirectionIdResponse,
+      IGetDirectionStackByDirectionIdRequest
+    >({
+      query: (body) => ({
+        url: `direction-stack/direction_id/${body.direction_id}`,
       }),
       providesTags: ["DirectionStack"],
     }),
@@ -74,6 +86,7 @@ const directionApi = rtkApi.injectEndpoints({
 export const {
   useGetAllDirectionsStacksQuery,
   useGetDirectionStackByIdQuery,
+  useGetDirectionStacksByDirectionIdQuery,
   useAddDirectionStackMutation,
   useUpdateDirectionStackMutation,
   useDeleteDirectionStackMutation,

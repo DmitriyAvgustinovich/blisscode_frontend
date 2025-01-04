@@ -8,10 +8,10 @@ import { Light as SyntaxHighlighter } from "react-syntax-highlighter";
 
 import { vs2015 } from "react-syntax-highlighter/dist/esm/styles/hljs";
 
-import { SearchSolutionsFilesModal } from "components/SearchSolutionsFilesModal/SearchSolutionsFilesModal";
-import { SolutionFile } from "components/SolutionFile/SolutionFile";
-import { SolutionFileTabs } from "components/SolutionFileTabs/SolutionFileTabs";
-import { SolutionFolder } from "components/SolutionFolder/SolutionFolder";
+import { SearchSolutionsFilesModal } from "components/SolutionFileViewer/SearchSolutionsFilesModal/SearchSolutionsFilesModal";
+import { SolutionFileTabs } from "components/SolutionFileViewer/SolutionFileTabs/SolutionFileTabs";
+import { SolutionFolder } from "components/SolutionFileViewer/SolutionFolder/SolutionFolder";
+import { TreeSolutionFileItem } from "components/SolutionFileViewer/TreeSolutionFileItem/TreeSolutionFileItem";
 
 import { useGetSolutionFileByUuidQuery } from "store/api/solution_file/solution-file-api";
 
@@ -76,7 +76,7 @@ export const ZipSolutionFileParser = () => {
 
       if (currentSolutionFile.type === "file") {
         return (
-          <SolutionFile
+          <TreeSolutionFileItem
             key={solutionFilePath}
             fileName={key}
             getSolutionFileContent={getSolutionFileContent}

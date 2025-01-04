@@ -8,6 +8,11 @@ export interface IGetDirectionStackByIdRequest {
   id: number;
 }
 
+export type TGetDirectionStackByDirectionIdResponse = IDirectionStack[];
+export interface IGetDirectionStackByDirectionIdRequest {
+  direction_id: number | null;
+}
+
 export type TAddDirectionStackResponse = IDirectionStack;
 export type TAddDirectionStackRequest = Omit<IDirectionStack, "id">;
 

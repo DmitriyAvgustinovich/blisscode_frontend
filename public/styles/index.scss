@@ -17,3 +17,13 @@
     border: 1px solid var(--purple-bg-color) !important;
   }
 }
+
+.ant-card-actions {
+  li {
+    span {
+      &:hover {
+        color: var(--purple-bg-color) !important;
+      }
+    }
+  }
+}

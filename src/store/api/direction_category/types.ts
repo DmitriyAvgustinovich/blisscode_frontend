@@ -8,6 +8,13 @@ export interface IGetDirectionCategoryByIdRequest {
   id: number;
 }
 
+export type TGetDirectionCategoriesByDirectionIdAndStackIdResponse =
+  IDirectionCategory[];
+export interface IGetDirectionCategoriesByDirectionIdAndStackIdRequest {
+  direction_id: number | null;
+  stack_id: number | null;
+}
+
 export type TAddDirectionCategoryResponse = IDirectionCategory;
 export type TAddDirectionCategoryRequest = Omit<IDirectionCategory, "id">;
 

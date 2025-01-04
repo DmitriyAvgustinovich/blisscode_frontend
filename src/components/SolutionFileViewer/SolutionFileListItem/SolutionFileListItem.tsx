@@ -10,18 +10,18 @@ import {
 
 import { RouterPath } from "configs/route-config";
 
-import styles from "./SolutionFileCard.module.scss";
+import styles from "./SolutionFileListItem.module.scss";
 
-export const SolutionFileCard = (props: ISolutionFile) => {
+export const SolutionFileListItem = (props: ISolutionFile) => {
   return (
-    <div className={styles.solutionFileCardWrapper}>
-      <Typography.Text className={styles.solutionFileCardTitle}>
-        <FontSizeOutlined className={styles.solutionFileCardTitle} />{" "}
+    <div className={styles.solutionFileListItemWrapper}>
+      <Typography.Text className={styles.solutionFileListItemTitle}>
+        <FontSizeOutlined className={styles.solutionFileListItemTitle} />{" "}
         {props.name}
       </Typography.Text>
 
-      <Typography.Text className={styles.solutionFileCardDescription}>
-        <FileTextOutlined className={styles.solutionFileCardDescription} />{" "}
+      <Typography.Text className={styles.solutionFileListItemDescription}>
+        <FileTextOutlined className={styles.solutionFileListItemDescription} />{" "}
         {props.description}
       </Typography.Text>
 

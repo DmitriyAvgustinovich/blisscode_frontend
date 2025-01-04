@@ -4,8 +4,8 @@ import { Button, Modal } from "antd";
 
 import { SearchOutlined } from "@ant-design/icons";
 
-import { SearchSolutionsFilesInput } from "components/SearchSolutionsFilesInput/SearchSolutionsFilesInput";
-import { SolutionsFilesSearchResult } from "components/SolutionsFilesSearchResult/SolutionsFilesSearchResult";
+import { SearchSolutionsFilesInput } from "components/SolutionFileViewer/SearchSolutionsFilesInput/SearchSolutionsFilesInput";
+import { SolutionsFilesSearchResult } from "components/SolutionFileViewer/SolutionsFilesSearchResult/SolutionsFilesSearchResult";
 
 import {
   IFileOrFolder,

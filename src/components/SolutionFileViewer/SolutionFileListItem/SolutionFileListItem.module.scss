@@ -1,4 +1,4 @@
-.solutionFileCardWrapper {
+.solutionFileListItemWrapper {
   min-width: 100%;
   background-color: var(--gray-bg-color);
   display: flex;
@@ -8,12 +8,12 @@
   border-radius: 10px;
 }
 
-.solutionFileCardTitle {
+.solutionFileListItemTitle {
   font: var(--font-l);
   color: var(--white-text-color);
 }
 
-.solutionFileCardDescription {
+.solutionFileListItemDescription {
   font: var(--font-ml);
   color: var(--white-text-color);
 }

@@ -6,9 +6,9 @@ import {
 
 import { IFormItem, TRecordStringObject } from "types";
 
-interface IGetValidationRulesProps {
+interface IGetValidationRulesProps<T> {
   formItem: IFormItem;
-  editingEntity: TRecordStringObject | null;
+  editingEntity: T;
 }
 
 const validatePrefixValue = (args: TRecordStringObject) => {
@@ -24,7 +24,7 @@ const getPrefixValidationError = (prefix: string) => {
   return `Должно начинаться с '${prefix}' и содержать любой латинский символ после него.`;
 };
 
-export const getValidationRules = (props: IGetValidationRulesProps) => {
+export const getValidationRules = <T>(props: IGetValidationRulesProps<T>) => {
   const { formItem, editingEntity } = props;
 
   const nodeDefaultValue = formItem.node?.props?.defaultValue;
@@ -34,7 +34,10 @@ export const getValidationRules = (props: IGetValidationRulesProps) => {
       nodeDefaultValue as keyof typeof solutionFilePrefixesValidation
     ];
 
-  if (formItem.name === solutionFilesTableDataIndexes.filePath) {
+  const isFilePathField =
+    formItem.name === solutionFilesTableDataIndexes.filePath;
+
+  if (isFilePathField) {
     return [];
   }
 

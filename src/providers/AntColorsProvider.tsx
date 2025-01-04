@@ -55,6 +55,12 @@ export const AntColorsProvider = (props: IAntColorsProviderProps) => {
             algorithm: true,
             colorText: "var(--white-text-color)",
           },
+          Card: {
+            algorithm: true,
+            colorBgContainer: "var(--gray-bg-color)",
+            colorText: "var(--white-text-color)",
+            colorTextDescription: "var(--white-text-color)",
+          },
         },
       }}
     >

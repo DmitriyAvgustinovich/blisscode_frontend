@@ -14,7 +14,7 @@ export function RequireAdmin(props: IRequireAdminProps) {
   const { activeUserData, isActiveUserDataLoading, isActiveUserHasAdmin } =
     useGetActiveUser();
 
-  if (!isActiveUserDataLoading && activeUserData && !isActiveUserHasAdmin) {
+  if (!isActiveUserDataLoading && (!activeUserData || !isActiveUserHasAdmin)) {
     return <Navigate to={RouterPath.forbidden} />;
   }
 

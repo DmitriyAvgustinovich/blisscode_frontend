@@ -1,33 +1,33 @@
-.solutionsFilesWrapper {
+.displayedSolutionsFilesListWrapper {
   padding: 20px;
   background-color: var(--primary-bg-color);
   height: 100vh;
 }
 
-.solutionsFilesTitle {
+.displayedSolutionsFilesListTitle {
   color: var(--white-text-color) !important;
 }
 
-.solutionsFilesGoToAdminPanelButton {
+.displayedSolutionsFilesListGoToAdminPanelButton {
   margin-bottom: 10px;
 }
 
-.solutionsFilesSearchInput {
+.displayedSolutionsFilesListSearchInput {
   margin-bottom: 20px;
 }
 
-.solutionsFilesCardsWrapper {
+.displayedSolutionsFilesListCardsWrapper {
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
 }
 
-.solutionsFilesEmptyText {
+.displayedSolutionsFilesListEmptyText {
   font: var(--font-m);
   color: var(--white-text-color);
 }
 
-.solutionsFilesPaginationWrapper {
+.displayedSolutionsFilesListPaginationWrapper {
   position: absolute;
   bottom: 20px;
   left: 50%;
@@ -35,7 +35,7 @@
   text-align: center;
 }
 
-.solutionsFilesPaginationText {
+.displayedSolutionsFilesListPaginationText {
   display: block;
   margin-bottom: 10px;
   font: var(--font-s);

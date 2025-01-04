@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 
 import { ControlFilled, RightOutlined } from "@ant-design/icons";
 
-import { SolutionFileCard } from "components/SolutionFileCard/SolutionFileCard";
+import { SolutionFileListItem } from "components/SolutionFileViewer/SolutionFileListItem/SolutionFileListItem";
 
 import { useGetDirectionByIdQuery } from "store/api/direction/direction-api";
 import { useGetDirectionCategoryByIdQuery } from "store/api/direction_category/direction-category-api";
@@ -19,9 +19,9 @@ import { RouterPath } from "configs/route-config";
 
 import { PAGINATION_PAGE_SIZE } from "constants/solution-files-constants";
 
-import styles from "./SolutionsFiles.module.scss";
+import styles from "./DisplayedSolutionsFilesList.module.scss";
 
-export const SolutionsFiles = () => {
+export const DisplayedSolutionsFilesList = () => {
   const [currentPage, setCurrentPage] = React.useState(1);
 
   const [searchResults, setSearchResults] =
@@ -80,8 +80,11 @@ export const SolutionsFiles = () => {
   };
 
   return (
-    <div className={styles.solutionsFilesWrapper}>
-      <Typography.Title className={styles.solutionsFilesTitle} level={3}>
+    <div className={styles.displayedSolutionsFilesListWrapper}>
+      <Typography.Title
+        className={styles.displayedSolutionsFilesListTitle}
+        level={3}
+      >
         {directionData?.name} <RightOutlined /> {stackData?.name}{" "}
         <RightOutlined /> {categoryData?.name}
       </Typography.Title>
@@ -89,7 +92,7 @@ export const SolutionsFiles = () => {
       {isActiveUserHasAdmin && (
         <Link to={RouterPath.admin_panel} target="_blank">
           <Button
-            className={styles.solutionsFilesGoToAdminPanelButton}
+            className={styles.displayedSolutionsFilesListGoToAdminPanelButton}
             type="primary"
             icon={<ControlFilled />}
             size="small"
@@ -100,34 +103,38 @@ export const SolutionsFiles = () => {
       )}
 
       <Input.Search
-        className={styles.solutionsFilesSearchInput}
+        className={styles.displayedSolutionsFilesListSearchInput}
         placeholder="Поиск решений..."
         onSearch={handleSearchSolutionsFiles}
         allowClear
       />
 
-      <div className={styles.solutionsFilesCardsWrapper}>
+      <div className={styles.displayedSolutionsFilesListCardsWrapper}>
         {displayedData?.data?.map((solutionFile) => (
           <React.Fragment key={solutionFile.id}>
-            <SolutionFileCard {...solutionFile} />
+            <SolutionFileListItem {...solutionFile} />
           </React.Fragment>
         ))}
       </div>
 
       {searchResults && searchResults?.totalCount < 1 && (
-        <Typography.Text className={styles.solutionsFilesEmptyText}>
+        <Typography.Text
+          className={styles.displayedSolutionsFilesListEmptyText}
+        >
           Решений не найдено. Попробуйте еще раз.
         </Typography.Text>
       )}
 
       {(displayedData?.totalCount ?? 0) > 0 && !searchResults && (
-        <div className={styles.solutionsFilesPaginationWrapper}>
-          <Typography.Text className={styles.solutionsFilesPaginationText}>
+        <div className={styles.displayedSolutionsFilesListPaginationWrapper}>
+          <Typography.Text
+            className={styles.displayedSolutionsFilesListPaginationText}
+          >
             Всего решений: {displayedData?.totalCount}
           </Typography.Text>
 
           <Pagination
-            className={styles.solutionsFilesPagination}
+            className={styles.displayedSolutionsFilesListPagination}
             current={currentPage}
             total={displayedData?.totalCount}
             pageSize={PAGINATION_PAGE_SIZE}

@@ -7,9 +7,17 @@ import { UploadProps } from "antd/es/upload/interface";
 
 import { LoadingOutlined, PlusOutlined } from "@ant-design/icons";
 
-import styles from "./UploadZipButton.module.scss";
+import styles from "./UploadZipSolutionFileButton.module.scss";
 
-export const UploadZipButton = () => {
+interface IUploadZipSolutionFileButtonProps {
+  existSolutionFileName?: string;
+}
+
+export const UploadZipSolutionFileButton = (
+  props: IUploadZipSolutionFileButtonProps
+) => {
+  const { existSolutionFileName } = props;
+
   const [isUploadFileLoading, setIsUploadFileLoading] = React.useState(false);
 
   const {
@@ -55,10 +63,10 @@ export const UploadZipButton = () => {
   };
 
   const uploadButton = (
-    <div className={styles.uploadZipButtonWrapper}>
+    <div className={styles.uploadZipSolutionFileButtonWrapper}>
       {isUploadFileLoading ? <LoadingOutlined /> : <PlusOutlined />}
 
-      <Typography.Text className={styles.uploadZipButtonText}>
+      <Typography.Text className={styles.uploadZipSolutionFileButtonText}>
         Загрузить файл решения
       </Typography.Text>
     </div>
@@ -76,10 +84,13 @@ export const UploadZipButton = () => {
 
   return (
     <Upload {...uploadProps}>
-      {solutionFileName ? (
-        <div className={styles.uploadZipButtonUploadedFileWrapper}>
-          <Typography.Text className={styles.uploadZipButtonUploadedFileText}>
-            Файл решения под именем <b>{solutionFileName}</b> загружен
+      {solutionFileName || existSolutionFileName ? (
+        <div className={styles.uploadZipSolutionFileButtonUploadedFileWrapper}>
+          <Typography.Text
+            className={styles.uploadZipSolutionFileButtonUploadedFileText}
+          >
+            Файл решения под именем{" "}
+            <b>{solutionFileName || existSolutionFileName}</b> загружен
           </Typography.Text>
         </div>
       ) : (

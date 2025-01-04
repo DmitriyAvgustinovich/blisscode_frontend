@@ -60,7 +60,7 @@ export const Main = () => {
       <br />
       <br />
       <Typography.Text className={styles.mainDescriptionText}>
-        🚀 Начни прямо сейчас! Перейди в{" "}
+        🚀 Начни прямо сейчас! Перейди в Telegram бот{" "}
         <a
           className={styles.mainDescriptionTextLink}
           // todo: вписать продакшн версию
