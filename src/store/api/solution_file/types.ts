@@ -1,7 +1,14 @@
 import { ISolutionFile } from "types";
 
-export type TGetAllSolutionsFilesResponse = ISolutionFile[];
-export type TGetAllSolutionsFilesRequest = void;
+export interface IGetAllSolutionsFilesResponse {
+  data: ISolutionFile[];
+  totalCount: number;
+}
+
+export interface IGetAllSolutionsFilesRequest {
+  page: number;
+  pageSize: number;
+}
 
 export interface ISolutionFileByUuidRequest {
   uuid: string;

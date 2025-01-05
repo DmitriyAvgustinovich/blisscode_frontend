@@ -1,3 +1,5 @@
+import React from "react";
+
 import { FormInstance, Input, Select } from "antd";
 
 import { UploadZipSolutionFileButton } from "components/AdminPanel/UploadZipSolutionFileButton/UploadZipSolutionFileButton";
@@ -35,31 +37,49 @@ export const useGetFormItemsForAdminPanel = (
 ) => {
   const { solutionFileName, formState } = args;
 
-  const directionId = formState?.getFieldValue(
+  const [selectedDirectionId, setSelectedDirectionId] = React.useState<
+    number | null
+  >(null);
+
+  const [selectedStackId, setSelectedStackId] = React.useState<number | null>(
+    null
+  );
+
+  const directionIdFromFormState = formState?.getFieldValue(
     solutionFilesTableDataIndexes.direction
   );
 
-  const stackId = formState?.getFieldValue(solutionFilesTableDataIndexes.stack);
+  const stackIdFromFormState = formState?.getFieldValue(
+    solutionFilesTableDataIndexes.stack
+  );
 
   const { data: allDirectionsData } = useGetAllDirectionsQuery();
 
-  const { data: stacksByDirectionIdData, refetch: refetchStacksByDirectionId } =
+  React.useEffect(() => {
+    setSelectedDirectionId(directionIdFromFormState);
+    setSelectedStackId(stackIdFromFormState);
+  }, [directionIdFromFormState, formState, stackIdFromFormState]);
+
+  const { data: stacksByDirectionIdData } =
     useGetDirectionStacksByDirectionIdQuery(
       {
-        direction_id: directionId,
+        direction_id: selectedDirectionId ?? directionIdFromFormState,
       },
       {
-        skip: !directionId,
+        skip: !selectedDirectionId,
       }
     );
 
-  const {
-    data: categoriesByDirectionIdAndStackIdData,
-    refetch: refetchCategoriesByDirectionIdAndStackId,
-  } = useGetDirectionCategoriesByDirectionIdAndStackIdQuery({
-    direction_id: directionId,
-    stack_id: stackId,
-  });
+  const { data: categoriesByDirectionIdAndStackIdData } =
+    useGetDirectionCategoriesByDirectionIdAndStackIdQuery(
+      {
+        direction_id: selectedDirectionId ?? directionIdFromFormState,
+        stack_id: selectedStackId ?? stackIdFromFormState,
+      },
+      {
+        skip: !selectedDirectionId || !selectedStackId,
+      }
+    );
 
   const directionFormItems = [
     {
@@ -105,12 +125,11 @@ export const useGetFormItemsForAdminPanel = (
         <Select
           options={getDirectionsOptions(allDirectionsData ?? [])}
           onChange={(directionId) => {
+            setSelectedDirectionId(directionId);
+
             formState?.setFieldsValue({
-              [directionCategoryTableDataIndexes.direction]: directionId,
               [directionCategoryTableDataIndexes.stack]: null,
             });
-
-            refetchStacksByDirectionId();
           }}
         />
       ),
@@ -119,7 +138,13 @@ export const useGetFormItemsForAdminPanel = (
       label: directionCategoryTableLabels.stack,
       name: directionCategoryTableDataIndexes.stack,
       node: (
-        <Select options={getDirectionsOptions(stacksByDirectionIdData ?? [])} />
+        <Select
+          options={getDirectionsOptions(stacksByDirectionIdData ?? [])}
+          onChange={(stackId) => {
+            setSelectedStackId(stackId);
+          }}
+          disabled={!selectedDirectionId}
+        />
       ),
     },
     {
@@ -154,14 +179,13 @@ export const useGetFormItemsForAdminPanel = (
         <Select
           options={getDirectionsOptions(allDirectionsData ?? [])}
           onChange={(directionId) => {
+            setSelectedDirectionId(directionId);
+
             formState?.setFieldsValue({
               [solutionFilesTableDataIndexes.direction]: directionId,
               [solutionFilesTableDataIndexes.stack]: null,
               [solutionFilesTableDataIndexes.directionCategory]: null,
             });
-
-            refetchStacksByDirectionId();
-            refetchCategoriesByDirectionIdAndStackId();
           }}
         />
       ),
@@ -173,13 +197,13 @@ export const useGetFormItemsForAdminPanel = (
         <Select
           options={getDirectionsOptions(stacksByDirectionIdData ?? [])}
           onChange={(stackId) => {
+            setSelectedStackId(stackId);
+
             formState?.setFieldsValue({
-              [solutionFilesTableDataIndexes.stack]: stackId,
               [solutionFilesTableDataIndexes.directionCategory]: null,
             });
-
-            refetchCategoriesByDirectionIdAndStackId();
           }}
+          disabled={!selectedDirectionId}
         />
       ),
     },
@@ -191,6 +215,7 @@ export const useGetFormItemsForAdminPanel = (
           options={getDirectionsOptions(
             categoriesByDirectionIdAndStackIdData ?? []
           )}
+          disabled={!selectedDirectionId || !selectedStackId}
         />
       ),
     },

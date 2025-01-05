@@ -1,0 +1,14 @@
+.solutionFilesCardWatchLink {
+  color: var(--purple-text-color);
+}
+
+.solutionsFilesCardEmptyText {
+  font: var(--font-m);
+  color: var(--white-text-color);
+}
+
+.solutionsFilesCardPaginationWrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}

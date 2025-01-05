@@ -26,7 +26,7 @@ export const SolutionFileListItem = (props: ISolutionFile) => {
       </Typography.Text>
 
       <Link
-        to={`${RouterPath.solution_file_viewer}?solutionFileId=${props.uuid}`}
+        to={`${RouterPath.solution_file_viewer}?uuid=${props.uuid}`}
         target="_blank"
       >
         <Button icon={<CodepenOutlined />} block>

@@ -22,7 +22,7 @@ import { IFileOrFolder, TRecordStringObject } from "types";
 import styles from "./ZipSolutionFileParser.module.scss";
 
 export const ZipSolutionFileParser = () => {
-  const { solutionFileId: uuid } = useGetSearchParams();
+  const { uuid } = useGetSearchParams();
 
   const { data: solutionFileData } = useGetSolutionFileByUuidQuery(
     { uuid },

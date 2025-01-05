@@ -53,7 +53,7 @@ export const DirectionsCard = () => {
   return (
     <AdminEntityCardWrapper<IDirection>
       cardTitle="Направления"
-      dataForCard={allDirectionsData}
+      dataForCard={allDirectionsData ?? []}
       isModalOpen={isModalOpen}
       setIsModalOpen={setIsModalOpen}
       form={form}

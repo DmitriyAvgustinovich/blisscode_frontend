@@ -52,7 +52,7 @@ export const DirectionStacksCard = () => {
   return (
     <AdminEntityCardWrapper<IDirectionStack>
       cardTitle="Стеки"
-      dataForCard={allStacksData}
+      dataForCard={allStacksData ?? []}
       isModalOpen={isModalOpen}
       setIsModalOpen={setIsModalOpen}
       form={form}

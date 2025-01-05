@@ -1,10 +1,9 @@
 import React from "react";
 
-import { Button, Input, Pagination, Typography } from "antd";
-import { useGetActiveUser, useGetSearchParams } from "hooks";
-import { Link } from "react-router-dom";
+import { Input, Pagination, Typography } from "antd";
+import { useGetSearchParams } from "hooks";
 
-import { ControlFilled, RightOutlined } from "@ant-design/icons";
+import { RightOutlined } from "@ant-design/icons";
 
 import { SolutionFileListItem } from "components/SolutionFileViewer/SolutionFileListItem/SolutionFileListItem";
 
@@ -14,8 +13,6 @@ import { useGetDirectionStackByIdQuery } from "store/api/direction_stack/directi
 import { useSearchSolutionFilesMutation } from "store/api/elastic_search/elastic-search-api";
 import { useGetSolutionsFilesByParamsQuery } from "store/api/solution_file/solution-file-api";
 import { IGetSolutionsFilesByParamsResponse } from "store/api/solution_file/types";
-
-import { RouterPath } from "configs/route-config";
 
 import { PAGINATION_PAGE_SIZE } from "constants/solution-files-constants";
 
@@ -27,7 +24,6 @@ export const DisplayedSolutionsFilesList = () => {
   const [searchResults, setSearchResults] =
     React.useState<IGetSolutionsFilesByParamsResponse | null>(null);
 
-  const { isActiveUserHasAdmin } = useGetActiveUser();
   const { directionId, stackId, categoryId } = useGetSearchParams();
 
   const [searchSolutionFiles] = useSearchSolutionFilesMutation();
@@ -89,19 +85,6 @@ export const DisplayedSolutionsFilesList = () => {
         <RightOutlined /> {categoryData?.name}
       </Typography.Title>
 
-      {isActiveUserHasAdmin && (
-        <Link to={RouterPath.admin_panel} target="_blank">
-          <Button
-            className={styles.displayedSolutionsFilesListGoToAdminPanelButton}
-            type="primary"
-            icon={<ControlFilled />}
-            size="small"
-          >
-            Админ панель
-          </Button>
-        </Link>
-      )}
-
       <Input.Search
         className={styles.displayedSolutionsFilesListSearchInput}
         placeholder="Поиск решений..."
@@ -130,11 +113,10 @@ export const DisplayedSolutionsFilesList = () => {
           <Typography.Text
             className={styles.displayedSolutionsFilesListPaginationText}
           >
-            Всего решений: {displayedData?.totalCount}
+            Всего решений: <b>{displayedData?.totalCount}</b>
           </Typography.Text>
 
           <Pagination
-            className={styles.displayedSolutionsFilesListPagination}
             current={currentPage}
             total={displayedData?.totalCount}
             pageSize={PAGINATION_PAGE_SIZE}

@@ -10,7 +10,7 @@ import styles from "./AdminEntityCardWrapper.module.scss";
 
 interface IAdminEntityCardWrapperProps<T> {
   cardTitle: string;
-  dataForCard?: T[];
+  dataForCard: T[];
   isModalOpen: boolean;
   setIsModalOpen: (isModalOpen: boolean) => void;
   form: FormInstance;
@@ -20,8 +20,11 @@ interface IAdminEntityCardWrapperProps<T> {
   setEditingEntity: (editingEntity: T | null) => void;
   handleSaveAction: (entity: T) => Promise<void>;
   deleteEntity: (entity: T) => Promise<void>;
+  setCurrentPage?: (page: number) => void;
   renderCardContentTitle: (dataItem: T) => React.ReactNode;
   renderCardContentDescription?: (dataItem: T) => React.ReactNode;
+  renderCustomHeader?: () => React.ReactNode;
+  renderCustomFooter?: () => React.ReactNode;
 }
 
 export const AdminEntityCardWrapper = <T extends { id: number }>(
@@ -39,8 +42,11 @@ export const AdminEntityCardWrapper = <T extends { id: number }>(
     setEditingEntity,
     handleSaveAction,
     deleteEntity,
+    setCurrentPage,
     renderCardContentTitle,
     renderCardContentDescription,
+    renderCustomHeader,
+    renderCustomFooter,
   } = props;
 
   const handleAddAction = () => {
@@ -58,6 +64,7 @@ export const AdminEntityCardWrapper = <T extends { id: number }>(
   const handleDeleteAction = async (entity: T) => {
     try {
       await deleteEntity(entity);
+      setCurrentPage?.(1);
     } catch (error) {
       message.error((error as { data: { message: string } }).data.message);
     }
@@ -68,14 +75,16 @@ export const AdminEntityCardWrapper = <T extends { id: number }>(
       <Card className={styles.adminEntityCardWrapper}>
         <Card.Meta title={cardTitle} />
 
-        <Button
-          className={styles.adminEntityCardAddButton}
-          type="primary"
-          onClick={handleAddAction}
-          icon={<PlusOutlined />}
-        >
-          Добавить
-        </Button>
+        <div className={styles.adminEntityCardHeaderWrapper}>
+          <Button
+            type="primary"
+            onClick={handleAddAction}
+            icon={<PlusOutlined />}
+          >
+            Добавить
+          </Button>
+          {renderCustomHeader && renderCustomHeader()}
+        </div>
 
         <div className={styles.adminEntityCardItemsWrapper}>
           {dataForCard?.map((dataItem) => (
@@ -93,9 +102,9 @@ export const AdminEntityCardWrapper = <T extends { id: number }>(
             </Card>
           ))}
         </div>
-      </Card>
 
-      {/* todo: добавить пагинацию */}
+        {renderCustomFooter && renderCustomFooter()}
+      </Card>
 
       <Modal
         title={modalTitle}

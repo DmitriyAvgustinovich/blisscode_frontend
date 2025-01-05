@@ -4,3 +4,11 @@ export const ADMINS_TG_IDS = [
 ];
 
 export const DEFAULT_VALIDATE_MESSAGE = "Пожалуйста, заполните поле";
+
+export const LOCAL_STORAGE_KEYS = {
+  botAuthUserHash: "botAuthUserHash",
+};
+
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
+export const tg = window.Telegram.WebApp;

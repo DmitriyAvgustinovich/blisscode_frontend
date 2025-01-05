@@ -1,7 +1,7 @@
 import { rtkApi } from "../rtk-api";
 import {
-  TGetAllSolutionsFilesResponse,
-  TGetAllSolutionsFilesRequest,
+  IGetAllSolutionsFilesResponse,
+  IGetAllSolutionsFilesRequest,
   TSolutionFileByUuidResponse,
   ISolutionFileByUuidRequest,
   IGetSolutionsFilesByParamsResponse,
@@ -17,11 +17,11 @@ import {
 const solutionFileApi = rtkApi.injectEndpoints({
   endpoints: (build) => ({
     getAllSolutionsFiles: build.query<
-      TGetAllSolutionsFilesResponse,
-      TGetAllSolutionsFilesRequest
+      IGetAllSolutionsFilesResponse,
+      IGetAllSolutionsFilesRequest
     >({
-      query: () => ({
-        url: "solution-files/all-solution-files",
+      query: (body) => ({
+        url: `solution-files/all-solution-files?page=${body.page}&pageSize=${body.pageSize}`,
       }),
       providesTags: ["SolutionFile"],
     }),

@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Form, message } from "antd";
+import { Form, Input, message, Pagination, Typography } from "antd";
 import {
   useContexts,
   useGetActiveUser,
@@ -10,18 +10,28 @@ import { Link } from "react-router-dom";
 
 import { LineOutlined } from "@ant-design/icons";
 
+import { useSearchSolutionFilesMutation } from "store/api/elastic_search/elastic-search-api";
 import {
   useAddSolutionFileMutation,
   useDeleteSolutionFileMutation,
   useGetAllSolutionsFilesQuery,
   useUpdateSolutionFileMutation,
 } from "store/api/solution_file/solution-file-api";
+import { IGetAllSolutionsFilesResponse } from "store/api/solution_file/types";
+
+import { PAGINATION_PAGE_SIZE } from "constants/solution-files-constants";
 
 import { ISolutionFile } from "types";
 
-import { AdminEntityCardWrapper } from "../AdminEntityCardWrapper/AdminEntityCardWrapper";
+import styles from "./SolutionsFilesCard.module.scss";
+import { AdminEntityCardWrapper } from "../../AdminEntityCardWrapper/AdminEntityCardWrapper";
 
 export const SolutionsFilesCard = () => {
+  const [currentPage, setCurrentPage] = React.useState(1);
+
+  const [searchResults, setSearchResults] =
+    React.useState<IGetAllSolutionsFilesResponse | null>(null);
+
   const [isModalOpen, setIsModalOpen] = React.useState(false);
 
   const [editingEntity, setEditingEntity] =
@@ -29,10 +39,14 @@ export const SolutionsFilesCard = () => {
 
   const [form] = Form.useForm();
 
-  const { data: allSolutionsData } = useGetAllSolutionsFilesQuery();
+  const { data: allSolutionsData } = useGetAllSolutionsFilesQuery({
+    page: currentPage,
+    pageSize: PAGINATION_PAGE_SIZE,
+  });
 
   const { solutionFileFormItems } = useGetFormItemsForAdminPanel({
     solutionFileName:
+      // todo: скорее всего slice будет потом не нужен
       editingEntity && form.getFieldValue("file_path")?.slice(6),
     formState: form,
   });
@@ -43,6 +57,8 @@ export const SolutionsFilesCard = () => {
   const [updateSolution] = useUpdateSolutionFileMutation();
   const [deleteSolution] = useDeleteSolutionFileMutation();
 
+  const [searchSolutionFiles] = useSearchSolutionFilesMutation();
+
   const {
     solutionFileCodeContext: { solutionFileName },
   } = useContexts();
@@ -52,11 +68,12 @@ export const SolutionsFilesCard = () => {
       if (editingEntity) {
         const updateData = {
           ...entity,
+          // todo: скорее всего slice будет потом не нужен
           filename: solutionFileName || entity.file_path?.slice(6),
           id: editingEntity.id,
         };
 
-        await updateSolution(updateData);
+        await updateSolution(updateData).unwrap();
       } else {
         const createData = { ...entity, filename: solutionFileName };
         await addSolution(createData).unwrap();
@@ -69,12 +86,36 @@ export const SolutionsFilesCard = () => {
     }
   };
 
-  // todo: добавить сюда поиск решений
+  const handleSearchSolutionsFiles = async (searchQuery: string) => {
+    try {
+      if (!searchQuery.trim()) {
+        setSearchResults(null);
+        return;
+      }
+
+      const { data, totalCount } = await searchSolutionFiles({
+        searchQuery,
+      }).unwrap();
+
+      setSearchResults({ data, totalCount });
+    } catch (error) {
+      console.error(error);
+      setSearchResults(null);
+    }
+  };
+
+  const displayedData = searchResults || allSolutionsData;
+
+  const onPageChange = (currentPage: number) => {
+    if (!searchResults) {
+      setCurrentPage(currentPage);
+    }
+  };
 
   return (
     <AdminEntityCardWrapper<ISolutionFile>
-      cardTitle={`Решения | ${allSolutionsData?.length ?? 0}`}
-      dataForCard={allSolutionsData}
+      cardTitle={`Решения (всего - ${displayedData?.totalCount ?? 0})`}
+      dataForCard={displayedData?.data ?? []}
       isModalOpen={isModalOpen}
       setIsModalOpen={setIsModalOpen}
       form={form}
@@ -84,6 +125,7 @@ export const SolutionsFilesCard = () => {
       setEditingEntity={setEditingEntity}
       handleSaveAction={handleSaveAction}
       deleteEntity={async (entity) => await deleteSolution(entity).unwrap()}
+      setCurrentPage={setCurrentPage}
       renderCardContentTitle={(dataItem) => (
         <>
           {dataItem.id} <LineOutlined rotate={90} /> {dataItem.name}
@@ -96,13 +138,39 @@ export const SolutionsFilesCard = () => {
           {dataItem.file_path}
           <br />
           <Link
+            className={styles.solutionFilesCardWatchLink}
             // todo: вписать продакшн версию
             to={`http://127.0.0.1:5173/solutions_files?directionId=${dataItem.direction_id}&stackId=${dataItem.stack_id}&categoryId=${dataItem.direction_category_id}&authUserId=${activeUserData?.hashedTelegramId}`}
             target="_blank"
-            style={{ color: "var(--purple-text-color)" }}
           >
-            Смотреть решения по данным параметрам
+            Смотреть решения
           </Link>
+        </>
+      )}
+      renderCustomHeader={() => (
+        <Input.Search
+          placeholder="Поиск решений..."
+          onSearch={handleSearchSolutionsFiles}
+          allowClear
+        />
+      )}
+      renderCustomFooter={() => (
+        <>
+          {searchResults && searchResults?.totalCount < 1 && (
+            <Typography.Text className={styles.solutionsFilesCardEmptyText}>
+              Решений не найдено. Попробуйте еще раз.
+            </Typography.Text>
+          )}
+
+          {(displayedData?.totalCount ?? 0) > 0 && !searchResults && (
+            <Pagination
+              className={styles.solutionsFilesCardPaginationWrapper}
+              current={currentPage}
+              total={displayedData?.totalCount}
+              pageSize={PAGINATION_PAGE_SIZE}
+              onChange={onPageChange}
+            />
+          )}
         </>
       )}
     />
