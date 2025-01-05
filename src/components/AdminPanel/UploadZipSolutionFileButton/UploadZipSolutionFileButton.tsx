@@ -21,7 +21,7 @@ export const UploadZipSolutionFileButton = (
   const [isUploadFileLoading, setIsUploadFileLoading] = React.useState(false);
 
   const {
-    solutionFileCodeContext: { solutionFileName, setSolutionFileName },
+    solutionFileCodeContext: { setSolutionFileName },
   } = useContexts();
 
   const beforeFileUpload = (file: File) => {
@@ -84,13 +84,12 @@ export const UploadZipSolutionFileButton = (
 
   return (
     <Upload {...uploadProps}>
-      {solutionFileName || existSolutionFileName ? (
+      {existSolutionFileName ? (
         <div className={styles.uploadZipSolutionFileButtonUploadedFileWrapper}>
           <Typography.Text
             className={styles.uploadZipSolutionFileButtonUploadedFileText}
           >
-            Файл решения под именем{" "}
-            <b>{solutionFileName || existSolutionFileName}</b> загружен
+            Файл решения под именем <b>{existSolutionFileName}</b> загружен
           </Typography.Text>
         </div>
       ) : (

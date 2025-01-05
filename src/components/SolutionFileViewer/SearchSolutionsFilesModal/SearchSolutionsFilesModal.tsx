@@ -91,7 +91,6 @@ export const SearchSolutionsFilesModal = (
     <>
       <Button
         className={styles.searchSolutionsFilesButton}
-        type="primary"
         icon={<SearchOutlined />}
         onClick={handleOpenSearchSolutionsFilesModal}
       >
