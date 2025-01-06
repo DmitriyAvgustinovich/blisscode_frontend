@@ -3,8 +3,8 @@ export interface IUser {
   username: string;
   telegram_id: string;
   createdAt: Date;
-  subscription: Date;
   subscribeTasks: boolean;
+  subscribeBase: boolean;
   baseChannel: string;
   dateStartSub: Date;
   dateLastCheckSub: Date;

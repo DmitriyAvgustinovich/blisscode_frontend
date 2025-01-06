@@ -12,8 +12,10 @@ export function RequireSubscriber(props: IRequireSubscriberProps) {
 
   const { activeUserData, isActiveUserDataLoading } = useGetActiveUser();
 
-  // todo: добавить проверку на подписку
-  if (!isActiveUserDataLoading && !activeUserData) {
+  const isActiveUserHasSubscribeBase =
+    !activeUserData || !activeUserData.subscribeBase;
+
+  if (!isActiveUserDataLoading && isActiveUserHasSubscribeBase) {
     return <Navigate to={RouterPath.forbidden} />;
   }
 

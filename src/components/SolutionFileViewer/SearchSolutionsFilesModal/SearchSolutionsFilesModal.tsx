@@ -93,6 +93,7 @@ export const SearchSolutionsFilesModal = (
         className={styles.searchSolutionsFilesButton}
         icon={<SearchOutlined />}
         onClick={handleOpenSearchSolutionsFilesModal}
+        size="small"
       >
         Поиск файлов по имени...
       </Button>

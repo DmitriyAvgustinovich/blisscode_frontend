@@ -1,10 +1,11 @@
 import { RouteProps } from "react-router-dom";
 
 import { AdminPanelPage } from "pages/AdminPanelPage";
+import { DisplayedSolutionsFilesListPage } from "pages/DisplayedSolutionsFilesListPage";
 import { ForbiddenPage } from "pages/ForbiddenPage";
+import KnowledgeBasePage from "pages/KnowledgeBasePage/KnowledgeBasePage";
 import { MainPage } from "pages/MainPage";
 import { SolutionFileViewerPage } from "pages/SolutionFileViewerPage";
-import { SolutionsFilesPage } from "pages/SolutionsFilesPage";
 
 import { LazyLoadChunk } from "components/LazyLoadChunk/LazyLoadChunk";
 
@@ -18,7 +19,8 @@ export enum AppRoutes {
   MAIN = "main",
   SOLUTION_FILE_VIEWER = "solution_file_viewer",
   ADMIN_PANEL = "admin_panel",
-  SOLUTIONS_FILES = "solution_files",
+  DISPLAYED_SOLUTIONS_FILES_LIST = "displayed_solutions_files_list",
+  KNOWLEDGE_BASE = "knowledge_base",
   FORBIDDEN = "forbidden",
 }
 
@@ -26,7 +28,8 @@ export const RouterPath: Record<AppRoutes, string> = {
   [AppRoutes.MAIN]: "/",
   [AppRoutes.SOLUTION_FILE_VIEWER]: "/solution_file_viewer",
   [AppRoutes.ADMIN_PANEL]: "/admin_panel",
-  [AppRoutes.SOLUTIONS_FILES]: "/solutions_files",
+  [AppRoutes.DISPLAYED_SOLUTIONS_FILES_LIST]: "/displayed_solutions_files_list",
+  [AppRoutes.KNOWLEDGE_BASE]: "/knowledge_base",
   [AppRoutes.FORBIDDEN]: "/forbidden",
 };
 
@@ -57,11 +60,20 @@ export const routeConfig: Record<AppRoutes, TAppRouteProps> = {
     ),
     adminOnly: true,
   },
-  [AppRoutes.SOLUTIONS_FILES]: {
-    path: RouterPath.solution_files,
+  [AppRoutes.DISPLAYED_SOLUTIONS_FILES_LIST]: {
+    path: RouterPath.displayed_solutions_files_list,
     element: (
       <LazyLoadChunk>
-        <SolutionsFilesPage />
+        <DisplayedSolutionsFilesListPage />
+      </LazyLoadChunk>
+    ),
+    subscriberOnly: true,
+  },
+  [AppRoutes.KNOWLEDGE_BASE]: {
+    path: RouterPath.knowledge_base,
+    element: (
+      <LazyLoadChunk>
+        <KnowledgeBasePage />
       </LazyLoadChunk>
     ),
     subscriberOnly: true,
@@ -73,6 +85,5 @@ export const routeConfig: Record<AppRoutes, TAppRouteProps> = {
         <ForbiddenPage />
       </LazyLoadChunk>
     ),
-    subscriberOnly: true,
   },
 };
