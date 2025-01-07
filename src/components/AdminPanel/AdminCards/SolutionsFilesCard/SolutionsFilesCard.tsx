@@ -142,7 +142,7 @@ export const SolutionsFilesCard = () => {
           <br />
           <Link
             className={styles.solutionFilesCardWatchLink}
-            to={`${PRODUCTION_FRONTEND_URL}/${RouterPath.displayed_solutions_files_list}?directionId=${dataItem.direction_id}&stackId=${dataItem.stack_id}&categoryId=${dataItem.direction_category_id}&authUserId=${activeUserData?.hashedTelegramId}`}
+            to={`${PRODUCTION_FRONTEND_URL}${RouterPath.displayed_solutions_files_list}?directionId=${dataItem.direction_id}&stackId=${dataItem.stack_id}&categoryId=${dataItem.direction_category_id}&authUserId=${activeUserData?.hashedTelegramId}`}
             target="_blank"
           >
             Смотреть решения
