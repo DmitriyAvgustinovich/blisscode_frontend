@@ -1,5 +1,7 @@
 import { Typography } from "antd";
 
+import { PRODUCTION_TELEGRAM_BOT_URL } from "constants/general-constants";
+
 import styles from "./Main.module.scss";
 
 export const Main = () => {
@@ -76,8 +78,7 @@ export const Main = () => {
         🚀 Начни прямо сейчас! Перейди в Telegram бот{" "}
         <a
           className={styles.mainDescriptionTextLink}
-          // todo: вписать продакшн версию
-          href="https://t.me/BlissCodeBaseTest_bot"
+          href={PRODUCTION_TELEGRAM_BOT_URL}
           target="_blank"
           rel="noopener noreferrer"
         >

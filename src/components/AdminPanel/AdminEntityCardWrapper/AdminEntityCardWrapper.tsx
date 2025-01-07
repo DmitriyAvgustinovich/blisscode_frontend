@@ -83,6 +83,7 @@ export const AdminEntityCardWrapper = <T extends { id: number }>(
           >
             Добавить
           </Button>
+
           {renderCustomHeader && renderCustomHeader()}
         </div>
 

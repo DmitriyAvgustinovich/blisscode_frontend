@@ -19,6 +19,9 @@ import {
 } from "store/api/solution_file/solution-file-api";
 import { IGetAllSolutionsFilesResponse } from "store/api/solution_file/types";
 
+import { RouterPath } from "configs/route-config";
+
+import { PRODUCTION_FRONTEND_URL } from "constants/general-constants";
 import { PAGINATION_PAGE_SIZE } from "constants/solution-files-constants";
 
 import { ISolutionFile } from "types";
@@ -139,8 +142,7 @@ export const SolutionsFilesCard = () => {
           <br />
           <Link
             className={styles.solutionFilesCardWatchLink}
-            // todo: вписать продакшн версию
-            to={`http://127.0.0.1:5173/solutions_files?directionId=${dataItem.direction_id}&stackId=${dataItem.stack_id}&categoryId=${dataItem.direction_category_id}&authUserId=${activeUserData?.hashedTelegramId}`}
+            to={`${PRODUCTION_FRONTEND_URL}/${RouterPath.displayed_solutions_files_list}?directionId=${dataItem.direction_id}&stackId=${dataItem.stack_id}&categoryId=${dataItem.direction_category_id}&authUserId=${activeUserData?.hashedTelegramId}`}
             target="_blank"
           >
             Смотреть решения

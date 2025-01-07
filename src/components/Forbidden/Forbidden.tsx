@@ -1,5 +1,7 @@
 import { Button, Typography } from "antd";
 
+import { PRODUCTION_TELEGRAM_BOT_URL } from "constants/general-constants";
+
 import styles from "./Forbidden.module.scss";
 
 export const Forbidden = () => {
@@ -12,8 +14,7 @@ export const Forbidden = () => {
       <Button
         className={styles.forbiddenButton}
         type="primary"
-        // todo: вписать продакшн версию
-        href="https://t.me/BlissCodeBaseTest_bot"
+        href={PRODUCTION_TELEGRAM_BOT_URL}
       >
         Вернуться в BlissCodeBase
       </Button>
