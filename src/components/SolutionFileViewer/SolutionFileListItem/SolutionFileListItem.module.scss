@@ -13,7 +13,10 @@
   color: var(--white-text-color);
 }
 
-.solutionFileListItemDescription {
+.solutionFileListItemDescriptionWrapper {
+  display: flex;
+  align-items: start;
+  gap: 10px;
   font: var(--font-ml);
   color: var(--white-text-color);
 }

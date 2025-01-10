@@ -1,14 +1,14 @@
 import { DEFAULT_VALIDATE_MESSAGE } from "constants/general-constants";
 import {
   solutionFilePrefixesValidation,
-  solutionFilesTableDataIndexes,
+  solutionFilesDataIndexes,
 } from "constants/solution-files-constants";
 
 import { IFormItem, TRecordStringObject } from "types";
 
 interface IGetValidationRulesProps<T> {
   formItem: IFormItem;
-  editingEntity: T;
+  editingEntity: T | boolean;
 }
 
 const validatePrefixValue = (args: TRecordStringObject) => {
@@ -35,7 +35,7 @@ export const getValidationRules = <T>(props: IGetValidationRulesProps<T>) => {
     ];
 
   const isFilePathField =
-    formItem.name === solutionFilesTableDataIndexes.filePath;
+    formItem.name === solutionFilesDataIndexes.filePath;
 
   if (isFilePathField) {
     return [];

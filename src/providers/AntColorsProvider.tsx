@@ -61,6 +61,11 @@ export const AntColorsProvider = (props: IAntColorsProviderProps) => {
             colorText: "var(--white-text-color)",
             colorTextDescription: "var(--white-text-color)",
           },
+          Collapse: {
+            algorithm: true,
+            colorText: "var(--white-text-color)",
+            contentBg: "var(--gray-bg-color)",
+          },
         },
       }}
     >

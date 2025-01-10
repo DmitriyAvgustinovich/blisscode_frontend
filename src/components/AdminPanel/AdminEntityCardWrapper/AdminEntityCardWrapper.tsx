@@ -4,7 +4,7 @@ import { DeleteOutlined, EditOutlined, PlusOutlined } from "@ant-design/icons";
 
 import { getValidationRules } from "utils";
 
-import { IFormItem } from "types";
+import { IFormItem, TRecordStringObject } from "types";
 
 import styles from "./AdminEntityCardWrapper.module.scss";
 
@@ -25,6 +25,7 @@ interface IAdminEntityCardWrapperProps<T> {
   renderCardContentDescription?: (dataItem: T) => React.ReactNode;
   renderCustomHeader?: () => React.ReactNode;
   renderCustomFooter?: () => React.ReactNode;
+  customStylesForModal?: TRecordStringObject;
 }
 
 export const AdminEntityCardWrapper = <T extends { id: number }>(
@@ -47,6 +48,7 @@ export const AdminEntityCardWrapper = <T extends { id: number }>(
     renderCardContentDescription,
     renderCustomHeader,
     renderCustomFooter,
+    customStylesForModal,
   } = props;
 
   const handleAddAction = () => {
@@ -108,6 +110,7 @@ export const AdminEntityCardWrapper = <T extends { id: number }>(
       </Card>
 
       <Modal
+        style={customStylesForModal}
         title={modalTitle}
         open={isModalOpen}
         onOk={form.submit}

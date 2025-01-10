@@ -8,6 +8,8 @@ import {
   FontSizeOutlined,
 } from "@ant-design/icons";
 
+import { MarkdownViewer } from "components/MarkdownViewer/MarkdownViewer";
+
 import { RouterPath } from "configs/route-config";
 
 import styles from "./SolutionFileListItem.module.scss";
@@ -20,10 +22,10 @@ export const SolutionFileListItem = (props: ISolutionFile) => {
         {props.name}
       </Typography.Text>
 
-      <Typography.Text className={styles.solutionFileListItemDescription}>
-        <FileTextOutlined className={styles.solutionFileListItemDescription} />{" "}
-        {props.description}
-      </Typography.Text>
+      <div className={styles.solutionFileListItemDescriptionWrapper}>
+        <FileTextOutlined />
+        <MarkdownViewer markdownContent={props.description} />
+      </div>
 
       <Link
         to={`${RouterPath.solution_file_viewer}?uuid=${props.uuid}`}

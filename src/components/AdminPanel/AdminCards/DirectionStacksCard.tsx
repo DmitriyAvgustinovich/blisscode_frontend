@@ -51,7 +51,7 @@ export const DirectionStacksCard = () => {
 
   return (
     <AdminEntityCardWrapper<IDirectionStack>
-      cardTitle="Стеки"
+      cardTitle={`Стеки (всего - ${allStacksData?.length ?? 0})`}
       dataForCard={allStacksData ?? []}
       isModalOpen={isModalOpen}
       setIsModalOpen={setIsModalOpen}

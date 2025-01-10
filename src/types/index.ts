@@ -8,3 +8,4 @@ export * from "./IDirectionCategory";
 export * from "./IUser";
 export * from "./IFormItem";
 export * from "./IOpenSolutionFileFromSearch";
+export * from "./IKnowledge";

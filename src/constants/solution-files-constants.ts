@@ -8,7 +8,7 @@ export const HIDDEN_FOLDERS_OR_FILES = [
   ".vscode",
 ];
 
-export const solutionFilesTableLabels = {
+export const solutionFilesLabels = {
   filePath: "Решение",
   name: "Название",
   description: "Описание",
@@ -17,7 +17,7 @@ export const solutionFilesTableLabels = {
   directionCategory: "Категория направления",
 };
 
-export const solutionFilesTableDataIndexes = {
+export const solutionFilesDataIndexes = {
   filePath: "file_path",
   name: "name",
   description: "description",
@@ -25,21 +25,6 @@ export const solutionFilesTableDataIndexes = {
   stack: "stack_id",
   directionCategory: "direction_category_id",
 };
-
-export const solutionFilesColumns = [
-  {
-    title: solutionFilesTableLabels.filePath,
-    dataIndex: solutionFilesTableDataIndexes.filePath,
-  },
-  {
-    title: solutionFilesTableLabels.name,
-    dataIndex: solutionFilesTableDataIndexes.name,
-  },
-  {
-    title: solutionFilesTableLabels.description,
-    dataIndex: solutionFilesTableDataIndexes.description,
-  },
-];
 
 export const solutionFilePrefixesValidation = {
   direction_: "direction_",

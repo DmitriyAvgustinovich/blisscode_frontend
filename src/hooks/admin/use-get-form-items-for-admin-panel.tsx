@@ -3,6 +3,7 @@ import React from "react";
 import { FormInstance, Input, Select } from "antd";
 
 import { UploadZipSolutionFileButton } from "components/AdminPanel/UploadZipSolutionFileButton/UploadZipSolutionFileButton";
+import { MarkdownEditor } from "components/MarkdownEditor/MarkdownEditor";
 
 import { useGetAllDirectionsQuery } from "store/api/direction/direction-api";
 import { useGetDirectionCategoriesByDirectionIdAndStackIdQuery } from "store/api/direction_category/direction-category-api";
@@ -17,8 +18,12 @@ import {
   directionTableLabels,
 } from "constants/direction-constants";
 import {
-  solutionFilesTableDataIndexes,
-  solutionFilesTableLabels,
+  knowledgeBaseDataIndexes,
+  knowledgeBaseLabels,
+} from "constants/knowledge-base-constants";
+import {
+  solutionFilesDataIndexes,
+  solutionFilesLabels,
 } from "constants/solution-files-constants";
 import {
   stackTableDataIndexes,
@@ -26,6 +31,8 @@ import {
 } from "constants/stack-constants";
 
 import { getDirectionsOptions } from "utils";
+
+import { ETypesKnowledge } from "types";
 
 interface IUseGetFormItemsForAdminPanelArgs {
   solutionFileName?: string;
@@ -45,12 +52,14 @@ export const useGetFormItemsForAdminPanel = (
     null
   );
 
+  const [knowledgeType, setKnowledgeType] = React.useState("");
+
   const directionIdFromFormState = formState?.getFieldValue(
-    solutionFilesTableDataIndexes.direction
+    solutionFilesDataIndexes.direction
   );
 
   const stackIdFromFormState = formState?.getFieldValue(
-    solutionFilesTableDataIndexes.stack
+    solutionFilesDataIndexes.stack
   );
 
   const { data: allDirectionsData } = useGetAllDirectionsQuery();
@@ -156,25 +165,30 @@ export const useGetFormItemsForAdminPanel = (
 
   const solutionFileFormItems = [
     {
-      label: solutionFilesTableLabels.filePath,
-      name: solutionFilesTableDataIndexes.filePath,
+      label: solutionFilesLabels.filePath,
+      name: solutionFilesDataIndexes.filePath,
       node: (
         <UploadZipSolutionFileButton existSolutionFileName={solutionFileName} />
       ),
     },
     {
-      label: solutionFilesTableLabels.name,
-      name: solutionFilesTableDataIndexes.name,
+      label: solutionFilesLabels.name,
+      name: solutionFilesDataIndexes.name,
       node: <Input />,
     },
     {
-      label: solutionFilesTableLabels.description,
-      name: solutionFilesTableDataIndexes.description,
-      node: <Input.TextArea rows={4} />,
+      label: solutionFilesLabels.description,
+      name: solutionFilesDataIndexes.description,
+      node: (
+        <MarkdownEditor
+          formState={formState}
+          fieldDataIndex={solutionFilesDataIndexes.description}
+        />
+      ),
     },
     {
-      label: solutionFilesTableLabels.direction,
-      name: solutionFilesTableDataIndexes.direction,
+      label: solutionFilesLabels.direction,
+      name: solutionFilesDataIndexes.direction,
       node: (
         <Select
           options={getDirectionsOptions(allDirectionsData ?? [])}
@@ -182,17 +196,17 @@ export const useGetFormItemsForAdminPanel = (
             setSelectedDirectionId(directionId);
 
             formState?.setFieldsValue({
-              [solutionFilesTableDataIndexes.direction]: directionId,
-              [solutionFilesTableDataIndexes.stack]: null,
-              [solutionFilesTableDataIndexes.directionCategory]: null,
+              [solutionFilesDataIndexes.direction]: directionId,
+              [solutionFilesDataIndexes.stack]: null,
+              [solutionFilesDataIndexes.directionCategory]: null,
             });
           }}
         />
       ),
     },
     {
-      label: solutionFilesTableLabels.stack,
-      name: solutionFilesTableDataIndexes.stack,
+      label: solutionFilesLabels.stack,
+      name: solutionFilesDataIndexes.stack,
       node: (
         <Select
           options={getDirectionsOptions(stacksByDirectionIdData ?? [])}
@@ -200,7 +214,7 @@ export const useGetFormItemsForAdminPanel = (
             setSelectedStackId(stackId);
 
             formState?.setFieldsValue({
-              [solutionFilesTableDataIndexes.directionCategory]: null,
+              [solutionFilesDataIndexes.directionCategory]: null,
             });
           }}
           disabled={!selectedDirectionId}
@@ -208,8 +222,8 @@ export const useGetFormItemsForAdminPanel = (
       ),
     },
     {
-      label: solutionFilesTableLabels.directionCategory,
-      name: solutionFilesTableDataIndexes.directionCategory,
+      label: solutionFilesLabels.directionCategory,
+      name: solutionFilesDataIndexes.directionCategory,
       node: (
         <Select
           options={getDirectionsOptions(
@@ -221,10 +235,68 @@ export const useGetFormItemsForAdminPanel = (
     },
   ];
 
+  const knowledgeTypesOptions = [
+    {
+      label: "Сообщение",
+      value: ETypesKnowledge.MESSAGE,
+    },
+    {
+      label: "Ссылка",
+      value: ETypesKnowledge.LINK,
+    },
+    {
+      label: "Конспект",
+      value: ETypesKnowledge.ABSTRACT,
+    },
+  ];
+
+  const knowledgeBaseFormItems = [
+    {
+      label: knowledgeBaseLabels.title,
+      name: knowledgeBaseDataIndexes.title,
+      node: <Input />,
+    },
+    {
+      label: knowledgeBaseLabels.text,
+      name: knowledgeBaseDataIndexes.text,
+      node: (
+        <MarkdownEditor
+          formState={formState}
+          fieldDataIndex={knowledgeBaseDataIndexes.text}
+        />
+      ),
+    },
+    {
+      label: knowledgeBaseLabels.type,
+      name: knowledgeBaseDataIndexes.type,
+      node: (
+        <Select
+          options={knowledgeTypesOptions}
+          onChange={(event) => setKnowledgeType(event)}
+        />
+      ),
+    },
+    ...(knowledgeType === ETypesKnowledge.LINK
+      ? [
+          {
+            label: knowledgeBaseLabels.link,
+            name: knowledgeBaseDataIndexes.link,
+            node: <Input />,
+          },
+        ]
+      : []),
+    {
+      label: knowledgeBaseLabels.direction,
+      name: knowledgeBaseDataIndexes.direction,
+      node: <Select options={getDirectionsOptions(allDirectionsData ?? [])} />,
+    },
+  ];
+
   return {
     directionFormItems,
     directionStackFormItems,
     directionCategoryFormItems,
     solutionFileFormItems,
+    knowledgeBaseFormItems,
   };
 };

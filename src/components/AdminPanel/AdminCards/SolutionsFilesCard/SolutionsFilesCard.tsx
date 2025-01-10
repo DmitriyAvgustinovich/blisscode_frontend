@@ -1,14 +1,15 @@
 import React from "react";
 
-import { Form, Input, message, Pagination, Typography } from "antd";
+import { Button, Form, Input, message, Pagination, Typography } from "antd";
 import {
   useContexts,
   useGetActiveUser,
   useGetFormItemsForAdminPanel,
 } from "hooks";
-import { Link } from "react-router-dom";
 
-import { LineOutlined } from "@ant-design/icons";
+import { EyeOutlined, LineOutlined } from "@ant-design/icons";
+
+import { MarkdownViewer } from "components/MarkdownViewer/MarkdownViewer";
 
 import { useSearchSolutionFilesMutation } from "store/api/elastic_search/elastic-search-api";
 import {
@@ -136,17 +137,19 @@ export const SolutionsFilesCard = () => {
       )}
       renderCardContentDescription={(dataItem) => (
         <>
-          {dataItem.description}
-          <br />
           {dataItem.file_path}
-          <br />
-          <Link
-            className={styles.solutionFilesCardWatchLink}
-            to={`${PRODUCTION_FRONTEND_URL}${RouterPath.displayed_solutions_files_list}?directionId=${dataItem.direction_id}&stackId=${dataItem.stack_id}&categoryId=${dataItem.direction_category_id}&authUserId=${activeUserData?.hashedTelegramId}`}
+          <MarkdownViewer markdownContent={dataItem.description} />
+
+          <Button
+            className={styles.solutionsFilesCardLinkButton}
+            type="primary"
+            size="small"
+            href={`${PRODUCTION_FRONTEND_URL}${RouterPath.displayed_solutions_files_list}?directionId=${dataItem.direction_id}&stackId=${dataItem.stack_id}&categoryId=${dataItem.direction_category_id}&authUserId=${activeUserData?.hashedTelegramId}`}
             target="_blank"
+            icon={<EyeOutlined />}
           >
             Смотреть решения
-          </Link>
+          </Button>
         </>
       )}
       renderCustomHeader={() => (

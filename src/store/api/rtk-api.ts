@@ -11,6 +11,7 @@ export const rtkApi = createApi({
     "DirectionStack",
     "DirectionCategory",
     "User",
+    "Knowledge",
   ],
   endpoints: () => ({}),
 });
