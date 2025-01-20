@@ -1,0 +1,41 @@
+.knowledgesListWrapper {
+  margin-top: 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.knowledgesListCardWrapper {
+  height: fit-content;
+  min-width: 300px;
+}
+
+.knowledgesListCollapseWrapper {
+  font: var(--font-m);
+
+  :global {
+    .ant-collapse-item {
+      margin-top: 20px;
+      border: none;
+    }
+
+    .ant-collapse-header {
+      padding: 0 !important;
+    }
+
+    .ant-collapse-content {
+      margin-left: 7px !important;
+    }
+
+    .ant-collapse-content-box {
+      padding-bottom: 0px !important;
+    }
+  }
+}
+
+.knowledgesListTitleInTopic {
+  display: block;
+  font: var(--font-m);
+  color: var(--gray-text-color) !important;
+  text-decoration: underline;
+}

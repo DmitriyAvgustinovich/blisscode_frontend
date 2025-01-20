@@ -1,5 +1,5 @@
 export enum ETypesKnowledge {
-  MESSAGE = "MESSAGE",
+  TEXT = "TEXT",
   ABSTRACT = "ABSTRACT",
   LINK = "LINK",
 }
@@ -10,7 +10,21 @@ export interface IKnowledge {
   text: string;
   type: ETypesKnowledge;
   link?: string;
-  direction_id: number;
-  createdAt?: string;
-  updatedAt?: string;
+  directionKnowledgeTopicId: number;
+  directionKnowledgeId: number;
+  createdAt: string;
+}
+
+export interface IDirectionTopicKnowledge {
+  id: number;
+  name: string;
+  directionKnowledgeId: number;
+  knowledge?: IKnowledge[];
+}
+
+export interface IDirectionKnowledge {
+  id: number;
+  name: string;
+  description?: string;
+  topics?: IDirectionTopicKnowledge[];
 }

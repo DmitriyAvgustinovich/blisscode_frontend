@@ -33,7 +33,7 @@ export const MarkdownEditor = (props: IMarkdownEditorPorps) => {
         highlightEnable
         toolbarBottom={false}
         preview="edit"
-        textareaProps={{ placeholder: "Введите..." }}
+        textareaProps={{ placeholder: "Введите описание знания..." }}
       />
 
       <Collapse

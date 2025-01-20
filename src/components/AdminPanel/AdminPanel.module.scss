@@ -4,21 +4,40 @@
   min-height: 100vh;
 }
 
-.adminPanelCardsWrapper {
+.adminPanelSolutionsFilesCardsWrapper {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: auto auto;
   gap: 20px;
 
-  > *:nth-child(-n+3) {
+  >*:nth-child(-n+3) {
     grid-column: span 1;
   }
 
-  > *:nth-child(4) {
+  >*:nth-child(4) {
     grid-column: 1 / -1;
   }
 
-  > * {
+  >* {
+    min-width: 0;
+  }
+}
+
+.adminPanelKnowledgeCardsWrapper {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: auto auto;
+  gap: 20px;
+
+  >*:nth-child(-n+2) {
+    grid-column: span 1;
+  }
+
+  >*:nth-child(3) {
+    grid-column: 1 / -1;
+  }
+
+  >* {
     min-width: 0;
   }
 }

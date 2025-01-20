@@ -1,6 +1,5 @@
 import { Button, Typography } from "antd";
 import { Link } from "react-router-dom";
-import { ISolutionFile } from "types/ISolutionFile";
 
 import {
   CodepenOutlined,
@@ -11,6 +10,8 @@ import {
 import { MarkdownViewer } from "components/MarkdownViewer/MarkdownViewer";
 
 import { RouterPath } from "configs/route-config";
+
+import { ISolutionFile } from "types";
 
 import styles from "./SolutionFileListItem.module.scss";
 

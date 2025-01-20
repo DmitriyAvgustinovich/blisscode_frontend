@@ -1,4 +1,4 @@
-import { IDirection } from "types/IDirection";
+import { IDirection } from "types";
 
 export type IGetAllDirectionsResponse = IDirection[];
 export type TGetAllDirectionsRequest = void;

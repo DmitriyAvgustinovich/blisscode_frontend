@@ -12,10 +12,7 @@ export function RequireSubscriber(props: IRequireSubscriberProps) {
 
   const { activeUserData, isActiveUserDataLoading } = useGetActiveUser();
 
-  const isActiveUserHasSubscribeBase =
-    !activeUserData || !activeUserData.subscribeBase;
-
-  if (!isActiveUserDataLoading && isActiveUserHasSubscribeBase) {
+  if (!isActiveUserDataLoading && (!activeUserData || !activeUserData.subscribeBase)) {
     return <Navigate to={RouterPath.forbidden} />;
   }
 

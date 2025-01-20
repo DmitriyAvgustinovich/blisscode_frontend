@@ -1,4 +1,4 @@
-import { IDirectionCategory } from "types/IDirectionCategory";
+import { IDirectionCategory } from "types";
 
 export type TGetAllDirectionCategoriesResponse = IDirectionCategory[];
 export type TGetAllDirectionCategoriesRequest = void;

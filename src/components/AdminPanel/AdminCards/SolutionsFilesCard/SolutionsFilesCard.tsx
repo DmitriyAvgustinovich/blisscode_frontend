@@ -110,7 +110,7 @@ export const SolutionsFilesCard = () => {
 
   const displayedData = searchResults || allSolutionsData;
 
-  const onPageChange = (currentPage: number) => {
+  const handlePageChange = (currentPage: number) => {
     if (!searchResults) {
       setCurrentPage(currentPage);
     }
@@ -157,13 +157,14 @@ export const SolutionsFilesCard = () => {
           placeholder="Поиск решений..."
           onSearch={handleSearchSolutionsFiles}
           allowClear
+          enterButton
         />
       )}
       renderCustomFooter={() => (
         <>
           {searchResults && searchResults?.totalCount < 1 && (
             <Typography.Text className={styles.solutionsFilesCardEmptyText}>
-              Решений не найдено. Попробуйте еще раз.
+              Решений не найдено, попробуйте еще раз
             </Typography.Text>
           )}
 
@@ -173,7 +174,7 @@ export const SolutionsFilesCard = () => {
               current={currentPage}
               total={displayedData?.totalCount}
               pageSize={PAGINATION_PAGE_SIZE}
-              onChange={onPageChange}
+              onChange={handlePageChange}
             />
           )}
         </>

@@ -8,6 +8,10 @@ import { MarkdownEditor } from "components/MarkdownEditor/MarkdownEditor";
 import { useGetAllDirectionsQuery } from "store/api/direction/direction-api";
 import { useGetDirectionCategoriesByDirectionIdAndStackIdQuery } from "store/api/direction_category/direction-category-api";
 import { useGetDirectionStacksByDirectionIdQuery } from "store/api/direction_stack/direction-stack-api";
+import {
+  useGetAllDirectionKnowledgesQuery,
+  useGetAllDirectionTopicsKnowledgeQuery,
+} from "store/knowledge-base/knowledge-base.api";
 
 import {
   directionCategoryTableDataIndexes,
@@ -18,8 +22,12 @@ import {
   directionTableLabels,
 } from "constants/direction-constants";
 import {
-  knowledgeBaseDataIndexes,
-  knowledgeBaseLabels,
+  directionKnowledgeDataIndexes,
+  directionKnowledgeLabels,
+  directionTopicKnowledgeDataIndexes,
+  directionTopicKnowledgeLabels,
+  knowledgeDataIndexes,
+  knowledgeLabels,
 } from "constants/knowledge-base-constants";
 import {
   solutionFilesDataIndexes,
@@ -30,9 +38,15 @@ import {
   stackTableLabels,
 } from "constants/stack-constants";
 
-import { getDirectionsOptions } from "utils";
+import { getSelectOptions } from "utils";
 
-import { ETypesKnowledge } from "types";
+import {
+  ETypesKnowledge,
+  IDirection,
+  IDirectionCategory,
+  IDirectionKnowledge,
+  IDirectionStack,
+} from "types";
 
 interface IUseGetFormItemsForAdminPanelArgs {
   solutionFileName?: string;
@@ -90,6 +104,12 @@ export const useGetFormItemsForAdminPanel = (
       }
     );
 
+  const { data: allDirectionKnowledgeData } =
+    useGetAllDirectionKnowledgesQuery();
+
+  const { data: allDirectionTopicsKnowledgeData } =
+    useGetAllDirectionTopicsKnowledgeQuery();
+
   const directionFormItems = [
     {
       label: directionTableLabels.name,
@@ -112,7 +132,11 @@ export const useGetFormItemsForAdminPanel = (
     {
       label: stackTableLabels.direction,
       name: stackTableDataIndexes.direction,
-      node: <Select options={getDirectionsOptions(allDirectionsData ?? [])} />,
+      node: (
+        <Select
+          options={getSelectOptions<IDirection>(allDirectionsData ?? [])}
+        />
+      ),
     },
     {
       label: stackTableLabels.tgCallbackData,
@@ -132,7 +156,7 @@ export const useGetFormItemsForAdminPanel = (
       name: directionCategoryTableDataIndexes.direction,
       node: (
         <Select
-          options={getDirectionsOptions(allDirectionsData ?? [])}
+          options={getSelectOptions<IDirection>(allDirectionsData ?? [])}
           onChange={(directionId) => {
             setSelectedDirectionId(directionId);
 
@@ -148,7 +172,9 @@ export const useGetFormItemsForAdminPanel = (
       name: directionCategoryTableDataIndexes.stack,
       node: (
         <Select
-          options={getDirectionsOptions(stacksByDirectionIdData ?? [])}
+          options={getSelectOptions<IDirectionStack>(
+            stacksByDirectionIdData ?? []
+          )}
           onChange={(stackId) => {
             setSelectedStackId(stackId);
           }}
@@ -191,7 +217,7 @@ export const useGetFormItemsForAdminPanel = (
       name: solutionFilesDataIndexes.direction,
       node: (
         <Select
-          options={getDirectionsOptions(allDirectionsData ?? [])}
+          options={getSelectOptions<IDirection>(allDirectionsData ?? [])}
           onChange={(directionId) => {
             setSelectedDirectionId(directionId);
 
@@ -209,7 +235,9 @@ export const useGetFormItemsForAdminPanel = (
       name: solutionFilesDataIndexes.stack,
       node: (
         <Select
-          options={getDirectionsOptions(stacksByDirectionIdData ?? [])}
+          options={getSelectOptions<IDirectionStack>(
+            stacksByDirectionIdData ?? []
+          )}
           onChange={(stackId) => {
             setSelectedStackId(stackId);
 
@@ -226,7 +254,7 @@ export const useGetFormItemsForAdminPanel = (
       name: solutionFilesDataIndexes.directionCategory,
       node: (
         <Select
-          options={getDirectionsOptions(
+          options={getSelectOptions<IDirectionCategory>(
             categoriesByDirectionIdAndStackIdData ?? []
           )}
           disabled={!selectedDirectionId || !selectedStackId}
@@ -237,12 +265,12 @@ export const useGetFormItemsForAdminPanel = (
 
   const knowledgeTypesOptions = [
     {
-      label: "Сообщение",
-      value: ETypesKnowledge.MESSAGE,
-    },
-    {
       label: "Ссылка",
       value: ETypesKnowledge.LINK,
+    },
+    {
+      label: "Текст",
+      value: ETypesKnowledge.TEXT,
     },
     {
       label: "Конспект",
@@ -250,25 +278,25 @@ export const useGetFormItemsForAdminPanel = (
     },
   ];
 
-  const knowledgeBaseFormItems = [
+  const knowledgeFormItems = [
     {
-      label: knowledgeBaseLabels.title,
-      name: knowledgeBaseDataIndexes.title,
+      label: knowledgeLabels.title,
+      name: knowledgeDataIndexes.title,
       node: <Input />,
     },
     {
-      label: knowledgeBaseLabels.text,
-      name: knowledgeBaseDataIndexes.text,
+      label: knowledgeLabels.text,
+      name: knowledgeDataIndexes.text,
       node: (
         <MarkdownEditor
           formState={formState}
-          fieldDataIndex={knowledgeBaseDataIndexes.text}
+          fieldDataIndex={knowledgeDataIndexes.text}
         />
       ),
     },
     {
-      label: knowledgeBaseLabels.type,
-      name: knowledgeBaseDataIndexes.type,
+      label: knowledgeLabels.type,
+      name: knowledgeDataIndexes.type,
       node: (
         <Select
           options={knowledgeTypesOptions}
@@ -279,16 +307,78 @@ export const useGetFormItemsForAdminPanel = (
     ...(knowledgeType === ETypesKnowledge.LINK
       ? [
           {
-            label: knowledgeBaseLabels.link,
-            name: knowledgeBaseDataIndexes.link,
+            label: knowledgeLabels.link,
+            name: knowledgeDataIndexes.link,
             node: <Input />,
           },
         ]
       : []),
     {
-      label: knowledgeBaseLabels.direction,
-      name: knowledgeBaseDataIndexes.direction,
-      node: <Select options={getDirectionsOptions(allDirectionsData ?? [])} />,
+      label: knowledgeLabels.directionKnowledge,
+      name: knowledgeDataIndexes.directionKnowledge,
+      node: (
+        <Select
+          showSearch
+          filterOption={(input, option) =>
+            (option?.label ?? "").toLowerCase().includes(input.toLowerCase())
+          }
+          options={getSelectOptions<IDirectionKnowledge>(
+            allDirectionKnowledgeData ?? []
+          )}
+        />
+      ),
+    },
+    {
+      label: knowledgeLabels.directionTopicKnowledge,
+      name: knowledgeDataIndexes.directionKnowledgeTopic,
+      node: (
+        <Select
+          showSearch
+          filterOption={(input, option) =>
+            (option?.label ?? "").toLowerCase().includes(input.toLowerCase())
+          }
+          options={getSelectOptions<IDirectionKnowledge>(
+            allDirectionTopicsKnowledgeData ?? []
+          )}
+        />
+      ),
+    },
+  ];
+
+  const directionKnowledgeFormItems = [
+    {
+      label: directionKnowledgeLabels.name,
+      name: directionKnowledgeDataIndexes.name,
+      node: <Input />,
+    },
+    {
+      label: directionKnowledgeLabels.description,
+      name: directionKnowledgeDataIndexes.description,
+      node: (
+        <MarkdownEditor
+          formState={formState}
+          fieldDataIndex={directionKnowledgeDataIndexes.description}
+        />
+      ),
+    },
+  ];
+
+  const directionTopicKnowledgeFormItems = [
+    {
+      label: directionTopicKnowledgeLabels.name,
+      name: directionTopicKnowledgeDataIndexes.name,
+      node: <Input />,
+    },
+    {
+      label: directionTopicKnowledgeLabels.directionKnowledge,
+      name: directionTopicKnowledgeDataIndexes.directionKnowledge,
+      node: (
+        <Select
+          options={getSelectOptions<IDirectionKnowledge>(
+            allDirectionKnowledgeData ?? []
+          )}
+        />
+      ),
     },
   ];
 
@@ -297,6 +387,8 @@ export const useGetFormItemsForAdminPanel = (
     directionStackFormItems,
     directionCategoryFormItems,
     solutionFileFormItems,
-    knowledgeBaseFormItems,
+    directionKnowledgeFormItems,
+    directionTopicKnowledgeFormItems,
+    knowledgeFormItems,
   };
 };

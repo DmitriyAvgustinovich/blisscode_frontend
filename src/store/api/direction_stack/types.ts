@@ -1,4 +1,4 @@
-import { IDirectionStack } from "types/IDirectionStack";
+import { IDirectionStack } from "types";
 
 export type TGetAllDirectionStacksResponse = IDirectionStack[];
 export type TGetAllDirectionStacksRequest = void;

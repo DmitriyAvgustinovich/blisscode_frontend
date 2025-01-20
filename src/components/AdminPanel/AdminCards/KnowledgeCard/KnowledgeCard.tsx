@@ -47,7 +47,7 @@ export const KnowledgeCard = () => {
     pageSize: PAGINATION_PAGE_SIZE,
   });
 
-  const { knowledgeBaseFormItems } = useGetFormItemsForAdminPanel({
+  const { knowledgeFormItems } = useGetFormItemsForAdminPanel({
     formState: form,
   });
 
@@ -90,13 +90,13 @@ export const KnowledgeCard = () => {
     }
   };
 
-  const displayedData = searchResults || allKnowledgeData;
-
-  const onPageChange = (currentPage: number) => {
+  const handlePageChange = (page: number) => {
     if (!searchResults) {
-      setCurrentPage(currentPage);
+      setCurrentPage(page);
     }
   };
+
+  const displayedData = searchResults || allKnowledgeData;
 
   return (
     <AdminEntityCardWrapper<IKnowledge>
@@ -106,7 +106,7 @@ export const KnowledgeCard = () => {
       setIsModalOpen={setIsModalOpen}
       form={form}
       modalTitle={editingEntity ? "Редактировать знание" : "Добавить знание"}
-      entityFormItems={knowledgeBaseFormItems}
+      entityFormItems={knowledgeFormItems}
       editingEntity={editingEntity}
       setEditingEntity={setEditingEntity}
       handleSaveAction={handleSaveAction}
@@ -140,13 +140,14 @@ export const KnowledgeCard = () => {
           placeholder="Поиск знаний..."
           onSearch={handleSearchKnowledge}
           allowClear
+          enterButton
         />
       )}
       renderCustomFooter={() => (
         <>
           {searchResults && searchResults?.totalCount < 1 && (
             <Typography.Text className={styles.knowledgeCardEmptyText}>
-              Знаний не найдено. Попробуйте еще раз.
+              Знаний не найдено, попробуйте еще раз
             </Typography.Text>
           )}
 
@@ -156,7 +157,7 @@ export const KnowledgeCard = () => {
               current={currentPage}
               total={displayedData?.totalCount}
               pageSize={PAGINATION_PAGE_SIZE}
-              onChange={onPageChange}
+              onChange={handlePageChange}
             />
           )}
         </>

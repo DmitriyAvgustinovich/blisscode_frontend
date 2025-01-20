@@ -1,23 +1,47 @@
 export const PAGINATION_PAGE_SIZE = 1;
 
-export const knowledgeBaseLabels = {
+export const knowledgeLabels = {
   id: "ID",
   title: "Название",
   text: "Описание",
   type: "Тип знания",
   link: "Ссылка на ресурс",
-  direction: "Направление",
   createdAt: "Дата создания",
-  updatedAt: "Дата обновления",
+  directionKnowledge: "Направление знания",
+  directionTopicKnowledge: "Топик направления знания",
 };
 
-export const knowledgeBaseDataIndexes = {
+export const knowledgeDataIndexes = {
   id: "id",
   title: "title",
   text: "text",
   type: "type",
   link: "link",
-  direction: "direction_id",
   createdAt: "createdAt",
-  updatedAt: "updatedAt",
+  directionKnowledge: "directionKnowledgeId",
+  directionKnowledgeTopic: "directionKnowledgeTopicId",
+};
+
+export const directionKnowledgeLabels = {
+  id: "ID",
+  name: "Название",
+  description: "Описание",
+};
+
+export const directionKnowledgeDataIndexes = {
+  id: "id",
+  name: "name",
+  description: "description",
+};
+
+export const directionTopicKnowledgeLabels = {
+  id: "ID",
+  name: "Название",
+  directionKnowledge: "Направление знания",
+};
+
+export const directionTopicKnowledgeDataIndexes = {
+  id: "id",
+  name: "name",
+  directionKnowledge: "directionKnowledgeId",
 };
