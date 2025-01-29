@@ -71,7 +71,7 @@ export const DirectionCategoriesCard = () => {
       renderCardContentTitle={(category) => (
         <>
           {category.id} <LineOutlined rotate={90} /> {category.name}{" "}
-          <LineOutlined rotate={90} /> {category.tg_callback_data}
+          <LineOutlined rotate={90} /> {category.tgCallbackData}
         </>
       )}
     />

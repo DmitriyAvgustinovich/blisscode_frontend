@@ -68,7 +68,7 @@ export const DirectionsCard = () => {
       renderCardContentTitle={(direction) => (
         <>
           {direction.id} <LineOutlined rotate={90} /> {direction.name}{" "}
-          <LineOutlined rotate={90} /> {direction.tg_callback_data}
+          <LineOutlined rotate={90} /> {direction.tgCallbackData}
         </>
       )}
     />

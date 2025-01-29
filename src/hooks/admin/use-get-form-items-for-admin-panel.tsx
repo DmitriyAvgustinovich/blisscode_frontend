@@ -37,6 +37,10 @@ import {
   stackTableDataIndexes,
   stackTableLabels,
 } from "constants/stack-constants";
+import {
+  theoreticalTestingDataIndexes,
+  theoreticalTestingLabels,
+} from "constants/theoretical-testing-constants";
 
 import { getSelectOptions } from "utils";
 
@@ -86,7 +90,7 @@ export const useGetFormItemsForAdminPanel = (
   const { data: stacksByDirectionIdData } =
     useGetDirectionStacksByDirectionIdQuery(
       {
-        direction_id: selectedDirectionId ?? directionIdFromFormState,
+        directionId: selectedDirectionId ?? directionIdFromFormState,
       },
       {
         skip: !selectedDirectionId,
@@ -96,8 +100,8 @@ export const useGetFormItemsForAdminPanel = (
   const { data: categoriesByDirectionIdAndStackIdData } =
     useGetDirectionCategoriesByDirectionIdAndStackIdQuery(
       {
-        direction_id: selectedDirectionId ?? directionIdFromFormState,
-        stack_id: selectedStackId ?? stackIdFromFormState,
+        directionId: selectedDirectionId ?? directionIdFromFormState,
+        stackId: selectedStackId ?? stackIdFromFormState,
       },
       {
         skip: !selectedDirectionId || !selectedStackId,
@@ -382,6 +386,50 @@ export const useGetFormItemsForAdminPanel = (
     },
   ];
 
+  const theoreticalTestingQuestionFormItems = [
+    {
+      label: theoreticalTestingLabels.name,
+      name: theoreticalTestingDataIndexes.name,
+      node: <Input />,
+    },
+    {
+      label: theoreticalTestingLabels.answer,
+      name: theoreticalTestingDataIndexes.answer,
+      node: <Input.TextArea rows={4} />,
+    },
+    {
+      label: theoreticalTestingLabels.direction,
+      name: theoreticalTestingDataIndexes.direction,
+      node: (
+        <Select
+          options={getSelectOptions<IDirection>(allDirectionsData ?? [])}
+          onChange={(directionId) => {
+            setSelectedDirectionId(directionId);
+
+            formState?.setFieldsValue({
+              [theoreticalTestingDataIndexes.stack]: null,
+            });
+          }}
+        />
+      ),
+    },
+    {
+      label: theoreticalTestingLabels.stack,
+      name: theoreticalTestingDataIndexes.stack,
+      node: (
+        <Select
+          options={getSelectOptions<IDirectionStack>(
+            stacksByDirectionIdData ?? []
+          )}
+          onChange={(stackId) => {
+            setSelectedStackId(stackId);
+          }}
+          disabled={!selectedDirectionId}
+        />
+      ),
+    },
+  ];
+
   return {
     directionFormItems,
     directionStackFormItems,
@@ -390,5 +438,6 @@ export const useGetFormItemsForAdminPanel = (
     directionKnowledgeFormItems,
     directionTopicKnowledgeFormItems,
     knowledgeFormItems,
+    theoreticalTestingQuestionFormItems,
   };
 };

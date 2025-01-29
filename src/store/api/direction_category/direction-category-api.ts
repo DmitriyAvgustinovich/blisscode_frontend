@@ -41,7 +41,7 @@ const directionCategoryApi = rtkApi.injectEndpoints({
       IGetDirectionCategoriesByDirectionIdAndStackIdRequest
     >({
       query: (body) => ({
-        url: `direction-category/direction/${body.direction_id}/stack/${body.stack_id}`,
+        url: `direction-category/direction/${body.directionId}/stack/${body.stackId}`,
       }),
       providesTags: ["DirectionCategory"],
     }),

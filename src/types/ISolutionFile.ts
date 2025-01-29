@@ -4,8 +4,8 @@ export interface ISolutionFile {
   filename?: string;
   name: string;
   description: string;
-  direction_id: number;
-  stack_id: number;
-  direction_category_id: number;
-  file_path?: string;
+  directionId: number;
+  stackId: number;
+  directionCategoryId: number;
+  filePath?: string;
 }

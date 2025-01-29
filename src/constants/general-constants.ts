@@ -14,8 +14,9 @@ export const LOCAL_STORAGE_KEYS = {
 export const tg = window.Telegram.WebApp;
 
 // todo: вписать продакшн версию
-export const PRODUCTION_FRONTEND_URL =
-  "https://beamish-pithivier-f47ac5.netlify.app";
+// export const PRODUCTION_FRONTEND_URL =
+//   'https://beamish-pithivier-f47ac5.netlify.app';
+export const PRODUCTION_FRONTEND_URL = "127.0.0.1:5173";
 
 // todo: вписать продакшн версию
 export const PRODUCTION_TELEGRAM_BOT_URL = "https://t.me/BlissCodeBaseTest_bot";

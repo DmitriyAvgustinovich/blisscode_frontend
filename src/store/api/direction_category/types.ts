@@ -11,8 +11,8 @@ export interface IGetDirectionCategoryByIdRequest {
 export type TGetDirectionCategoriesByDirectionIdAndStackIdResponse =
   IDirectionCategory[];
 export interface IGetDirectionCategoriesByDirectionIdAndStackIdRequest {
-  direction_id: number | null;
-  stack_id: number | null;
+  directionId: number | null;
+  stackId: number | null;
 }
 
 export type TAddDirectionCategoryResponse = IDirectionCategory;

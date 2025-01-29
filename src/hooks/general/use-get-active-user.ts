@@ -11,7 +11,7 @@ export const useGetActiveUser = () => {
     });
 
   const isActiveUserHasAdmin = ADMINS_TG_IDS.includes(
-    activeUserData?.telegram_id ?? ""
+    activeUserData?.telegramId ?? ""
   );
 
   return { activeUserData, isActiveUserDataLoading, isActiveUserHasAdmin };

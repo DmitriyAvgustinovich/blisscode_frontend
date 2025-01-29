@@ -51,7 +51,7 @@ export const SolutionsFilesCard = () => {
   const { solutionFileFormItems } = useGetFormItemsForAdminPanel({
     solutionFileName:
       // todo: скорее всего slice будет потом не нужен
-      editingEntity && form.getFieldValue("file_path")?.slice(6),
+      editingEntity && form.getFieldValue("filePath")?.slice(6),
     formState: form,
   });
 
@@ -73,7 +73,7 @@ export const SolutionsFilesCard = () => {
         const updateData = {
           ...entity,
           // todo: скорее всего slice будет потом не нужен
-          filename: solutionFileName || entity.file_path?.slice(6),
+          filename: solutionFileName || entity.filePath?.slice(6),
           id: editingEntity.id,
         };
 
@@ -137,14 +137,14 @@ export const SolutionsFilesCard = () => {
       )}
       renderCardContentDescription={(dataItem) => (
         <>
-          {dataItem.file_path}
+          {dataItem.filePath}
           <MarkdownViewer markdownContent={dataItem.description} />
 
           <Button
             className={styles.solutionsFilesCardLinkButton}
             type="primary"
             size="small"
-            href={`${PRODUCTION_FRONTEND_URL}${RouterPath.displayed_solutions_files_list}?directionId=${dataItem.direction_id}&stackId=${dataItem.stack_id}&categoryId=${dataItem.direction_category_id}&authUserId=${activeUserData?.hashedTelegramId}`}
+            href={`${PRODUCTION_FRONTEND_URL}${RouterPath.displayed_solutions_files_list}?directionId=${dataItem.directionId}&stackId=${dataItem.stackId}&categoryId=${dataItem.directionCategoryId}&authUserId=${activeUserData?.hashedTelegramId}`}
             target="_blank"
             icon={<EyeOutlined />}
           >

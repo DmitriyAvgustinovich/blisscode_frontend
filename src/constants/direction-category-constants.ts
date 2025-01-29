@@ -6,10 +6,10 @@ export const directionCategoryTableLabels = {
 };
 
 export const directionCategoryTableDataIndexes = {
-  tgCallbackData: "tg_callback_data",
+  tgCallbackData: "tgCallbackData",
   name: "name",
-  direction: "direction_id",
-  stack: "stack_id",
+  direction: "directionId",
+  stack: "stackId",
 };
 
 export const directionCategoryColumns = [

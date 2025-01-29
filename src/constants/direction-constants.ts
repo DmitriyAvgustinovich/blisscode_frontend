@@ -4,7 +4,7 @@ export const directionTableLabels = {
 };
 
 export const directionTableDataIndexes = {
-  tgCallbackData: "tg_callback_data",
+  tgCallbackData: "tgCallbackData",
   name: "name",
 };
 

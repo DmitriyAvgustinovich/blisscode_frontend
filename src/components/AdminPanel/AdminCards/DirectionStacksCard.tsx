@@ -65,7 +65,7 @@ export const DirectionStacksCard = () => {
       renderCardContentTitle={(stack) => (
         <>
           {stack.id} <LineOutlined rotate={90} /> {stack.name}{" "}
-          <LineOutlined rotate={90} /> {stack.tg_callback_data}
+          <LineOutlined rotate={90} /> {stack.tgCallbackData}
         </>
       )}
     />

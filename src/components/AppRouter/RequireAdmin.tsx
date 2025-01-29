@@ -1,8 +1,7 @@
+import { useGetActiveUser } from "hooks";
 import { Navigate } from "react-router-dom";
 
 import { RouterPath } from "configs/route-config";
-
-import { useGetActiveUser } from "hooks/index";
 
 interface IRequireAdminProps {
   children: JSX.Element;

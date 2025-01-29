@@ -1,13 +1,13 @@
 export interface IUser {
   id: number;
   username: string;
-  telegram_id: string;
-  createdAt: Date;
+  telegramId: string;
+  createdAt: string;
   subscribeTasks: boolean;
   subscribeBase: boolean;
   baseChannel: string;
-  dateStartSub: Date;
-  dateLastCheckSub: Date;
+  dateStartSub: string;
+  dateLastCheckSub: string;
   salt: string;
   hashedTelegramId: string;
 }

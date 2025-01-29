@@ -1,4 +1,4 @@
-import { IKnowledge, ISolutionFile } from "types";
+import { IKnowledge, ISolutionFile, ITheoreticalTestingQuestion } from "types";
 
 export interface ISearchSolutionsFilesRequest {
   searchQuery: string;
@@ -16,4 +16,13 @@ export interface ISearchKnowledgeRequest {
 export interface ISearchKnowledgeResponse {
   data: IKnowledge[];
   totalCount: number;
+}
+
+export interface ISearchTheoreticalQuestionsResponse {
+  data: ITheoreticalTestingQuestion[];
+  totalCount: number;
+}
+
+export interface ISearchTheoreticalQuestionsRequest {
+  searchQuery: string;
 }

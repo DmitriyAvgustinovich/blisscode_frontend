@@ -7,6 +7,7 @@ import { DirectionKnowledge } from "./AdminCards/KnowledgeCard/DirectionKnowledg
 import { DirectionTopicKnowledge } from "./AdminCards/KnowledgeCard/DirectionTopicKnowledge";
 import { KnowledgeCard } from "./AdminCards/KnowledgeCard/KnowledgeCard";
 import { SolutionsFilesCard } from "./AdminCards/SolutionsFilesCard/SolutionsFilesCard";
+import { TheoreticalTestingCard } from "./AdminCards/TheoreticalTestingCard/TheoreticalTestingCard";
 import styles from "./AdminPanel.module.scss";
 
 export const AdminPanel = () => {
@@ -33,6 +34,11 @@ export const AdminPanel = () => {
           <KnowledgeCard />
         </div>
       ),
+    },
+    {
+      key: "3",
+      label: "Теоретическое тестирование",
+      children: <TheoreticalTestingCard />,
     },
   ];
 

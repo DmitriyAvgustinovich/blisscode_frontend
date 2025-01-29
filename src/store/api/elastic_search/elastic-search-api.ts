@@ -4,6 +4,8 @@ import {
   ISearchKnowledgeResponse,
   ISearchSolutionsFilesRequest,
   ISearchSolutionsFilesResponse,
+  ISearchTheoreticalQuestionsRequest,
+  ISearchTheoreticalQuestionsResponse,
 } from "./types";
 
 const elasticSearchApi = rtkApi.injectEndpoints({
@@ -31,8 +33,23 @@ const elasticSearchApi = rtkApi.injectEndpoints({
       }),
       invalidatesTags: ["Knowledge"],
     }),
+
+    searchTheoreticalQuestions: build.mutation<
+      ISearchTheoreticalQuestionsResponse,
+      ISearchTheoreticalQuestionsRequest
+    >({
+      query: (body) => ({
+        url: "elastic-search/search-theoretical-question",
+        method: "POST",
+        body,
+      }),
+      invalidatesTags: ["TheoreticalTestingQuestion"],
+    }),
   }),
 });
 
-export const { useSearchSolutionFilesMutation, useSearchKnowledgesMutation } =
-  elasticSearchApi;
+export const {
+  useSearchSolutionFilesMutation,
+  useSearchKnowledgesMutation,
+  useSearchTheoreticalQuestionsMutation,
+} = elasticSearchApi;

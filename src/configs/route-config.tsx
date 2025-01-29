@@ -6,6 +6,7 @@ import { ForbiddenPage } from "pages/ForbiddenPage";
 import KnowledgeBasePage from "pages/KnowledgeBasePage/KnowledgeBasePage";
 import { MainPage } from "pages/MainPage";
 import { SolutionFileViewerPage } from "pages/SolutionFileViewerPage";
+import { TheoreticalTestResultsPage } from "pages/TheoreticalTestResultsPage";
 
 import { LazyLoadChunk } from "components/LazyLoadChunk/LazyLoadChunk";
 
@@ -21,6 +22,7 @@ export enum AppRoutes {
   ADMIN_PANEL = "admin_panel",
   DISPLAYED_SOLUTIONS_FILES_LIST = "displayed_solutions_files_list",
   KNOWLEDGE_BASE = "knowledge_base",
+  THEORETICAL_TEST_RESULTS = "theoretical_test_results",
   FORBIDDEN = "forbidden",
 }
 
@@ -30,6 +32,7 @@ export const RouterPath: Record<AppRoutes, string> = {
   [AppRoutes.ADMIN_PANEL]: "/admin_panel",
   [AppRoutes.DISPLAYED_SOLUTIONS_FILES_LIST]: "/displayed_solutions_files_list",
   [AppRoutes.KNOWLEDGE_BASE]: "/knowledge_base",
+  [AppRoutes.THEORETICAL_TEST_RESULTS]: "/theoretical_test_results",
   [AppRoutes.FORBIDDEN]: "/forbidden",
 };
 
@@ -74,6 +77,15 @@ export const routeConfig: Record<AppRoutes, TAppRouteProps> = {
     element: (
       <LazyLoadChunk>
         <KnowledgeBasePage />
+      </LazyLoadChunk>
+    ),
+    subscriberOnly: true,
+  },
+  [AppRoutes.THEORETICAL_TEST_RESULTS]: {
+    path: RouterPath.theoretical_test_results,
+    element: (
+      <LazyLoadChunk>
+        <TheoreticalTestResultsPage />
       </LazyLoadChunk>
     ),
     subscriberOnly: true,

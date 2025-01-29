@@ -18,12 +18,12 @@ export const solutionFilesLabels = {
 };
 
 export const solutionFilesDataIndexes = {
-  filePath: "file_path",
+  filePath: "filePath",
   name: "name",
   description: "description",
-  direction: "direction_id",
-  stack: "stack_id",
-  directionCategory: "direction_category_id",
+  direction: "directionId",
+  stack: "stackId",
+  directionCategory: "directionCategoryId",
 };
 
 export const solutionFilePrefixesValidation = {

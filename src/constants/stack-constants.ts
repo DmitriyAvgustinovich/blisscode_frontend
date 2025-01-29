@@ -5,9 +5,9 @@ export const stackTableLabels = {
 };
 
 export const stackTableDataIndexes = {
-  tgCallbackData: "tg_callback_data",
+  tgCallbackData: "tgCallbackData",
   name: "name",
-  direction: "direction_id",
+  direction: "directionId",
 };
 
 export const stackColumns = [

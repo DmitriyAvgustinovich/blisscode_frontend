@@ -1,0 +1,28 @@
+.theoreticalTestResultsWrapper {
+  height: 100vh;
+  background-color: var(--primary-bg-color);
+  padding: 20px;
+}
+
+.theoreticalTestResultsTitle {
+  color: var(--white-text-color) !important;
+}
+
+.theoreticalTestResultsButton {
+  margin-bottom: 15px;
+}
+
+.theoreticalTestResultsMarkdownWrapper {
+  font: var(--font-m);
+  overflow-y: scroll;
+  max-height: 75vh;
+
+  &::-webkit-scrollbar {
+    width: 3px;
+    height: 3px;
+
+    &-thumb {
+      background-color: var(--purple-bg-color);
+    }
+  }
+}

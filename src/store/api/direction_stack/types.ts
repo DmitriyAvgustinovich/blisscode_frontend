@@ -10,7 +10,7 @@ export interface IGetDirectionStackByIdRequest {
 
 export type TGetDirectionStackByDirectionIdResponse = IDirectionStack[];
 export interface IGetDirectionStackByDirectionIdRequest {
-  direction_id: number | null;
+  directionId: number | null;
 }
 
 export type TAddDirectionStackResponse = IDirectionStack;

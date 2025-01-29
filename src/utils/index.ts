@@ -7,3 +7,4 @@ export * from "./general/get-select-options";
 export * from "./admin/get-stacks-options";
 export * from "./admin/get-validation-rules";
 export * from "./general/get-formatted-date";
+export * from "./general/download-pdf";

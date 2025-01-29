@@ -1,6 +1,7 @@
 import React from "react";
 
 import { Form } from "antd";
+import { useGetFormItemsForAdminPanel } from "hooks";
 
 import { LineOutlined } from "@ant-design/icons";
 
@@ -12,8 +13,6 @@ import {
   useGetAllDirectionTopicsKnowledgeQuery,
   useUpdateDirectionTopicKnowledgeMutation,
 } from "store/knowledge-base/knowledge-base.api";
-
-import { useGetFormItemsForAdminPanel } from "hooks/index";
 
 import { IDirectionTopicKnowledge } from "types";
 

@@ -22,7 +22,7 @@ export interface IGetKnowledgeByIdRequest {
 
 export type TGetKnowledgesByDirectionIdResponse = IKnowledge[];
 export interface IGetKnowledgesByDirectionIdRequest {
-  direction_id: number | null;
+  directionId: number | null;
 }
 
 export type TAddKnowledgeResponse = IKnowledge;
