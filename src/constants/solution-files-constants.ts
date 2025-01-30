@@ -31,3 +31,5 @@ export const solutionFilePrefixesValidation = {
   stack_: "stack_",
   category_: "category_",
 };
+
+export const SOLUTIONS_FILES_FOLDER_PREFIX = 'solutions_files_storage';

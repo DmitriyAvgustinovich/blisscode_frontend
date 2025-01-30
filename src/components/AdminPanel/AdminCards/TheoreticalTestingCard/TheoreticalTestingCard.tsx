@@ -2,7 +2,6 @@ import React from "react";
 
 import { Form, Pagination, Input, Typography } from "antd";
 import { useGetFormItemsForAdminPanel } from "hooks";
-import { ITheoreticalTestingQuestion } from "types/ITheoreticalTestingQuestion";
 
 import { LineOutlined } from "@ant-design/icons";
 
@@ -18,6 +17,8 @@ import {
 import { IGetAllQuestionsResponse } from "store/api/theoretical_testing/types";
 
 import { PAGINATION_PAGE_SIZE } from "constants/theoretical-testing-constants";
+
+import { ITheoreticalTestingQuestion } from "types";
 
 import styles from "./TheoreticalTestingCard.module.scss";
 

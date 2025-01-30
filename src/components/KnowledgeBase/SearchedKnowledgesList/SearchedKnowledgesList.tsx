@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 import { CalendarOutlined, EyeOutlined } from "@ant-design/icons";
 
-import { IGetAllKnowledgesResponse } from "store/knowledge-base/types";
+import { IGetAllKnowledgesResponse } from "store/api/knowledge_base/types";
 
 import { getFormattedDate } from "utils";
 

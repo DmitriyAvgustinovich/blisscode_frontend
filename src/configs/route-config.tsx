@@ -1,9 +1,10 @@
 import { RouteProps } from "react-router-dom";
 
 import { AdminPanelPage } from "pages/AdminPanelPage";
+import { CvReviewResultsPage } from "pages/CvReviewResultsPage";
 import { DisplayedSolutionsFilesListPage } from "pages/DisplayedSolutionsFilesListPage";
 import { ForbiddenPage } from "pages/ForbiddenPage";
-import KnowledgeBasePage from "pages/KnowledgeBasePage/KnowledgeBasePage";
+import { KnowledgeBasePage } from "pages/KnowledgeBasePage";
 import { MainPage } from "pages/MainPage";
 import { SolutionFileViewerPage } from "pages/SolutionFileViewerPage";
 import { TheoreticalTestResultsPage } from "pages/TheoreticalTestResultsPage";
@@ -23,6 +24,7 @@ export enum AppRoutes {
   DISPLAYED_SOLUTIONS_FILES_LIST = "displayed_solutions_files_list",
   KNOWLEDGE_BASE = "knowledge_base",
   THEORETICAL_TEST_RESULTS = "theoretical_test_results",
+  CV_REVIEW_RESULTS = "cv_review_results",
   FORBIDDEN = "forbidden",
 }
 
@@ -33,6 +35,7 @@ export const RouterPath: Record<AppRoutes, string> = {
   [AppRoutes.DISPLAYED_SOLUTIONS_FILES_LIST]: "/displayed_solutions_files_list",
   [AppRoutes.KNOWLEDGE_BASE]: "/knowledge_base",
   [AppRoutes.THEORETICAL_TEST_RESULTS]: "/theoretical_test_results",
+  [AppRoutes.CV_REVIEW_RESULTS]: "/cv_review_results",
   [AppRoutes.FORBIDDEN]: "/forbidden",
 };
 
@@ -86,6 +89,15 @@ export const routeConfig: Record<AppRoutes, TAppRouteProps> = {
     element: (
       <LazyLoadChunk>
         <TheoreticalTestResultsPage />
+      </LazyLoadChunk>
+    ),
+    subscriberOnly: true,
+  },
+  [AppRoutes.CV_REVIEW_RESULTS]: {
+    path: RouterPath.cv_review_results,
+    element: (
+      <LazyLoadChunk>
+        <CvReviewResultsPage />
       </LazyLoadChunk>
     ),
     subscriberOnly: true,

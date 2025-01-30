@@ -12,7 +12,7 @@ import {
   useDeleteDirectionTopicKnowledgeMutation,
   useGetAllDirectionTopicsKnowledgeQuery,
   useUpdateDirectionTopicKnowledgeMutation,
-} from "store/knowledge-base/knowledge-base.api";
+} from "store/api/knowledge_base/knowledge-base.api";
 
 import { IDirectionTopicKnowledge } from "types";
 

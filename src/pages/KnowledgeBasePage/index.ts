@@ -1,3 +1,5 @@
 import React from "react";
 
-export const AdminPanelPage = React.lazy(() => import("./KnowledgeBasePage"));
+export const KnowledgeBasePage = React.lazy(
+  () => import("./KnowledgeBasePage")
+);

@@ -22,8 +22,11 @@ import { IGetAllSolutionsFilesResponse } from "store/api/solution_file/types";
 
 import { RouterPath } from "configs/route-config";
 
-import { PRODUCTION_FRONTEND_URL } from "constants/general-constants";
-import { PAGINATION_PAGE_SIZE } from "constants/solution-files-constants";
+import {
+  PAGINATION_PAGE_SIZE,
+  solutionFilesDataIndexes,
+  SOLUTIONS_FILES_FOLDER_PREFIX,
+} from "constants/solution-files-constants";
 
 import { ISolutionFile } from "types";
 
@@ -50,8 +53,10 @@ export const SolutionsFilesCard = () => {
 
   const { solutionFileFormItems } = useGetFormItemsForAdminPanel({
     solutionFileName:
-      // todo: скорее всего slice будет потом не нужен
-      editingEntity && form.getFieldValue("filePath")?.slice(6),
+      editingEntity &&
+      form
+        .getFieldValue(solutionFilesDataIndexes.filePath)
+        ?.slice(SOLUTIONS_FILES_FOLDER_PREFIX.length + 1),
     formState: form,
   });
 
@@ -64,7 +69,7 @@ export const SolutionsFilesCard = () => {
   const [searchSolutionFiles] = useSearchSolutionFilesMutation();
 
   const {
-    solutionFileCodeContext: { solutionFileName },
+    solutionFileCodeContext: { solutionFileName, setSolutionFileName },
   } = useContexts();
 
   const handleSaveAction = async (entity: ISolutionFile) => {
@@ -72,8 +77,9 @@ export const SolutionsFilesCard = () => {
       if (editingEntity) {
         const updateData = {
           ...entity,
-          // todo: скорее всего slice будет потом не нужен
-          filename: solutionFileName || entity.filePath?.slice(6),
+          filename:
+            solutionFileName ||
+            entity.filePath?.slice(SOLUTIONS_FILES_FOLDER_PREFIX.length + 1),
           id: editingEntity.id,
         };
 
@@ -81,6 +87,9 @@ export const SolutionsFilesCard = () => {
       } else {
         const createData = { ...entity, filename: solutionFileName };
         await addSolution(createData).unwrap();
+
+        form.resetFields();
+        setSolutionFileName("");
       }
 
       setIsModalOpen(false);
@@ -144,7 +153,7 @@ export const SolutionsFilesCard = () => {
             className={styles.solutionsFilesCardLinkButton}
             type="primary"
             size="small"
-            href={`${PRODUCTION_FRONTEND_URL}${RouterPath.displayed_solutions_files_list}?directionId=${dataItem.directionId}&stackId=${dataItem.stackId}&categoryId=${dataItem.directionCategoryId}&authUserId=${activeUserData?.hashedTelegramId}`}
+            href={`${RouterPath.displayed_solutions_files_list}?directionId=${dataItem.directionId}&stackId=${dataItem.stackId}&categoryId=${dataItem.directionCategoryId}&authUserId=${activeUserData?.hashedTelegramId}`}
             target="_blank"
             icon={<EyeOutlined />}
           >

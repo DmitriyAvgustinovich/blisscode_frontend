@@ -16,6 +16,7 @@ export const rtkApi = createApi({
     "DirectionTopicKnowledge",
     "TheoreticalTestingQuestion",
     "TheoreticalTestingResult",
+    "CvReviewResult",
   ],
   endpoints: () => ({}),
 });

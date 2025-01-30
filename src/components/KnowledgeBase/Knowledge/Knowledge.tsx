@@ -12,7 +12,7 @@ import { MarkdownViewer } from "components/MarkdownViewer/MarkdownViewer";
 import {
   useGetDirectionKnowledgeByIdQuery,
   useGetDirectionTopicKnowledgeByIdQuery,
-} from "store/knowledge-base/knowledge-base.api";
+} from "store/api/knowledge_base/knowledge-base.api";
 
 import { RouterPath } from "configs/route-config";
 

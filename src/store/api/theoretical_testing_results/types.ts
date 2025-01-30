@@ -1,4 +1,4 @@
-import { ITheoreticalTestResults } from "types/ITheoreticalTestingQuestion";
+import { ITheoreticalTestResults } from "types";
 
 export type TGetTheoreticalTestResultsResponse = ITheoreticalTestResults;
 export interface IGetTheoreticalTestResultsRequest {

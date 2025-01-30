@@ -11,7 +11,7 @@ import { useGetDirectionStacksByDirectionIdQuery } from "store/api/direction_sta
 import {
   useGetAllDirectionKnowledgesQuery,
   useGetAllDirectionTopicsKnowledgeQuery,
-} from "store/knowledge-base/knowledge-base.api";
+} from "store/api/knowledge_base/knowledge-base.api";
 
 import {
   directionCategoryTableDataIndexes,

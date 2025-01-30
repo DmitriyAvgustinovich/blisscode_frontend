@@ -30,6 +30,12 @@ interface IHtml2PdfOptions {
     format?: string;
     orientation?: string;
   };
+  pagebreak?: {
+    mode?: string;
+    before?: string;
+    after?: string[];
+    avoid?: string[];
+  };
 }
 
 interface IDownloadPdfArgs {
@@ -72,6 +78,7 @@ export const downloadPdf = (args: IDownloadPdfArgs) => {
       format: "a4",
       orientation: "portrait",
     },
+    pagebreak: { mode: "avoid-all", before: "#page-break" },
   };
 
   html2pdf().from(element).set(options).save();

@@ -7,8 +7,8 @@ import { useSearchKnowledgesMutation } from "store/api/elastic_search/elastic-se
 import {
   useGetAllDirectionKnowledgesQuery,
   useGetKnowledgeByIdQuery,
-} from "store/knowledge-base/knowledge-base.api";
-import { IGetAllKnowledgesResponse } from "store/knowledge-base/types";
+} from "store/api/knowledge_base/knowledge-base.api";
+import { IGetAllKnowledgesResponse } from "store/api/knowledge_base/types";
 
 import { EmptyKnowledge } from "./EmptyKnowledge/EmptyKnowledge";
 import { Knowledge } from "./Knowledge/Knowledge";

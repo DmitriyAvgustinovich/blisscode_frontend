@@ -1,4 +1,4 @@
-declare module 'html2pdf.js' {
+declare module "html2pdf.js" {
   interface Html2PdfOptions {
     margin?: number | number[];
     filename?: string;
@@ -15,6 +15,12 @@ declare module 'html2pdf.js' {
       unit?: string;
       format?: string;
       orientation?: string;
+    };
+    pagebreak?: {
+      mode?: string;
+      before?: string;
+      after?: string[];
+      avoid?: string[];
     };
   }
 
