@@ -1,5 +1,6 @@
 export const PAGINATION_PAGE_SIZE = 3;
 
+
 export const theoreticalTestingLabels = {
   id: "ID",
   name: "Вопрос",

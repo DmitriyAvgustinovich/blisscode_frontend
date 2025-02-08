@@ -6,6 +6,7 @@ import { DisplayedSolutionsFilesListPage } from "pages/DisplayedSolutionsFilesLi
 import { ForbiddenPage } from "pages/ForbiddenPage";
 import { KnowledgeBasePage } from "pages/KnowledgeBasePage";
 import { MainPage } from "pages/MainPage";
+import { PersonalAccountPage } from "pages/PersonalAccountPage";
 import { SolutionFileViewerPage } from "pages/SolutionFileViewerPage";
 import { TheoreticalTestResultsPage } from "pages/TheoreticalTestResultsPage";
 
@@ -25,6 +26,7 @@ export enum AppRoutes {
   KNOWLEDGE_BASE = "knowledge_base",
   THEORETICAL_TEST_RESULTS = "theoretical_test_results",
   CV_REVIEW_RESULTS = "cv_review_results",
+  PERSONAL_ACCOUNT = "personal_account",
   FORBIDDEN = "forbidden",
 }
 
@@ -36,6 +38,7 @@ export const RouterPath: Record<AppRoutes, string> = {
   [AppRoutes.KNOWLEDGE_BASE]: "/knowledge_base",
   [AppRoutes.THEORETICAL_TEST_RESULTS]: "/theoretical_test_results",
   [AppRoutes.CV_REVIEW_RESULTS]: "/cv_review_results",
+  [AppRoutes.PERSONAL_ACCOUNT]: "/personal_account",
   [AppRoutes.FORBIDDEN]: "/forbidden",
 };
 
@@ -98,6 +101,15 @@ export const routeConfig: Record<AppRoutes, TAppRouteProps> = {
     element: (
       <LazyLoadChunk>
         <CvReviewResultsPage />
+      </LazyLoadChunk>
+    ),
+    subscriberOnly: true,
+  },
+  [AppRoutes.PERSONAL_ACCOUNT]: {
+    path: RouterPath.personal_account,
+    element: (
+      <LazyLoadChunk>
+        <PersonalAccountPage />
       </LazyLoadChunk>
     ),
     subscriberOnly: true,

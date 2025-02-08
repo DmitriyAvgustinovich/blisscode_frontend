@@ -1,3 +1,6 @@
+export const PAGINATION_PAGE_SIZE_THEORETICAL_TEST_RESULTS = 1;
+export const PAGINATION_PAGE_SIZE_CV_REVIEW_RESULTS = 1;
+
 export const ADMINS_TG_IDS = [
   import.meta.env.VITE_ADMIN_ID_DIMAS,
   import.meta.env.VITE_ADMIN_ID_ARKADIY,

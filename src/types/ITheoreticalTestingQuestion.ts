@@ -8,7 +8,6 @@ export interface ITheoreticalTestingQuestion {
 
 export interface ITheoreticalTestResults {
   id: number;
-  hashedTelegramId: string;
   directionId: number;
   stackId: number;
   answersResult: string;

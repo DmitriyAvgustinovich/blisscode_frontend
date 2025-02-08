@@ -7,6 +7,31 @@
   box-sizing: border-box;
 }
 
+.ant-pagination {
+  .ant-pagination-jump-next,
+  .ant-pagination-jump-prev {
+    .ant-pagination-item-ellipsis {
+      color: var(--white-text-color) !important;
+    }
+
+    &:hover {
+      .ant-pagination-item-link-icon {
+        color: var(--purple-bg-color) !important;
+      }
+    }
+  }
+
+  .ant-pagination-prev,
+  .ant-pagination-next {
+    &:hover {
+      .ant-pagination-item-link {
+        color: var(--purple-bg-color) !important;
+        border-color: var(--purple-bg-color) !important;
+      }
+    }
+  }
+}
+
 .ant-pagination-item {
   &:hover {
     border: 1px solid var(--purple-bg-color) !important;

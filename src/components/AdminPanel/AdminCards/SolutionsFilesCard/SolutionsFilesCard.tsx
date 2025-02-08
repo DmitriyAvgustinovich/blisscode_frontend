@@ -119,7 +119,7 @@ export const SolutionsFilesCard = () => {
 
   const displayedData = searchResults || allSolutionsData;
 
-  const handlePageChange = (currentPage: number) => {
+  const handleChangePage = (currentPage: number) => {
     if (!searchResults) {
       setCurrentPage(currentPage);
     }
@@ -183,7 +183,7 @@ export const SolutionsFilesCard = () => {
               current={currentPage}
               total={displayedData?.totalCount}
               pageSize={PAGINATION_PAGE_SIZE}
-              onChange={handlePageChange}
+              onChange={handleChangePage}
             />
           )}
         </>

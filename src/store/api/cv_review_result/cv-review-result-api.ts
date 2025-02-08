@@ -1,5 +1,10 @@
 import { rtkApi } from "../rtk-api";
-import { IGetCvReviewResultRequest, TGetCvReviewResultResponse } from "./types";
+import {
+  IGetCvReviewResultRequest,
+  IGetCvReviewResultsByHashedTelegramIdRequest,
+  TGetCvReviewResultResponse,
+  IGetCvReviewResultsByHashedTelegramIdResponse,
+} from "./types";
 
 const cvReviewResultApi = rtkApi.injectEndpoints({
   endpoints: (build) => ({
@@ -12,7 +17,20 @@ const cvReviewResultApi = rtkApi.injectEndpoints({
       }),
       providesTags: ["CvReviewResult"],
     }),
+
+    getCvReviewResultsByHashedTelegramId: build.query<
+      IGetCvReviewResultsByHashedTelegramIdResponse,
+      IGetCvReviewResultsByHashedTelegramIdRequest
+    >({
+      query: (body) => ({
+        url: `cv-review-results/get-cv-review-results-by-hashed-telegram-id/${body.hashedTelegramId}?page=${body.page}&pageSize=${body.pageSize}`,
+      }),
+      providesTags: ["CvReviewResult"],
+    }),
   }),
 });
 
-export const { useGetCvReviewResultQuery } = cvReviewResultApi;
+export const {
+  useGetCvReviewResultQuery,
+  useGetCvReviewResultsByHashedTelegramIdQuery,
+} = cvReviewResultApi;

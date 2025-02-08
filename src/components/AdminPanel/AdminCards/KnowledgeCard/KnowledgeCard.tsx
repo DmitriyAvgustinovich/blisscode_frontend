@@ -90,7 +90,7 @@ export const KnowledgeCard = () => {
     }
   };
 
-  const handlePageChange = (page: number) => {
+  const handleChangePage = (page: number) => {
     if (!searchResults) {
       setCurrentPage(page);
     }
@@ -157,7 +157,7 @@ export const KnowledgeCard = () => {
               current={currentPage}
               total={displayedData?.totalCount}
               pageSize={PAGINATION_PAGE_SIZE}
-              onChange={handlePageChange}
+              onChange={handleChangePage}
             />
           )}
         </>
