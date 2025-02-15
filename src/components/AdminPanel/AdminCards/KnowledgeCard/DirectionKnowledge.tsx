@@ -3,10 +3,9 @@ import React from "react";
 import { Form } from "antd";
 import { useGetFormItemsForAdminPanel } from "hooks";
 
-import { LineOutlined } from "@ant-design/icons";
-
 import { AdminEntityCardWrapper } from "components/AdminPanel/AdminEntityCardWrapper/AdminEntityCardWrapper";
 import { MarkdownViewer } from "components/MarkdownViewer/MarkdownViewer";
+import { TextWithLine } from "components/TextWithLine/TextWithLine";
 
 import {
   useAddDirectionKnowledgeMutation,
@@ -73,14 +72,24 @@ export const DirectionKnowledge = () => {
         await deleteDirectionKnowledge(entity).unwrap()
       }
       renderCardContentTitle={(directionKnowledge) => (
-        <>
-          {directionKnowledge.id} <LineOutlined rotate={90} />{" "}
-          {directionKnowledge.name}
-        </>
+        <TextWithLine
+          elements={[
+            <>
+              Идентификатор: <b>{directionKnowledge.id}</b>
+            </>,
+            <>
+              Название: <b>{directionKnowledge.name}</b>
+            </>,
+          ]}
+        />
       )}
       renderCardContentDescription={(directionKnowledge) => (
-        <MarkdownViewer
-          markdownContent={directionKnowledge.description ?? ""}
+        <TextWithLine
+          elements={[
+            <MarkdownViewer
+              markdownContent={directionKnowledge.description ?? ""}
+            />,
+          ]}
         />
       )}
     />

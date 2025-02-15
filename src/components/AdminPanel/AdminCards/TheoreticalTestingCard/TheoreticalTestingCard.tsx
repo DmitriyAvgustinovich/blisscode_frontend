@@ -3,9 +3,8 @@ import React from "react";
 import { Form, Pagination, Input, Typography } from "antd";
 import { useGetFormItemsForAdminPanel } from "hooks";
 
-import { LineOutlined } from "@ant-design/icons";
-
 import { AdminEntityCardWrapper } from "components/AdminPanel/AdminEntityCardWrapper/AdminEntityCardWrapper";
+import { TextWithLine } from "components/TextWithLine/TextWithLine";
 
 import { useSearchTheoreticalQuestionsMutation } from "store/api/elastic_search/elastic-search-api";
 import {
@@ -107,11 +106,26 @@ export const TheoreticalTestingCard = () => {
       deleteEntity={async (entity) => await deleteQuestion(entity).unwrap()}
       setCurrentPage={setCurrentPage}
       renderCardContentTitle={(question) => (
-        <>
-          {question.id} <LineOutlined rotate={90} /> {question.name}
-        </>
+        <TextWithLine
+          elements={[
+            <>
+              Идентификатор: <b>{question.id}</b>
+            </>,
+            <>
+              Вопрос: <b>{question.name}</b>
+            </>,
+          ]}
+        />
       )}
-      renderCardContentDescription={(question) => <>{question.answer}</>}
+      renderCardContentDescription={(question) => (
+        <TextWithLine
+          elements={[
+            <>
+              Ответ: <b>{question.answer}</b>
+            </>,
+          ]}
+        />
+      )}
       renderCustomHeader={() => (
         <Input.Search
           placeholder="Поиск вопросов..."

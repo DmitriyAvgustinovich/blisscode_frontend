@@ -3,10 +3,11 @@ import React from "react";
 import { Button, Form, Input, Pagination, Typography } from "antd";
 import { useGetActiveUser, useGetFormItemsForAdminPanel } from "hooks";
 
-import { EyeOutlined, LineOutlined } from "@ant-design/icons";
+import { EyeOutlined } from "@ant-design/icons";
 
 import { AdminEntityCardWrapper } from "components/AdminPanel/AdminEntityCardWrapper/AdminEntityCardWrapper";
 import { MarkdownViewer } from "components/MarkdownViewer/MarkdownViewer";
+import { TextWithLine } from "components/TextWithLine/TextWithLine";
 
 import { useSearchKnowledgesMutation } from "store/api/elastic_search/elastic-search-api";
 import {
@@ -19,7 +20,6 @@ import { IGetAllKnowledgesResponse } from "store/api/knowledge_base/types";
 
 import { RouterPath } from "configs/route-config";
 
-import { PRODUCTION_FRONTEND_URL } from "constants/general-constants";
 import { PAGINATION_PAGE_SIZE } from "constants/knowledge-base-constants";
 
 import { IKnowledge } from "types";
@@ -114,20 +114,31 @@ export const KnowledgeCard = () => {
       setCurrentPage={setCurrentPage}
       customStylesForModal={{ minWidth: "70%" }}
       renderCardContentTitle={(knowledge) => (
-        <>
-          {knowledge.id} <LineOutlined rotate={90} /> {knowledge.title}{" "}
-          <LineOutlined rotate={90} /> {knowledge.type}
-        </>
+        <TextWithLine
+          elements={[
+            <>
+              Идентификатор: <b>{knowledge.id}</b>
+            </>,
+            <>
+              Название: <b>{knowledge.title}</b>
+            </>,
+            <>
+              Тип знания: <b>{knowledge.type}</b>
+            </>,
+          ]}
+        />
       )}
       renderCardContentDescription={(knowledge) => (
         <>
-          <MarkdownViewer markdownContent={knowledge.text} />
+          <TextWithLine
+            elements={[<MarkdownViewer markdownContent={knowledge.text} />]}
+          />
 
           <Button
             className={styles.knowledgeCardButton}
             type="primary"
             size="small"
-            href={`${PRODUCTION_FRONTEND_URL}${RouterPath.knowledge_base}?knowledgeId=${knowledge.id}&authUserId=${activeUserData?.hashedTelegramId}`}
+            href={`${RouterPath.knowledge_base}?knowledgeId=${knowledge.id}&authUserId=${activeUserData?.hashedTelegramId}`}
             target="_blank"
             icon={<EyeOutlined />}
           >

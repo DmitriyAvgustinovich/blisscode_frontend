@@ -3,7 +3,7 @@ import React from "react";
 import { Form } from "antd";
 import { useGetFormItemsForAdminPanel } from "hooks";
 
-import { LineOutlined } from "@ant-design/icons";
+import { TextWithLine } from "components/TextWithLine/TextWithLine";
 
 import {
   useAddDirectionStackMutation,
@@ -63,10 +63,19 @@ export const DirectionStacksCard = () => {
       handleSaveAction={handleSaveAction}
       deleteEntity={async (entity) => await deleteStack(entity).unwrap()}
       renderCardContentTitle={(stack) => (
-        <>
-          {stack.id} <LineOutlined rotate={90} /> {stack.name}{" "}
-          <LineOutlined rotate={90} /> {stack.tgCallbackData}
-        </>
+        <TextWithLine
+          elements={[
+            <>
+              Идентификатор: <b>{stack.id}</b>
+            </>,
+            <>
+              Название: <b>{stack.name}</b>
+            </>,
+            <>
+              Callback_data: <b>{stack.tgCallbackData}</b>
+            </>,
+          ]}
+        />
       )}
     />
   );

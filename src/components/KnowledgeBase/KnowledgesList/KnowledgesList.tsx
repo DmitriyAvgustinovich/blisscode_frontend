@@ -1,5 +1,7 @@
-import { Card, Collapse, Typography } from "antd";
+import { Card, Collapse } from "antd";
 import { Link } from "react-router-dom";
+
+import { TextWithLine } from "components/TextWithLine/TextWithLine";
 
 import { IDirectionKnowledge } from "types";
 
@@ -18,9 +20,14 @@ export const KnowledgesList = (props: IKnowledgesListProps) => {
         <Card
           className={styles.knowledgesListCardWrapper}
           key={knowledge.id}
-          title={knowledge.name}
+          title={
+            <TextWithLine
+              elements={[<b>{knowledge.name}</b>]}
+              isColumn={false}
+            />
+          }
         >
-          <Card.Meta description={knowledge.description} />
+          <TextWithLine elements={[knowledge.description]} isColumn={false} />
 
           <Collapse
             className={styles.knowledgesListCollapseWrapper}
@@ -30,11 +37,10 @@ export const KnowledgesList = (props: IKnowledgesListProps) => {
               <Collapse.Panel key={topic.id} header={topic.name}>
                 {topic.knowledge?.map((knowledge) => (
                   <Link key={knowledge.id} to={`?knowledgeId=${knowledge.id}`}>
-                    <Typography.Text
-                      className={styles.knowledgesListTitleInTopic}
-                    >
-                      {knowledge.title}
-                    </Typography.Text>
+                    <TextWithLine
+                      elements={[knowledge.title]}
+                      isColumn={false}
+                    />
                   </Link>
                 ))}
               </Collapse.Panel>

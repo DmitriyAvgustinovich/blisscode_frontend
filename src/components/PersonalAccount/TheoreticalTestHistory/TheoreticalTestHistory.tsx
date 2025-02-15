@@ -28,8 +28,8 @@ export const TheoreticalTestHistory = () => {
   return (
     <>
       <Typography.Text className={styles.theoreticalTestHistoryTitle}>
-        В этом разделе вы можете ознакомиться с историей прохождения
-        теоретических тестов
+        В этом разделе можно ознакомиться с историей прохождения теоретических
+        тестов.
       </Typography.Text>
 
       <div className={styles.theoreticalTestHistoryWrapper}>
@@ -41,13 +41,19 @@ export const TheoreticalTestHistory = () => {
         ))}
       </div>
 
-      <Pagination
-        className={styles.theoreticalTestHistoryPaginationWrapper}
-        current={currentPage}
-        total={testResultsData?.totalCount}
-        pageSize={PAGINATION_PAGE_SIZE_THEORETICAL_TEST_RESULTS}
-        onChange={handleChangePage}
-      />
+      {(testResultsData?.totalCount ?? 0) > 0 ? (
+        <Pagination
+          className={styles.theoreticalTestHistoryPaginationWrapper}
+          current={currentPage}
+          total={testResultsData?.totalCount}
+          pageSize={PAGINATION_PAGE_SIZE_THEORETICAL_TEST_RESULTS}
+          onChange={handleChangePage}
+        />
+      ) : (
+        <Typography.Text className={styles.theoreticalTestHistoryTitle}>
+          Результаты прохождения теоретических тестов не найдены.
+        </Typography.Text>
+      )}
     </>
   );
 };

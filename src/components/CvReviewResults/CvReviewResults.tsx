@@ -1,7 +1,7 @@
 import { Button, Typography } from "antd";
 import { useGetSearchParams } from "hooks";
 
-import { FilePdfOutlined } from "@ant-design/icons";
+import { FilePdfOutlined, LoadingOutlined } from "@ant-design/icons";
 
 import { MarkdownViewer } from "components/MarkdownViewer/MarkdownViewer";
 
@@ -39,7 +39,7 @@ export const CvReviewResults = () => {
 
       {isCvReviewResultsDataLoading ? (
         <Typography.Text className={styles.cvReviewResultsTitle}>
-          Загрузка...
+          <LoadingOutlined /> Загрузка...
         </Typography.Text>
       ) : (
         <>

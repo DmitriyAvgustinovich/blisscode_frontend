@@ -3,9 +3,8 @@ import React from "react";
 import { Form } from "antd";
 import { useGetFormItemsForAdminPanel } from "hooks";
 
-import { LineOutlined } from "@ant-design/icons";
-
 import { AdminEntityCardWrapper } from "components/AdminPanel/AdminEntityCardWrapper/AdminEntityCardWrapper";
+import { TextWithLine } from "components/TextWithLine/TextWithLine";
 
 import {
   useAddDirectionTopicKnowledgeMutation,
@@ -76,10 +75,16 @@ export const DirectionTopicKnowledge = () => {
         await deleteDirectionTopicKnowledge(entity).unwrap()
       }
       renderCardContentTitle={(directionTopicKnowledge) => (
-        <>
-          {directionTopicKnowledge.id} <LineOutlined rotate={90} />{" "}
-          {directionTopicKnowledge.name}
-        </>
+        <TextWithLine
+          elements={[
+            <>
+              Идентификатор: <b>{directionTopicKnowledge.id}</b>
+            </>,
+            <>
+              Название: <b>{directionTopicKnowledge.name}</b>
+            </>,
+          ]}
+        />
       )}
     />
   );

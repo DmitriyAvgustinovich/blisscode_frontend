@@ -7,9 +7,10 @@ import {
   useGetFormItemsForAdminPanel,
 } from "hooks";
 
-import { EyeOutlined, LineOutlined } from "@ant-design/icons";
+import { EyeOutlined } from "@ant-design/icons";
 
 import { MarkdownViewer } from "components/MarkdownViewer/MarkdownViewer";
+import { TextWithLine } from "components/TextWithLine/TextWithLine";
 
 import { useSearchSolutionFilesMutation } from "store/api/elastic_search/elastic-search-api";
 import {
@@ -139,21 +140,36 @@ export const SolutionsFilesCard = () => {
       handleSaveAction={handleSaveAction}
       deleteEntity={async (entity) => await deleteSolution(entity).unwrap()}
       setCurrentPage={setCurrentPage}
-      renderCardContentTitle={(dataItem) => (
-        <>
-          {dataItem.id} <LineOutlined rotate={90} /> {dataItem.name}
-        </>
+      renderCardContentTitle={(solutionFile) => (
+        <TextWithLine
+          elements={[
+            <>
+              Идентификатор: <b>{solutionFile.id}</b>
+            </>,
+            <>
+              Название: <b>{solutionFile.name}</b>
+            </>,
+            <>
+              Путь до файла: <b>{solutionFile.filePath}</b>
+            </>,
+          ]}
+        />
       )}
-      renderCardContentDescription={(dataItem) => (
+      renderCardContentDescription={(solutionFile) => (
         <>
-          {dataItem.filePath}
-          <MarkdownViewer markdownContent={dataItem.description} />
+          <TextWithLine
+            elements={[
+              <>
+                <MarkdownViewer markdownContent={solutionFile.description} />
+              </>,
+            ]}
+          />
 
           <Button
             className={styles.solutionsFilesCardLinkButton}
             type="primary"
             size="small"
-            href={`${RouterPath.displayed_solutions_files_list}?directionId=${dataItem.directionId}&stackId=${dataItem.stackId}&categoryId=${dataItem.directionCategoryId}&authUserId=${activeUserData?.hashedTelegramId}`}
+            href={`${RouterPath.displayed_solutions_files_list}?directionId=${solutionFile.directionId}&stackId=${solutionFile.stackId}&categoryId=${solutionFile.directionCategoryId}&authUserId=${activeUserData?.hashedTelegramId}`}
             target="_blank"
             icon={<EyeOutlined />}
           >

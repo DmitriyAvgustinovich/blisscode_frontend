@@ -29,7 +29,7 @@ export const CvReviewHistory = () => {
   return (
     <>
       <Typography.Text className={styles.cvReviewHistoryTitle}>
-        В этом разделе вы можете ознакомиться с историей ревью резюме
+        В этом разделе можно ознакомиться с историей ревью резюме.
       </Typography.Text>
 
       <div className={styles.cvReviewHistoryWrapper}>
@@ -41,13 +41,19 @@ export const CvReviewHistory = () => {
         ))}
       </div>
 
-      <Pagination
-        className={styles.cvReviewHistoryPaginationWrapper}
-        current={currentPage}
-        total={cvReviewResultsData?.totalCount}
-        pageSize={PAGINATION_PAGE_SIZE_CV_REVIEW_RESULTS}
-        onChange={handleChangePage}
-      />
+      {(cvReviewResultsData?.totalCount ?? 0) > 0 ? (
+        <Pagination
+          className={styles.cvReviewHistoryPaginationWrapper}
+          current={currentPage}
+          total={cvReviewResultsData?.totalCount}
+          pageSize={PAGINATION_PAGE_SIZE_CV_REVIEW_RESULTS}
+          onChange={handleChangePage}
+        />
+      ) : (
+        <Typography.Text className={styles.cvReviewHistoryTitle}>
+          Результаты ревью резюме не найдены.
+        </Typography.Text>
+      )}
     </>
   );
 };

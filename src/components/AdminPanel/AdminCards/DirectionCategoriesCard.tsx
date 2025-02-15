@@ -3,7 +3,7 @@ import React from "react";
 import { Form } from "antd";
 import { useGetFormItemsForAdminPanel } from "hooks";
 
-import { LineOutlined } from "@ant-design/icons";
+import { TextWithLine } from "components/TextWithLine/TextWithLine";
 
 import {
   useAddDirectionCategoryMutation,
@@ -69,10 +69,19 @@ export const DirectionCategoriesCard = () => {
       handleSaveAction={handleSaveAction}
       deleteEntity={async (entity) => await deleteCategory(entity).unwrap()}
       renderCardContentTitle={(category) => (
-        <>
-          {category.id} <LineOutlined rotate={90} /> {category.name}{" "}
-          <LineOutlined rotate={90} /> {category.tgCallbackData}
-        </>
+        <TextWithLine
+          elements={[
+            <>
+              Идентификатор: <b>{category.id}</b>
+            </>,
+            <>
+              Название: <b>{category.name}</b>
+            </>,
+            <>
+              Callback_data: <b>{category.tgCallbackData}</b>
+            </>,
+          ]}
+        />
       )}
     />
   );

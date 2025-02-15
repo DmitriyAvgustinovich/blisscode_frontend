@@ -31,14 +31,7 @@
   background-color: var(--gray-bg-color);
 }
 
-.searchedKnowledgeListItemDate {
+.searchedKnowledgeListItemLink {
   display: block;
-  color: var(--white-text-color);
-}
-
-.searchedKnowledgeListItemTitle {
-  display: block;
-  margin-bottom: 10px;
-  font: var(--font-ml);
-  color: var(--white-text-color);
+  margin-top: 10px;
 }

@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import {
   CalendarOutlined,
   LeftOutlined,
+  LoadingOutlined,
   RightOutlined,
 } from "@ant-design/icons";
 
@@ -24,10 +25,11 @@ import styles from "./Knowledge.module.scss";
 
 interface IKnowledgeItemProps {
   knowledgeData: IKnowledge;
+  isKnowledgeDataIsLoading: boolean;
 }
 
 export const Knowledge = (props: IKnowledgeItemProps) => {
-  const { knowledgeData } = props;
+  const { knowledgeData, isKnowledgeDataIsLoading } = props;
 
   const { data: directionKnowledgeData } = useGetDirectionKnowledgeByIdQuery({
     id: knowledgeData.directionKnowledgeId,
@@ -40,28 +42,36 @@ export const Knowledge = (props: IKnowledgeItemProps) => {
 
   return (
     <>
-      <div className={styles.knowledgeHeaderWrapper}>
-        <Tooltip title="Назад в Базу знаний" placement="bottomRight">
-          <Link to={RouterPath.knowledge_base}>
-            <Button type="primary" icon={<LeftOutlined />} />
-          </Link>
-        </Tooltip>
-
-        <Typography.Title className={styles.knowledgeTitle} level={3}>
-          {directionKnowledgeData?.name} <RightOutlined />{" "}
-          {directionKnowledgeTopicData?.name} <RightOutlined />{" "}
-          {knowledgeData.title}
-        </Typography.Title>
-      </div>
-
-      <div className={styles.knowledgeContentWrapper}>
-        <Typography.Text className={styles.knowledgeTitle}>
-          <CalendarOutlined /> Создано{" "}
-          <b>{getFormattedDate(knowledgeData.createdAt)}</b>
+      {isKnowledgeDataIsLoading ? (
+        <Typography.Text className={styles.knowledgeLoadingTitle}>
+          <LoadingOutlined /> Загрузка...
         </Typography.Text>
+      ) : (
+        <>
+          <div className={styles.knowledgeHeaderWrapper}>
+            <Tooltip title="Назад в Базу знаний" placement="bottomRight">
+              <Link to={RouterPath.knowledge_base}>
+                <Button type="primary" icon={<LeftOutlined />} />
+              </Link>
+            </Tooltip>
 
-        <MarkdownViewer markdownContent={knowledgeData.text} />
-      </div>
+            <Typography.Title className={styles.knowledgeTitle} level={3}>
+              {directionKnowledgeData?.name} <RightOutlined />{" "}
+              {directionKnowledgeTopicData?.name} <RightOutlined />{" "}
+              {knowledgeData.title}
+            </Typography.Title>
+          </div>
+
+          <div className={styles.knowledgeContentWrapper}>
+            <Typography.Text className={styles.knowledgeTitle}>
+              <CalendarOutlined /> Создано{" "}
+              <b>{getFormattedDate(knowledgeData.createdAt)}</b>
+            </Typography.Text>
+
+            <MarkdownViewer markdownContent={knowledgeData.text} />
+          </div>
+        </>
+      )}
     </>
   );
 };

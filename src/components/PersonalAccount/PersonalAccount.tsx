@@ -4,6 +4,7 @@ import { useGetActiveUser } from "hooks";
 import { CvReviewHistory } from "./CvReviewHistory/CvReviewHistory";
 import styles from "./PersonalAccount.module.scss";
 import { TheoreticalTestHistory } from "./TheoreticalTestHistory/TheoreticalTestHistory";
+import { UsageGptLimits } from "./UsageGptLimits/UsageGptLimits";
 
 export const PersonalAccount = () => {
   const { activeUserData } = useGetActiveUser();
@@ -18,6 +19,11 @@ export const PersonalAccount = () => {
       key: "2",
       label: "Ревью резюме",
       children: <CvReviewHistory />,
+    },
+    {
+      key: "3",
+      label: "Лимиты использования ИИ",
+      children: <UsageGptLimits />,
     },
   ];
 

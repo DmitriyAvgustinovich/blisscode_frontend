@@ -43,9 +43,8 @@
       }
 
       blockquote {
-        border-left: 4px solid var(--purple-bg-color);
-        padding-left: 16px;
-        margin: 16px 0;
+        border-left: 3px solid var(--purple-bg-color);
+        padding-left: 8px;
         color: rgba(255, 255, 255, 0.7);
       }
 
@@ -57,9 +56,10 @@
       }
 
       hr {
+        margin: 16px 0;
+        height: 0 !important;
         border: none;
         border-top: 2px solid var(--purple-bg-color);
-        margin: 16px 0;
       }
 
       table {

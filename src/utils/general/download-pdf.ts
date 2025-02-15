@@ -50,10 +50,19 @@ export const downloadPdf = (args: IDownloadPdfArgs) => {
   Object.assign(element.style, ELEMENT_STYLES.container);
 
   const content = dataStringForPdf
+    // Удаляем заголовки Markdown (например, # Заголовок, ## Подзаголовок)
     .replace(/^#+ /gm, "")
+    // Заменяем элементы списка Markdown на маркеры
     .replace(/^- /gm, "• ")
+    // Преобразуем синтаксис жирного шрифта Markdown в HTML-теги strong
     .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
-    .replace(/\[|\]/g, "");
+    // Удаляем квадратные скобки
+    .replace(/\[|\]/g, "")
+    // Заменяем горизонтальные линии Markdown на HTML-элементы hr
+    .replace(
+      /---/g,
+      '<hr style="border-top: 1px solid #ccc; margin: 10px 0;">'
+    );
 
   const sections = content.split("\n").filter((line: string) => line.trim());
 

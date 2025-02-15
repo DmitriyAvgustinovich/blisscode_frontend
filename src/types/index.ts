@@ -11,3 +11,4 @@ export * from "./IOpenSolutionFileFromSearch";
 export * from "./IKnowledge";
 export * from "./ITheoreticalTestingQuestion";
 export * from "./ICvReviewResult";
+export * from "./IGptApiUsage";

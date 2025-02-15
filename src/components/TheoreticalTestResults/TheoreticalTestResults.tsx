@@ -1,7 +1,7 @@
 import { Button, Typography } from "antd";
 import { useGetSearchParams } from "hooks";
 
-import { FilePdfOutlined } from "@ant-design/icons";
+import { FilePdfOutlined, LoadingOutlined } from "@ant-design/icons";
 
 import { MarkdownViewer } from "components/MarkdownViewer/MarkdownViewer";
 
@@ -44,7 +44,7 @@ export const TheoreticalTestResults = () => {
 
       {isTheoreticalTestResultsDataLoading ? (
         <Typography.Text className={styles.theoreticalTestResultsTitle}>
-          Загрузка...
+           <LoadingOutlined /> Загрузка...
         </Typography.Text>
       ) : (
         <>

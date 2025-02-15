@@ -3,6 +3,8 @@ import React from "react";
 import { Input, Typography } from "antd";
 import { useGetSearchParams } from "hooks";
 
+import { LoadingOutlined } from "@ant-design/icons";
+
 import { useSearchKnowledgesMutation } from "store/api/elastic_search/elastic-search-api";
 import {
   useGetAllDirectionKnowledgesQuery,
@@ -19,6 +21,8 @@ import { SearchedKnowledgesList } from "./SearchedKnowledgesList/SearchedKnowled
 export const KnowledgeBase = () => {
   const [searchResults, setSearchResults] =
     React.useState<IGetAllKnowledgesResponse | null>(null);
+
+  const [searchValue, setSearchValue] = React.useState("");
 
   const { knowledgeId } = useGetSearchParams();
 
@@ -58,6 +62,12 @@ export const KnowledgeBase = () => {
     }
   };
 
+  const handleChangeSearchInput = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    setSearchValue(event.target.value);
+  };
+
   return (
     <div className={styles.knowledgeBaseWrapper}>
       {!isCertainKnowledgePage && (
@@ -69,6 +79,8 @@ export const KnowledgeBase = () => {
           <Input.Search
             placeholder="Поиск по базе знаний..."
             onSearch={handleSearchKnowledge}
+            value={searchValue}
+            onChange={handleChangeSearchInput}
             allowClear
             enterButton
           />
@@ -85,12 +97,15 @@ export const KnowledgeBase = () => {
         <>
           {isKnowledgeDataIsLoading && (
             <Typography.Text className={styles.knowledgeBaseTitle}>
-              Загрузка...
+              <LoadingOutlined /> Загрузка...
             </Typography.Text>
           )}
 
           {!isKnowledgeDataIsLoading && isKnowledgeExist && (
-            <Knowledge knowledgeData={knowledgeData} />
+            <Knowledge
+              knowledgeData={knowledgeData}
+              isKnowledgeDataIsLoading={isKnowledgeDataIsLoading}
+            />
           )}
 
           {!isKnowledgeDataIsLoading && !isKnowledgeExist && <EmptyKnowledge />}

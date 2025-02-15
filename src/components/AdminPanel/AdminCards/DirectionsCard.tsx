@@ -3,7 +3,7 @@ import React from "react";
 import { Form } from "antd";
 import { useGetFormItemsForAdminPanel } from "hooks";
 
-import { LineOutlined } from "@ant-design/icons";
+import { TextWithLine } from "components/TextWithLine/TextWithLine";
 
 import {
   useAddDirectionMutation,
@@ -66,10 +66,19 @@ export const DirectionsCard = () => {
       handleSaveAction={handleSaveAction}
       deleteEntity={async (entity) => await deleteDirection(entity).unwrap()}
       renderCardContentTitle={(direction) => (
-        <>
-          {direction.id} <LineOutlined rotate={90} /> {direction.name}{" "}
-          <LineOutlined rotate={90} /> {direction.tgCallbackData}
-        </>
+        <TextWithLine
+          elements={[
+            <>
+              Идентификатор: <b>{direction.id}</b>
+            </>,
+            <>
+              Название: <b>{direction.name}</b>
+            </>,
+            <>
+              Callback_data: <b>{direction.tgCallbackData}</b>
+            </>,
+          ]}
+        />
       )}
     />
   );
