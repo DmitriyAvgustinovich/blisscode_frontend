@@ -1,11 +1,11 @@
-import { IKnowledge, ISolutionFile, ITheoreticalTestingQuestion } from "types";
+import { IKnowledge, ISolutionFileInParser, ITheoreticalTestingQuestion } from "types";
 
 export interface ISearchSolutionsFilesRequest {
   searchQuery: string;
 }
 
 export interface ISearchSolutionsFilesResponse {
-  data: ISolutionFile[];
+  data: ISolutionFileInParser[];
   totalCount: number;
 }
 

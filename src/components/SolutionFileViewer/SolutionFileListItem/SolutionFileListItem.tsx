@@ -8,11 +8,11 @@ import { TextWithLine } from "components/TextWithLine/TextWithLine";
 
 import { RouterPath } from "configs/route-config";
 
-import { ISolutionFile } from "types";
+import { ISolutionFileInParser } from "types";
 
 import styles from "./SolutionFileListItem.module.scss";
 
-export const SolutionFileListItem = (props: ISolutionFile) => {
+export const SolutionFileListItem = (props: ISolutionFileInParser) => {
   const { name, description, uuid } = props;
 
   return (

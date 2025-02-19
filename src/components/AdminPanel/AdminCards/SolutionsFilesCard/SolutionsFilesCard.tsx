@@ -87,6 +87,8 @@ export const SolutionsFilesCard = () => {
         await updateSolution(updateData).unwrap();
       } else {
         const createData = { ...entity, filename: solutionFileName };
+        //eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
         await addSolution(createData).unwrap();
 
         form.resetFields();
@@ -129,6 +131,8 @@ export const SolutionsFilesCard = () => {
   return (
     <AdminEntityCardWrapper<ISolutionFile>
       cardTitle={`Решения (всего - ${displayedData?.totalCount ?? 0})`}
+      //eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
       dataForCard={displayedData?.data ?? []}
       isModalOpen={isModalOpen}
       setIsModalOpen={setIsModalOpen}

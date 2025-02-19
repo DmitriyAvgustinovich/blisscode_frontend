@@ -1,4 +1,4 @@
-export interface ISolutionFile {
+export interface ISolutionFileInParser {
   type: "file";
   content: string;
   getSolutionFileContent: () => Promise<string>;
@@ -6,13 +6,13 @@ export interface ISolutionFile {
 
 export interface IFileOrFolder {
   type: "file" | "folder";
-  [key: string]: ISolutionFile | IFileOrFolder | "file" | "folder";
+  [key: string]: ISolutionFileInParser | IFileOrFolder | "file" | "folder";
 }
 
 export interface ISearchResult {
   path: string;
   name: string;
-  file: ISolutionFile;
+  file: ISolutionFileInParser;
 }
 
 export interface IOpenedSolutionFile {
@@ -20,5 +20,3 @@ export interface IOpenedSolutionFile {
   solutionFileName: string;
   solutionFileContent: string;
 }
-
-export type TRecordStringObject = Record<string, string>;

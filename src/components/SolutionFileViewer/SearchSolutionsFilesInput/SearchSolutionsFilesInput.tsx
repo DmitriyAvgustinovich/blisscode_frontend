@@ -4,7 +4,7 @@ import { Input, InputRef } from "antd";
 import {
   IFileOrFolder,
   ISearchResult,
-  ISolutionFile,
+  ISolutionFileInParser,
 } from "types/IFileOrOrder";
 
 interface ISearchSolutionsFilesInputProps {
@@ -76,7 +76,7 @@ export const SearchSolutionsFilesInput = (
         searchResults.push({
           path: currentSolutionFilePath,
           name: key,
-          file: currentSolutionFile as ISolutionFile,
+          file: currentSolutionFile as ISolutionFileInParser,
         });
       }
     });

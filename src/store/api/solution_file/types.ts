@@ -1,7 +1,7 @@
-import { ISolutionFile } from "types";
+import { ISolutionFileInParser } from "types";
 
 export interface IGetAllSolutionsFilesResponse {
-  data: ISolutionFile[];
+  data: ISolutionFileInParser[];
   totalCount: number;
 }
 
@@ -22,7 +22,7 @@ export interface ISolutionFileByIdRequest {
 }
 
 export interface IGetSolutionsFilesByParamsResponse {
-  data: ISolutionFile[];
+  data: ISolutionFileInParser[];
   totalCount: number;
 }
 
@@ -34,10 +34,10 @@ export interface IGetSolutionsFilesByParamsRequest {
   pageSize: number;
 }
 
-export type TAddSolutionFileResponse = ISolutionFile;
-export type TAddSolutionFileRequest = ISolutionFile;
+export type TAddSolutionFileResponse = ISolutionFileInParser;
+export type TAddSolutionFileRequest = ISolutionFileInParser;
 
-export type TUpdateSolutionFileResponse = ISolutionFile;
+export type TUpdateSolutionFileResponse = ISolutionFileInParser;
 export interface IUpdateSolutionFileRequest {
   id: number;
 }
