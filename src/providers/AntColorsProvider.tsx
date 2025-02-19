@@ -66,6 +66,10 @@ export const AntColorsProvider = (props: IAntColorsProviderProps) => {
             colorText: "var(--white-text-color)",
             contentBg: "var(--gray-bg-color)",
           },
+          FloatButton: {
+            algorithm: true,
+            colorPrimary: "#715fde",
+          },
         },
       }}
     >

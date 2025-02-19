@@ -1,8 +1,6 @@
 import { Button, Typography } from "antd";
 import { Link } from "react-router-dom";
 
-import { CalendarOutlined, EyeOutlined } from "@ant-design/icons";
-
 import { TextWithLine } from "components/TextWithLine/TextWithLine";
 
 import { IGetAllKnowledgesResponse } from "store/api/knowledge_base/types";
@@ -32,22 +30,18 @@ export const SearchedKnowledgesList = (props: ISearchedKnowledgesListProps) => {
             key={knowledgeData.id}
             className={styles.searchedKnowledgeListItemWrapper}
           >
-            <TextWithLine
-              elements={[
-                <>
-                  <CalendarOutlined /> Создано{" "}
-                  <b>{getFormattedDate(knowledgeData.createdAt)}</b>
-                </>,
-                <b>{knowledgeData.title}</b>,
-              ]}
-            />
+            <Typography.Text className={styles.searchedKnowledgesListText}>
+              Создано <b>{getFormattedDate(knowledgeData.createdAt)}</b>
+            </Typography.Text>
+
+            <TextWithLine elements={[<b>{knowledgeData.title}</b>]} />
 
             <Link
               className={styles.searchedKnowledgeListItemLink}
               to={`?knowledgeId=${knowledgeData.id}`}
             >
-              <Button size="small" type="primary" icon={<EyeOutlined />}>
-                Читать подробнее
+              <Button size="small" type="primary">
+                Подробнее
               </Button>
             </Link>
           </div>

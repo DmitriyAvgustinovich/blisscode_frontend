@@ -3,8 +3,8 @@ import { Tabs } from "antd";
 import { DirectionCategoriesCard } from "./AdminCards/DirectionCategoriesCard";
 import { DirectionsCard } from "./AdminCards/DirectionsCard";
 import { DirectionStacksCard } from "./AdminCards/DirectionStacksCard";
-import { DirectionKnowledge } from "./AdminCards/KnowledgeCard/DirectionKnowledge";
-import { DirectionTopicKnowledge } from "./AdminCards/KnowledgeCard/DirectionTopicKnowledge";
+import { DirectionKnowledgeCard } from "./AdminCards/KnowledgeCard/DirectionKnowledgeCard";
+import { DirectionTopicKnowledgeCard } from "./AdminCards/KnowledgeCard/DirectionTopicKnowledgeCard";
 import { KnowledgeCard } from "./AdminCards/KnowledgeCard/KnowledgeCard";
 import { SolutionsFilesCard } from "./AdminCards/SolutionsFilesCard/SolutionsFilesCard";
 import { TheoreticalTestingCard } from "./AdminCards/TheoreticalTestingCard/TheoreticalTestingCard";
@@ -29,8 +29,8 @@ export const AdminPanel = () => {
       label: "База знаний",
       children: (
         <div className={styles.adminPanelKnowledgeCardsWrapper}>
-          <DirectionKnowledge />
-          <DirectionTopicKnowledge />
+          <DirectionKnowledgeCard />
+          <DirectionTopicKnowledgeCard />
           <KnowledgeCard />
         </div>
       ),

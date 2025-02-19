@@ -130,9 +130,7 @@ export const KnowledgeCard = () => {
       )}
       renderCardContentDescription={(knowledge) => (
         <>
-          <TextWithLine
-            elements={[<MarkdownViewer markdownContent={knowledge.text} />]}
-          />
+          <MarkdownViewer markdownContent={knowledge.text} />
 
           <Button
             className={styles.knowledgeCardButton}

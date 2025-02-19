@@ -16,7 +16,7 @@ import {
 
 import { IDirectionKnowledge } from "types";
 
-export const DirectionKnowledge = () => {
+export const DirectionKnowledgeCard = () => {
   const [isModalOpen, setIsModalOpen] = React.useState(false);
 
   const [editingEntity, setEditingEntity] =
@@ -84,12 +84,8 @@ export const DirectionKnowledge = () => {
         />
       )}
       renderCardContentDescription={(directionKnowledge) => (
-        <TextWithLine
-          elements={[
-            <MarkdownViewer
-              markdownContent={directionKnowledge.description ?? ""}
-            />,
-          ]}
+        <MarkdownViewer
+          markdownContent={directionKnowledge.description ?? ""}
         />
       )}
     />

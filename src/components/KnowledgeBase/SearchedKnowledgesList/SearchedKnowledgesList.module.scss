@@ -31,7 +31,14 @@
   background-color: var(--gray-bg-color);
 }
 
+.searchedKnowledgesListText {
+  font: var(--font-s);
+  color: var(--white-text-color);
+  display: block;
+  margin-bottom: 5px;
+}
+
 .searchedKnowledgeListItemLink {
   display: block;
-  margin-top: 10px;
+  margin-top: 20px;
 }

@@ -157,13 +157,7 @@ export const SolutionsFilesCard = () => {
       )}
       renderCardContentDescription={(solutionFile) => (
         <>
-          <TextWithLine
-            elements={[
-              <>
-                <MarkdownViewer markdownContent={solutionFile.description} />
-              </>,
-            ]}
-          />
+          <MarkdownViewer markdownContent={solutionFile.description} />
 
           <Button
             className={styles.solutionsFilesCardLinkButton}

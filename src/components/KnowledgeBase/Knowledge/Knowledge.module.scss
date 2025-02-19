@@ -9,15 +9,34 @@
 }
 
 .knowledgeTitle {
-  display: block;
-  margin-bottom: 10px;
+  color: var(--white-text-color) !important;
+}
+
+.knowledgeDate {
+  font: var(--font-s);
   color: var(--white-text-color) !important;
 }
 
 .knowledgeContentWrapper {
+  margin-top: 15px;
+  padding: 15px 20px 20px 20px;
   border-radius: 12px;
-  padding: 20px;
   background-color: var(--gray-bg-color);
   font: var(--font-m);
   color: var(--white-text-color);
+}
+
+.knowledgeFloatButton {
+  right: 45px !important;
+}
+
+.knowledgeFloatButtonWrapper {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s ease-in-out, visibility 0.2s ease-in-out;
+
+  &.visible {
+    opacity: 1;
+    visibility: visible;
+  }
 }

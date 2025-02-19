@@ -13,17 +13,16 @@ import { ISolutionFile } from "types";
 import styles from "./SolutionFileListItem.module.scss";
 
 export const SolutionFileListItem = (props: ISolutionFile) => {
+  const { name, description, uuid } = props;
+
   return (
     <div className={styles.solutionFileListItemWrapper}>
-      <TextWithLine
-        elements={[
-          <b>{props.name}</b>,
-          <MarkdownViewer markdownContent={props.description} />,
-        ]}
-      />
+      <TextWithLine elements={[<b>{name}</b>]} />
+
+      <MarkdownViewer markdownContent={description} />
 
       <Link
-        to={`${RouterPath.solution_file_viewer}?uuid=${props.uuid}`}
+        to={`${RouterPath.solution_file_viewer}?uuid=${uuid}`}
         target="_blank"
       >
         <Button icon={<CodepenOutlined />} block>

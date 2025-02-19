@@ -3,6 +3,8 @@ import JSZip from "jszip";
 import { IFileOrFolder } from "types";
 
 export const buildFileTree = (zipSolution: JSZip) => {
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
   const solutionFileStructure: IFileOrFolder = {};
 
   zipSolution.forEach((relativeFilePath, zipSolutionEntry) => {
@@ -12,6 +14,8 @@ export const buildFileTree = (zipSolution: JSZip) => {
     filePathParts.forEach((filePart, index) => {
       if (!currentFileStructureLevel[filePart]) {
         if (index === filePathParts.length - 1) {
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          // @ts-ignore
           currentFileStructureLevel[filePart] = {
             type: "file",
             getSolutionFileContent: () => zipSolutionEntry.async("string"),

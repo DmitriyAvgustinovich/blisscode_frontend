@@ -1,13 +1,24 @@
 import React from "react";
 
 import { Input, InputRef } from "antd";
-
-import { IFileOrFolder, TRecordStringObject } from "types";
+import {
+  IFileOrFolder,
+  ISearchResult,
+  ISolutionFile,
+} from "types/IFileOrOrder";
 
 interface ISearchSolutionsFilesInputProps {
   isSearchSolutionsFilesModalOpen: boolean;
   solutionsFilesTree: IFileOrFolder | null;
-  // setSolutionsFilesSearchResults: any;
+  setSolutionsFilesSearchResults: React.Dispatch<
+    React.SetStateAction<ISearchResult[]>
+  >;
+}
+
+interface IRecursivelySearchArgs {
+  solutionFileTree: IFileOrFolder;
+  searchQuery: string;
+  solutionFilePath?: string;
 }
 
 export const SearchSolutionsFilesInput = (
@@ -16,8 +27,6 @@ export const SearchSolutionsFilesInput = (
   const {
     isSearchSolutionsFilesModalOpen,
     solutionsFilesTree,
-    //eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
     setSolutionsFilesSearchResults,
   } = props;
 
@@ -32,29 +41,29 @@ export const SearchSolutionsFilesInput = (
     }
   }, [isSearchSolutionsFilesModalOpen]);
 
-  const recursivelySearchSolutionsFiles = (args: TRecordStringObject) => {
+  const recursivelySearchSolutionsFiles = (
+    args: IRecursivelySearchArgs
+  ): ISearchResult[] => {
     const { solutionFileTree, searchQuery, solutionFilePath = "" } = args;
 
     if (!solutionFileTree || typeof solutionFileTree !== "object") {
       return [];
     }
 
-    const searchResults: TRecordStringObject[] = [];
+    const searchResults: ISearchResult[] = [];
 
     Object.keys(solutionFileTree).forEach((key) => {
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-ignore
       const currentSolutionFile = solutionFileTree[key];
       const currentSolutionFilePath = `${solutionFilePath}/${key}`;
 
+      if (!currentSolutionFile || typeof currentSolutionFile !== "object") {
+        return;
+      }
+
       const isSolutionFileNameMatchWithSearchQuery =
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore
         currentSolutionFile.type === "file" &&
         key.toLowerCase().includes(searchQuery.toLowerCase());
 
-      //eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-ignore
       if (currentSolutionFile.type === "folder") {
         searchResults.push(
           ...recursivelySearchSolutionsFiles({
@@ -67,7 +76,7 @@ export const SearchSolutionsFilesInput = (
         searchResults.push({
           path: currentSolutionFilePath,
           name: key,
-          file: currentSolutionFile,
+          file: currentSolutionFile as ISolutionFile,
         });
       }
     });
@@ -85,8 +94,6 @@ export const SearchSolutionsFilesInput = (
 
     if (solutionsFilesTree !== null) {
       const searchResult = recursivelySearchSolutionsFiles({
-        //eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore
         solutionFileTree: solutionsFilesTree,
         searchQuery,
       });

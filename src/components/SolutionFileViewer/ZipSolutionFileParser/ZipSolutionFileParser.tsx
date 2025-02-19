@@ -51,6 +51,8 @@ export const ZipSolutionFileParser = () => {
       const currentSolutionFile = solutionFileTree[key];
       const solutionFilePath = `${parentPath}/${key}`;
 
+      //eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
       if (currentSolutionFile.type === "folder") {
         return (
           <SolutionFolder key={solutionFilePath} fileName={key}>
@@ -74,6 +76,8 @@ export const ZipSolutionFileParser = () => {
         });
       };
 
+      //eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
       if (currentSolutionFile.type === "file") {
         return (
           <TreeSolutionFileItem
@@ -104,9 +108,17 @@ export const ZipSolutionFileParser = () => {
       <div className={styles.zipSolutionFileParserTreeWrapper}>
         <SearchSolutionsFilesModal
           solutionsFilesTree={solutionsFilesTree}
+          //eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          // @ts-ignore
           searchSolutionsFilesResults={searchSolutionsFilesResults}
+          //eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          // @ts-ignore
           setSolutionsFilesSearchResults={setSolutionsFilesSearchResults}
+          //eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          // @ts-ignore
           openedSolutionsFiles={openedSolutionsFiles}
+          //eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          // @ts-ignore
           setOpenedSolutionsFiles={setOpenedSolutionsFiles}
           setActiveSolutionsFilePath={setActiveSolutionsFilePath}
         />

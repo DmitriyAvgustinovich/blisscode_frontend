@@ -15,7 +15,7 @@ import {
 
 import { IDirectionTopicKnowledge } from "types";
 
-export const DirectionTopicKnowledge = () => {
+export const DirectionTopicKnowledgeCard = () => {
   const [isModalOpen, setIsModalOpen] = React.useState(false);
 
   const [editingEntity, setEditingEntity] =

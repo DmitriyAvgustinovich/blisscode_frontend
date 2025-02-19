@@ -10,8 +10,6 @@ import { useGetGptApiUsageLimitsByHashedTelegramIdQuery } from "store/api/gpt_ap
 
 import { PRODUCTION_TELEGRAM_BOT_URL } from "constants/general-constants";
 
-import { getCurrentDate } from "utils";
-
 import styles from "./UsageGptLimits.module.scss";
 
 export const UsageGptLimits = () => {
@@ -26,54 +24,40 @@ export const UsageGptLimits = () => {
 
   return (
     <>
-      <Typography.Text className={styles.usageGptLimitsTitle}>
+      <Typography.Text className={styles.usageGptLimitsText}>
         В этом разделе можно ознакомиться с лимитами использования ИИ в боте{" "}
         <Link
           className={styles.usageGptLimitsBotLink}
           to={PRODUCTION_TELEGRAM_BOT_URL}
+          target="_blank"
         >
           BlissCodeBase
         </Link>
       </Typography.Text>
 
       {isGptApiUsageLimitsDataLoading ? (
-        <Typography.Text className={styles.usageGptLimitsTitle}>
+        <Typography.Text className={styles.usageGptLimitsText}>
           <LoadingOutlined /> Загрузка...
         </Typography.Text>
       ) : (
         <div className={styles.usageGptLimitsWrapper}>
-          <div className={styles.usageGptLimitsDateWrapper}>
-            <TextWithLine
-              elements={[
-                <>
-                  Сегодняшняя дата: <b>{getCurrentDate()}</b>
-                </>,
-              ]}
-            />
-          </div>
+          {gptApiUsageLimitsData?.map((gptApiUsageLimit) => (
+            <div
+              key={gptApiUsageLimit.gptApiType}
+              className={styles.usageGptLimitItemWrapper}
+            >
+              <TextWithLine elements={[gptApiUsageLimit.label]} />
 
-          <div className={styles.usageGptLimitItemsWrapper}>
-            {gptApiUsageLimitsData?.map((gptApiUsageLimit) => (
-              <div
-                key={gptApiUsageLimit.gptApiType}
-                className={styles.usageGptLimitItemWrapper}
-              >
-                <TextWithLine
-                  elements={[
-                    <>{gptApiUsageLimit.label}</>,
-                    <>
-                      Осталось использований:{" "}
-                      <b>{gptApiUsageLimit.remaining}</b> из{" "}
-                      <b>{gptApiUsageLimit.limit}</b>
-                    </>,
-                    <>
-                      Использовано сегодня: <b>{gptApiUsageLimit.usedToday}</b>
-                    </>,
-                  ]}
-                />
-              </div>
-            ))}
-          </div>
+              <Typography.Text className={styles.usageGptLimitsTextA}>
+                Осталось использований: <b>{gptApiUsageLimit.remaining}</b> из{" "}
+                <b>{gptApiUsageLimit.limit}</b>
+              </Typography.Text>
+
+              <Typography.Text className={styles.usageGptLimitsTextA}>
+                Использовано сегодня: <b>{gptApiUsageLimit.usedToday}</b>
+              </Typography.Text>
+            </div>
+          ))}
         </div>
       )}
     </>

@@ -1,4 +1,4 @@
-import { Card, Collapse } from "antd";
+import { Card, Collapse, Typography } from "antd";
 import { Link } from "react-router-dom";
 
 import { TextWithLine } from "components/TextWithLine/TextWithLine";
@@ -27,7 +27,9 @@ export const KnowledgesList = (props: IKnowledgesListProps) => {
             />
           }
         >
-          <TextWithLine elements={[knowledge.description]} isColumn={false} />
+          <Typography.Text className={styles.knowledgesListText}>
+            {knowledge.description}
+          </Typography.Text>
 
           <Collapse
             className={styles.knowledgesListCollapseWrapper}

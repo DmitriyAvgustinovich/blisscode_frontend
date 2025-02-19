@@ -59,9 +59,11 @@ export const downloadPdf = (args: IDownloadPdfArgs) => {
     // Удаляем квадратные скобки
     .replace(/\[|\]/g, "")
     // Заменяем горизонтальные линии Markdown на HTML-элементы hr
+    .replace(/---/g, '<hr style="border-top: 1px solid #000; margin: 10px 0;">')
+    // Добавляем поддержку символа кавычек >
     .replace(
-      /---/g,
-      '<hr style="border-top: 1px solid #ccc; margin: 10px 0;">'
+      /^> (.+)$/gm,
+      '<blockquote style="border-left: 2px solid #000; padding-left: 10px; margin-left: 0;">$1</blockquote>'
     );
 
   const sections = content.split("\n").filter((line: string) => line.trim());

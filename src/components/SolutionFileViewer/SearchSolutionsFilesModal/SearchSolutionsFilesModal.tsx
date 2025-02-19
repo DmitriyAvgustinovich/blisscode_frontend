@@ -1,27 +1,29 @@
 import React from "react";
 
 import { Button, Modal } from "antd";
+import {
+  IFileOrFolder,
+  ISearchResult,
+  IOpenedSolutionFile,
+} from "types/IFileOrOrder";
 
 import { SearchOutlined } from "@ant-design/icons";
 
 import { SearchSolutionsFilesInput } from "components/SolutionFileViewer/SearchSolutionsFilesInput/SearchSolutionsFilesInput";
 import { SolutionsFilesSearchResult } from "components/SolutionFileViewer/SolutionsFilesSearchResult/SolutionsFilesSearchResult";
 
-import {
-  IFileOrFolder,
-  IOpenSolutionFileFromSearch,
-  TRecordStringObject,
-  TSetStateActionStrings,
-} from "types";
-
 import styles from "./SearchSolutionsFilesModal.module.scss";
 
 interface ISearchSolutionsFilesModalProps {
   solutionsFilesTree: IFileOrFolder | null;
-  searchSolutionsFilesResults: TRecordStringObject[];
-  setSolutionsFilesSearchResults: TSetStateActionStrings;
-  openedSolutionsFiles: TRecordStringObject[];
-  setOpenedSolutionsFiles: TSetStateActionStrings;
+  searchSolutionsFilesResults: ISearchResult[];
+  setSolutionsFilesSearchResults: React.Dispatch<
+    React.SetStateAction<ISearchResult[]>
+  >;
+  openedSolutionsFiles: IOpenedSolutionFile[];
+  setOpenedSolutionsFiles: React.Dispatch<
+    React.SetStateAction<IOpenedSolutionFile[]>
+  >;
   setActiveSolutionsFilePath: React.Dispatch<
     React.SetStateAction<string | null>
   >;
@@ -50,38 +52,29 @@ export const SearchSolutionsFilesModal = (
     setIsSearchSolutionsFilesModalOpen(false);
   };
 
-  const handleOpenSolutionFileFromSearch = async (
-    args: IOpenSolutionFileFromSearch
-  ) => {
-    const { file, path, name } = args;
+  const handleOpenSolutionFileFromSearch = async (args: ISearchResult) => {
+    const { path, name, file } = args;
+
+    const solutionFileContent = await file.getSolutionFileContent();
 
     const alreadyOpened = openedSolutionsFiles.some(
       (file) => file.solutionFilePath === path
     );
 
-    try {
-      //eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-ignore
-      const solutionFileContent = await file.getSolutionFileContent();
+    const newSolutionFileTab = {
+      solutionFilePath: path,
+      solutionFileName: name,
+      solutionFileContent,
+    };
 
-      const newSolutionFileTab = {
-        solutionFilePath: path,
-        solutionFileName: name,
-        solutionFileContent,
-      };
-
-      if (!alreadyOpened) {
-        setOpenedSolutionsFiles((prevFiles) => [
-          ...prevFiles,
-          newSolutionFileTab,
-        ]);
-
-        setActiveSolutionsFilePath(path);
-      } else {
-        setActiveSolutionsFilePath(path);
-      }
-    } catch (error) {
-      console.log(error);
+    if (!alreadyOpened) {
+      setOpenedSolutionsFiles((prevFiles) => [
+        ...prevFiles,
+        newSolutionFileTab,
+      ]);
+      setActiveSolutionsFilePath(path);
+    } else {
+      setActiveSolutionsFilePath(path);
     }
 
     handleCloseSearchSolutionsFilesModal();
@@ -99,18 +92,15 @@ export const SearchSolutionsFilesModal = (
       </Button>
 
       <Modal
-        title="Поиск файла по имени..."
         open={isSearchSolutionsFilesModalOpen}
         onCancel={handleCloseSearchSolutionsFilesModal}
-        destroyOnClose
         footer={null}
         mask={false}
+        closeIcon={null}
       >
         <SearchSolutionsFilesInput
           isSearchSolutionsFilesModalOpen={isSearchSolutionsFilesModalOpen}
           solutionsFilesTree={solutionsFilesTree}
-          //eslint-disable-next-line @typescript-eslint/ban-ts-comment
-          // @ts-ignore
           setSolutionsFilesSearchResults={setSolutionsFilesSearchResults}
         />
 

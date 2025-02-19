@@ -1,12 +1,22 @@
 import { Typography } from "antd";
 
-import { IOpenSolutionFileFromSearch, TRecordStringObject } from "types";
-
 import styles from "./SolutionsFilesSearchResult.module.scss";
 
+interface ISolutionFile {
+  type: "file";
+  content: string;
+  getSolutionFileContent: () => Promise<string>;
+}
+
+interface ISearchResult {
+  path: string;
+  name: string;
+  file: ISolutionFile;
+}
+
 interface ISolutionsFilesSearchResultProps {
-  searchSolutionsFilesResults: TRecordStringObject[];
-  handleOpenSolutionFileFromSearch: (args: IOpenSolutionFileFromSearch) => void;
+  searchSolutionsFilesResults: ISearchResult[];
+  handleOpenSolutionFileFromSearch: (args: ISearchResult) => void;
 }
 
 export const SolutionsFilesSearchResult = (
@@ -22,23 +32,25 @@ export const SolutionsFilesSearchResult = (
       </Typography.Text>
 
       <div className={styles.solutionsFilesSearchResultWrapper}>
-        {searchSolutionsFilesResults.map((searchSolutionFileResult) => {
+        {searchSolutionsFilesResults.map(({ path, name, file }) => {
           const handleClickSearchResultFile = () => {
-            //eslint-disable-next-line @typescript-eslint/ban-ts-comment
-            // @ts-ignore
-            handleOpenSolutionFileFromSearch(searchSolutionFileResult);
+            handleOpenSolutionFileFromSearch({
+              path,
+              name,
+              file,
+            });
           };
 
           return (
             <div
               className={styles.solutionsFilesSearchResult}
-              key={searchSolutionFileResult.path}
+              key={path}
               onClick={handleClickSearchResultFile}
             >
               <Typography.Text
                 className={styles.solutionsFilesSearchResultText}
               >
-                {searchSolutionFileResult.path.slice(1)}
+                {name}
               </Typography.Text>
             </div>
           );

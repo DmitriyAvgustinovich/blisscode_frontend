@@ -1,9 +1,10 @@
 .solutionFolderWrapper {
+  margin-left: 10px;
   display: flex;
   gap: 5px;
   cursor: pointer;
-  color: var(--gray-text-color);
-  font: var(--font-ml);
+  color: var(--white-text-color);
+  font: var(--font-m);
   font-weight: 100;
 
   &:hover {
