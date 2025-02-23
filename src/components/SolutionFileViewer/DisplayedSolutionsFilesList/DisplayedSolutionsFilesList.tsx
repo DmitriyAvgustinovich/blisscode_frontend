@@ -79,7 +79,7 @@ export const DisplayedSolutionsFilesList = () => {
     <div className={styles.displayedSolutionsFilesListWrapper}>
       <Typography.Title
         className={styles.displayedSolutionsFilesListTitle}
-        level={3}
+        level={window.innerWidth < 430 ? 4 : 3}
       >
         {directionData?.name} <RightOutlined /> {stackData?.name}{" "}
         <RightOutlined /> {categoryData?.name}
@@ -110,20 +110,13 @@ export const DisplayedSolutionsFilesList = () => {
       )}
 
       {(displayedData?.totalCount ?? 0) > 0 && !searchResults && (
-        <div className={styles.displayedSolutionsFilesListPaginationWrapper}>
-          <Typography.Text
-            className={styles.displayedSolutionsFilesListPaginationText}
-          >
-            Всего решений: <b>{displayedData?.totalCount}</b>
-          </Typography.Text>
-
-          <Pagination
-            current={currentPage}
-            total={displayedData?.totalCount}
-            pageSize={PAGINATION_PAGE_SIZE}
-            onChange={handleChangePage}
-          />
-        </div>
+        <Pagination
+          className={styles.displayedSolutionsFilesListPaginationWrapper}
+          current={currentPage}
+          total={displayedData?.totalCount}
+          pageSize={PAGINATION_PAGE_SIZE}
+          onChange={handleChangePage}
+        />
       )}
     </div>
   );

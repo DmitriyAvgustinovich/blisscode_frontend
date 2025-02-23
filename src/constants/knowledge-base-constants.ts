@@ -45,3 +45,5 @@ export const directionTopicKnowledgeDataIndexes = {
   name: "name",
   directionKnowledge: "directionKnowledgeId",
 };
+
+export const REACTION_COOLDOWN_MS = 5000;

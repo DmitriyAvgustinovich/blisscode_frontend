@@ -125,6 +125,12 @@ export const KnowledgeCard = () => {
             <>
               Тип знания: <b>{knowledge.type}</b>
             </>,
+            <>
+              Лайки: <b>{knowledge.likes}</b>
+            </>,
+            <>
+              Дизлайки: <b>{knowledge.dislikes}</b>
+            </>,
           ]}
         />
       )}

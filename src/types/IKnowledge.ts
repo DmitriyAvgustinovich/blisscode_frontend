@@ -13,6 +13,10 @@ export interface IKnowledge {
   directionKnowledgeTopicId: number;
   directionKnowledgeId: number;
   createdAt: string;
+  likes: number;
+  dislikes: number;
+  isLiked: boolean;
+  isDisliked: boolean;
 }
 
 export interface IDirectionTopicKnowledge {

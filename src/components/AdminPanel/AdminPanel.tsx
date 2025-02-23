@@ -11,28 +11,68 @@ import { TheoreticalTestingCard } from "./AdminCards/TheoreticalTestingCard/Theo
 import styles from "./AdminPanel.module.scss";
 
 export const AdminPanel = () => {
+  const solutionsTabItems = [
+    {
+      key: "1",
+      label: "Направления",
+      children: <DirectionsCard />,
+    },
+    {
+      key: "2",
+      label: "Стеки",
+      children: <DirectionStacksCard />,
+    },
+    {
+      key: "3",
+      label: "Категории направлений",
+      children: <DirectionCategoriesCard />,
+    },
+    {
+      key: "4",
+      label: "Решения",
+      children: <SolutionsFilesCard />,
+    },
+  ];
+
+  const knowledgesTabItems = [
+    {
+      key: "1",
+      label: "Направления знаний",
+      children: <DirectionKnowledgeCard />,
+    },
+    {
+      key: "2",
+      label: "Топики направлений знаний",
+      children: <DirectionTopicKnowledgeCard />,
+    },
+    {
+      key: "3",
+      label: "Знания",
+      children: <KnowledgeCard />,
+    },
+  ];
+
   const tabsItems = [
     {
       key: "1",
       label: "Файлы решений",
       children: (
-        <div className={styles.adminPanelSolutionsFilesCardsWrapper}>
-          <DirectionsCard />
-          <DirectionStacksCard />
-          <DirectionCategoriesCard />
-          <SolutionsFilesCard />
-        </div>
+        <Tabs
+          defaultActiveKey="1"
+          items={solutionsTabItems}
+          tabPosition="right"
+        />
       ),
     },
     {
       key: "2",
       label: "База знаний",
       children: (
-        <div className={styles.adminPanelKnowledgeCardsWrapper}>
-          <DirectionKnowledgeCard />
-          <DirectionTopicKnowledgeCard />
-          <KnowledgeCard />
-        </div>
+        <Tabs
+          defaultActiveKey="1"
+          items={knowledgesTabItems}
+          tabPosition="right"
+        />
       ),
     },
     {

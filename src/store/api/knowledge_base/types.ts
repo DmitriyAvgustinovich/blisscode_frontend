@@ -31,6 +31,10 @@ export type TAddKnowledgeRequest = Omit<IKnowledge, "id">;
 export type TUpdateKnowledgeResponse = IKnowledge;
 export interface IUpdateKnowledgeRequest {
   id: number;
+  likes?: number;
+  dislikes?: number;
+  isLiked?: boolean;
+  isDisliked?: boolean;
 }
 
 export type TDeleteKnowledgeResponse = void;

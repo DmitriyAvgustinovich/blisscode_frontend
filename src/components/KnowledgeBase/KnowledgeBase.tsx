@@ -37,7 +37,7 @@ export const KnowledgeBase = () => {
     );
 
   const isKnowledgeExist = !isKnowledgeDataIsLoading && !!knowledgeData;
-  const isCertainKnowledgePage = window.location.search !== "";
+  const isChoosenKnowledgePage = !!knowledgeId;
 
   const { data: allDirectionKnowledgesData } =
     useGetAllDirectionKnowledgesQuery();
@@ -70,7 +70,7 @@ export const KnowledgeBase = () => {
 
   return (
     <div className={styles.knowledgeBaseWrapper}>
-      {!isCertainKnowledgePage && (
+      {!isChoosenKnowledgePage && (
         <>
           <Typography.Title level={2} className={styles.knowledgeBaseTitle}>
             База знаний
@@ -88,12 +88,16 @@ export const KnowledgeBase = () => {
           {searchResults ? (
             <SearchedKnowledgesList searchKnowledgesListData={searchResults} />
           ) : (
-            <KnowledgesList knowledgesList={allDirectionKnowledgesData ?? []} />
+            <div className={styles.knowledgeBaseListWrapper}>
+              <KnowledgesList
+                knowledgesList={allDirectionKnowledgesData ?? []}
+              />
+            </div>
           )}
         </>
       )}
 
-      {isCertainKnowledgePage && (
+      {isChoosenKnowledgePage && (
         <>
           {isKnowledgeDataIsLoading && (
             <Typography.Text className={styles.knowledgeBaseTitle}>
