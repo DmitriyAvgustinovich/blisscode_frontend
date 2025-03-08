@@ -12,11 +12,11 @@ export const Main = () => {
       </Typography.Title>
 
       <Typography.Text className={styles.mainGreetingText}>
-        Добро пожаловать в <b>BlissCodeBase</b> — помощник на пути в мир IT!
+        Добро пожаловать в <b>BlissCodeBase</b> — проводник в мир IT!
       </Typography.Text>
 
       <Typography.Title className={styles.mainSubTitle} level={2}>
-        🔍 Что ты получишь?
+        🔥 Что ты получишь?
       </Typography.Title>
 
       <Typography.Text className={styles.mainDescriptionText}>
@@ -34,7 +34,7 @@ export const Main = () => {
       </Typography.Text>
 
       <Typography.Title className={styles.mainSubTitle} level={2}>
-        💻 Как это работает?
+        🤔 Как это работает?
       </Typography.Title>
 
       <Typography.Text className={styles.mainDescriptionText}>
@@ -49,9 +49,9 @@ export const Main = () => {
         </a>
         ;
         <br />
-        2. Выбери интересующее тебя направление;
+        2. Оплати подписку по одному из представленных тарифов;
         <br />
-        3. Оплати подписку по одному из представленных тарифов;
+        3. Выбери интересующее тебя направление;
         <br />
         4. Используй доступные инструменты для обучения и развития.
       </Typography.Text>
@@ -83,8 +83,8 @@ export const Main = () => {
           rel="noopener noreferrer"
         >
           BlissCodeBase
-        </a>{" "}
-        и выбери интересующее тебя направление.
+        </a>
+        . Успех не за горами.
       </Typography.Text>
     </div>
   );
